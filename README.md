@@ -42,3 +42,8 @@ animations can collide between exhibitions.
 `src/pairs.json` is the single source for the pair names, rooms and colours used by the lobby and the nav.
 `dist/hub.html` is the lobby as a page fragment, for hosting as a claude.ai Artifact with the four rooms as
 sibling files.
+
+## Also in this repository
+
+`apollonian-dionysian/` is a separate exhibition, *Apollonian vs Dionysian*: a React + Vite project with
+its own build. See its README.
