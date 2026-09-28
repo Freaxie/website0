@@ -53,3 +53,5 @@ its own build. See its README.
 `being-becoming/` is the third, *Being & Becoming*.
 
 `transcendence-immanence/` is the fourth, *Transcendence & Immanence*.
+
+`reason-passion/` is the fifth, *Reason & Passion*.
