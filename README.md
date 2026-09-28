@@ -47,3 +47,5 @@ sibling files.
 
 `apollonian-dionysian/` is a separate exhibition, *Apollonian vs Dionysian*: a React + Vite project with
 its own build. See its README.
+
+`space-time/` is a companion exhibition, *Space & Time*, built the same way.
