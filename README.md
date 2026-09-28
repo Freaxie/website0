@@ -51,3 +51,5 @@ its own build. See its README.
 `space-time/` is a companion exhibition, *Space & Time*, built the same way.
 
 `being-becoming/` is the third, *Being & Becoming*.
+
+`transcendence-immanence/` is the fourth, *Transcendence & Immanence*.
