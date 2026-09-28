@@ -44,4 +44,4 @@ for (const { key } of pairs) {
   writeFileSync(at(`dist/${key}.html`), out)
 }
 
-console.log(`built lobby + ${pairs.length} exhibitions into cognitive-functions/dist/`)
+console.log(`built lobby + ${pairs.length} exhibitions into dist/`)
