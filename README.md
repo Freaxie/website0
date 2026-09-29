@@ -59,3 +59,5 @@ its own build. See its README.
 `materialism-idealism/` is the sixth, *Materialism & Idealism*.
 
 `generalist-specialist/` is the seventh, *Generalist & Specialist*.
+
+`oracle-algorithm/` is the eighth, *Oracle vs Algorithm*.
