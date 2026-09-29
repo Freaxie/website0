@@ -57,3 +57,5 @@ its own build. See its README.
 `reason-passion/` is the fifth, *Reason & Passion*.
 
 `materialism-idealism/` is the sixth, *Materialism & Idealism*.
+
+`generalist-specialist/` is the seventh, *Generalist & Specialist*.
