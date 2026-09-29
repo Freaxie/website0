@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { motion, useSpring, useTransform } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { useMotionValueEvent, useSpring } from 'framer-motion'
 import SectionHead from '../components/SectionHead.jsx'
 
 let uid = 100
@@ -54,9 +54,15 @@ export default function Algebra() {
   // the beam swings on a spring; the pans counter-rotate so they always hang level
   const spring = useSpring(0, { stiffness: 60, damping: 10 })
   useEffect(() => spring.set(tilt), [tilt, spring])
-  const beam = useTransform(spring, (a) => `rotate(${a} 200 110)`)
-  const panL = useTransform(spring, (a) => `rotate(${-a} 60 110)`)
-  const panR = useTransform(spring, (a) => `rotate(${-a} 340 110)`)
+  // written straight to the SVG attributes: a motion value bound to `transform` on an SVG group is not applied
+  const beam = useRef(null)
+  const panL = useRef(null)
+  const panR = useRef(null)
+  useMotionValueEvent(spring, 'change', (a) => {
+    beam.current?.setAttribute('transform', `rotate(${a} 200 110)`)
+    panL.current?.setAttribute('transform', `rotate(${-a} 60 110)`)
+    panR.current?.setAttribute('transform', `rotate(${-a} 340 110)`)
+  })
 
   const column = (side) => (
     <div className={`alg__col alg__col--${side}`}>
@@ -120,20 +126,20 @@ export default function Algebra() {
         <div className="alg__scale">
           <svg viewBox="0 0 400 300" role="img" aria-label={`Pros weigh ${pro}, cons weigh ${con}. ${verdict}`}>
             <path d="M200 280V110M150 290H250" className="alg__stand" />
-            <motion.g transform={beam}>
+            <g ref={beam}>
               <path d="M40 110H360" className="alg__beam" />
               <circle cx="200" cy="110" r="6" className="alg__pivot" />
-              <motion.g transform={panL}>
+              <g ref={panL}>
                 <path d="M60 110L20 200H100Z" className="alg__string" />
                 <path d="M10 200H110" className="alg__pan" />
                 <g transform="translate(60 198)">{stack(blocks.pro, 0)}</g>
-              </motion.g>
-              <motion.g transform={panR}>
+              </g>
+              <g ref={panR}>
                 <path d="M340 110L300 200H380Z" className="alg__string" />
                 <path d="M290 200H390" className="alg__pan" />
                 <g transform="translate(340 198)">{stack(blocks.con, 0)}</g>
-              </motion.g>
-            </motion.g>
+              </g>
+            </g>
           </svg>
           <div className="alg__totals mono" aria-live="polite">
             <span>Pro {pro}</span>

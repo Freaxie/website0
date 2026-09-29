@@ -55,3 +55,5 @@ its own build. See its README.
 `transcendence-immanence/` is the fourth, *Transcendence & Immanence*.
 
 `reason-passion/` is the fifth, *Reason & Passion*.
+
+`materialism-idealism/` is the sixth, *Materialism & Idealism*.
