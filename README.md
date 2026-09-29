@@ -61,3 +61,5 @@ its own build. See its README.
 `generalist-specialist/` is the seventh, *Generalist & Specialist*.
 
 `oracle-algorithm/` is the eighth, *Oracle vs Algorithm*.
+
+`puer-aeternus/` is the ninth, *Puer Aeternus*.
