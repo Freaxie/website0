@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useInView } from 'framer-motion'
 import SectionHead from '../components/SectionHead.jsx'
 import Glyph from '../components/Glyph.jsx'
 import { ARCHETYPES, THINGS } from '../lib/archetypes.js'
+import { bus } from '../lib/bus.js'
 
 const INKS = ['#ffd23f', '#0c0c0c', '#ffb3d6', '#1f4fd8', '#f7f5f0']
 
@@ -234,6 +235,7 @@ export default function Encounters() {
                 onPointerEnter={() => {
                   setHeld(true)
                   setWho(i)
+                  bus.switched()
                 }}
                 onClick={() => {
                   setHeld(true)

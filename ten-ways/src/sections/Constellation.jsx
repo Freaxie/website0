@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import SectionHead from '../components/SectionHead.jsx'
 import Glyph from '../components/Glyph.jsx'
-import { ARCHETYPES, QUIZ, byId } from '../lib/archetypes.js'
+import { ARCHETYPES, LINKS, QUIZ, byId } from '../lib/archetypes.js'
+import { bus } from '../lib/bus.js'
 import { TAU } from '../lib/geom.js'
 
 const BUDGET = 15
@@ -11,6 +12,15 @@ const ING = { understand: 'understanding', build: 'building', overcome: 'overcom
 
 function list(words) {
   return words.length < 2 ? words.join('') : `${words.slice(0, -1).join(', ')} and ${words.at(-1)}`
+}
+
+// Hidden: two archetypes that rarely share a life, held equally and above the rest, fuse.
+const FUSIONS = {
+  'monk+warrior': 'The Warrior-Monk',
+  'philosopher+sovereign': 'The Philosopher-King',
+  'artist+scientist': 'The Renaissance Mind',
+  'engineer+trickster': 'The Hacker',
+  'explorer+monk': 'The Pilgrim',
 }
 
 const empty = () => Object.fromEntries(ARCHETYPES.map((a) => [a.id, 0]))
@@ -46,6 +56,19 @@ export default function Constellation() {
     if (left > 0 && mode === 'hand') text += ` ${left} point${left === 1 ? '' : 's'} still to give.`
   }
 
+  // a fusion needs its two halves tied at the top, with at least three points each
+  let fusion = null
+  if (ranked.length >= 2 && pts[ranked[0].id] === pts[ranked[1].id] && pts[ranked[0].id] >= 3 && (ranked.length === 2 || pts[ranked[2].id] < pts[ranked[0].id])) {
+    const key = [ranked[0].id, ranked[1].id].sort().join('+')
+    if (FUSIONS[key]) {
+      const link = LINKS.unions.find(([p, q]) => [p, q].sort().join('+') === key)
+      fusion = { name: FUSIONS[key], line: link ? link[2] : '', a: byId[key.split('+')[0]], b: byId[key.split('+')[1]] }
+    }
+  }
+  useEffect(() => {
+    if (fusion) bus.whisper(`fusion-${fusion.name}`, `A fusion: ${fusion.name}.`, fusion.a.color)
+  }, [fusion?.name])
+
   const C = 170
   const vert = (i, v) => {
     const ang = (i / 10) * TAU - Math.PI / 2
@@ -62,8 +85,18 @@ export default function Constellation() {
           <span className="mono">
             {mode === 'quiz' ? `${answers.length} of ${QUIZ.length} answered` : `${spent} of ${BUDGET} points given`}
           </span>
-          <b>{title}</b>
-          <p>{text}</p>
+          <b>{fusion ? fusion.name : title}</b>
+          <p>{fusion ? fusion.line : text}</p>
+          {fusion && (
+            <motion.svg className="con__fusion" viewBox="-60 -60 120 120" initial={{ scale: 0, rotate: -90 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: 'spring', stiffness: 120, damping: 12 }} aria-hidden="true">
+              <motion.g animate={{ rotate: 360 }} transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}>
+                <path d={fusion.a.glyph} transform="translate(-50 -50)" stroke={fusion.a.color} strokeWidth="5" fill="none" strokeLinecap="round" />
+              </motion.g>
+              <motion.g animate={{ rotate: -360 }} transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}>
+                <path d={fusion.b.glyph} transform="translate(-50 -50)" stroke={fusion.b.color} strokeWidth="5" fill="none" strokeLinecap="round" />
+              </motion.g>
+            </motion.svg>
+          )}
         </div>
       </div>
 

@@ -2,6 +2,10 @@ import { MotionConfig } from 'framer-motion'
 import Intro from './components/Intro.jsx'
 import Grain from './components/Grain.jsx'
 import Nav from './components/Nav.jsx'
+import Cursor from './components/Cursor.jsx'
+import Whisper from './components/Whisper.jsx'
+import Passage from './components/Passage.jsx'
+import Secrets from './components/Secrets.jsx'
 import Hero from './sections/Hero.jsx'
 import Atlas from './sections/Atlas.jsx'
 import Plates from './sections/Plates.jsx'
@@ -35,6 +39,10 @@ export default function App() {
         <Finale />
       </main>
       <Grain />
+      <Passage />
+      <Secrets />
+      <Whisper />
+      <Cursor />
     </MotionConfig>
   )
 }

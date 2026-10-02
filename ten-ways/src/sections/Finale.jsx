@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { ARCHETYPES } from '../lib/archetypes.js'
+import Convergence from '../components/Convergence.jsx'
 
 const ease = [0.76, 0, 0.24, 1]
 
@@ -25,6 +26,8 @@ export default function Finale() {
       <motion.p className="fin__last" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.6 }} transition={{ duration: 1.4, delay: 0.4 }}>
         Reality is large enough for all ten.
       </motion.p>
+
+      <Convergence />
 
       <footer className="fin__foot">
         <div className="fin__colophon mono">

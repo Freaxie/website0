@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { useLoop } from '../lib/useLoop.js'
 import { ARCHETYPES } from '../lib/archetypes.js'
 import { TAU, range, rng } from '../lib/geom.js'
+import { bus } from '../lib/bus.js'
 
 const R = 168 // radius of the ring of signs
 const CORE = 44
@@ -15,6 +16,7 @@ export default function Hero() {
   const ref = useRef(null)
   const canvas = useRef(null)
   const activeRef = useRef(0)
+  const knocks = useRef(0)
   const [active, setActive] = useState(0)
   const [held, setHeld] = useState(false)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
@@ -128,6 +130,7 @@ export default function Hero() {
                     onPointerEnter={() => {
                       setHeld(true)
                       setActive(i)
+                      bus.switched()
                     }}
                     onFocus={() => {
                       setHeld(true)
@@ -147,7 +150,15 @@ export default function Hero() {
                 </g>
               )
             })}
-            <circle r={CORE} className="hero__core" />
+            <circle
+              r={CORE}
+              className="hero__core"
+              onClick={() => {
+                // reality, knocked on often enough, answers once
+                knocks.current++
+                if (knocks.current === 7) bus.whisper('reality', 'Reality does not answer. It only waits.', '#0c0c0c')
+              }}
+            />
             <text y="4" textAnchor="middle" className="hero__core-label">
               REALITY
             </text>

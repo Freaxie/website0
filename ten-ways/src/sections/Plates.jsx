@@ -1,12 +1,73 @@
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
 import SectionHead from '../components/SectionHead.jsx'
 import Glyph from '../components/Glyph.jsx'
 import Instrument from '../components/Instrument.jsx'
+import World from '../components/World.jsx'
+import KineticName from '../components/KineticName.jsx'
+import Threshold from '../components/Threshold.jsx'
 import { ARCHETYPES } from '../lib/archetypes.js'
+import { bus, reduced } from '../lib/bus.js'
 
-const ease = [0.76, 0, 0.24, 1]
-const rise = (delay = 0) => ({ hidden: { y: '110%' }, show: { y: 0, transition: { duration: 1, delay, ease } } })
+// what each sign says to someone who keeps pressing it
+const SECRET = {
+  scientist: 'The first observation was you.',
+  engineer: 'Everything here was built. Even this.',
+  warrior: 'The hardest opponent has your face.',
+  artist: 'You have been making this all along.',
+  philosopher: 'Who is asking?',
+  explorer: 'The map is not the edge of the world.',
+  monk: 'Stop pressing.',
+  sovereign: 'Every rule began as someone’s wish.',
+  hedonist: 'Again.',
+  trickster: 'There is no secret here.',
+}
+
+// The trickster's plate will not hold still: parts of it drift, swap and jump when touched.
+const LOOSE = '.plate__facts > div, .plate__quote, .plate__glyph-btn, .plate__verb, .plate__bar > span, .plate__play'
+function useTrickery(ref, on) {
+  const visible = useInView(ref, { amount: 0.3 })
+  useEffect(() => {
+    if (!on || !visible || reduced) return
+    const root = ref.current
+    const nudge = (el, k = 1) => {
+      if (!el || el.dataset.loose) return
+      el.dataset.loose = '1'
+      el.style.transition = 'transform 0.18s steps(3)'
+      el.style.transform = `translate(${(Math.random() - 0.5) * 60 * k}px, ${(Math.random() - 0.5) * 24 * k}px) rotate(${(Math.random() - 0.5) * 8 * k}deg)`
+      setTimeout(() => {
+        el.style.transition = 'transform 1.4s cubic-bezier(0.2, 0.8, 0.2, 1)'
+        el.style.transform = ''
+        setTimeout(() => delete el.dataset.loose, 1400)
+      }, 700 + Math.random() * 500)
+    }
+    const id = setInterval(() => {
+      const all = root.querySelectorAll(LOOSE)
+      nudge(all[Math.floor(Math.random() * all.length)])
+      // now and then two facts quietly change places, and change back
+      if (Math.random() < 0.35) {
+        const facts = root.querySelectorAll('.plate__facts > div')
+        const i = 1 + Math.floor(Math.random() * (facts.length - 1))
+        const j = 1 + Math.floor(Math.random() * (facts.length - 1))
+        if (i !== j) {
+          facts[i].style.order = j
+          facts[j].style.order = i
+          setTimeout(() => {
+            facts[i].style.order = ''
+            facts[j].style.order = ''
+          }, 1600)
+        }
+      }
+    }, 1800)
+    const touch = (e) => nudge(e.target.closest?.(LOOSE), 0.6)
+    root.addEventListener('pointerover', touch)
+    return () => {
+      clearInterval(id)
+      root.removeEventListener('pointerover', touch)
+    }
+  }, [on, visible, ref])
+}
+
 const fade = (delay = 0) => ({ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.9, delay } } })
 
 function Plate({ a, i }) {
@@ -16,8 +77,21 @@ function Plate({ a, i }) {
   const [shadow, setShadow] = useState(false)
   const c = shadow ? a.fg : a.color
   const fg = shadow ? a.color : a.fg
+  const ref = useRef(null)
+  const presses = useRef(0)
+  useTrickery(ref, a.id === 'trickster')
   return (
-    <motion.article id={`plate-${a.id}`} className={`plate plate--${a.id} ${shadow ? 'is-shadow' : ''}`} style={{ '--c': c, '--fg': fg }} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }}>
+    <motion.article
+      ref={ref}
+      id={`plate-${a.id}`}
+      data-world={a.id}
+      className={`plate plate--${a.id} ${shadow ? 'is-shadow' : ''}`}
+      style={{ '--c': c, '--fg': fg }}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.25 }}
+    >
+      <World kind={a.id} fg={fg} bg={c} color={a.color} host={ref} />
       <Glyph d={a.glyph} className="plate__mark" width={1.2} />
       <header className="plate__bar mono">
         <span>
@@ -36,10 +110,20 @@ function Plate({ a, i }) {
       <div className="plate__body">
         <div className="plate__text">
           <motion.div variants={fade(0.1)}>
-            <Glyph d={a.glyph} className="plate__glyph" width={4} />
+            <button
+              type="button"
+              className="plate__glyph-btn"
+              aria-label={`The ${a.name.toLowerCase()}’s sign`}
+              onClick={() => {
+                presses.current++
+                if (presses.current === 5) bus.whisper(`sign-${a.id}`, SECRET[a.id], a.color)
+              }}
+            >
+              <Glyph d={a.glyph} className="plate__glyph" width={4} />
+            </button>
           </motion.div>
           <h3 className="plate__name">
-            <motion.span variants={rise(0.05)}>{a.name}</motion.span>
+            <KineticName a={a} />
           </h3>
           <span className="plate__mirror" aria-hidden="true">
             {a.name}
@@ -100,6 +184,8 @@ function Plate({ a, i }) {
 // A band of the ten colours that rides along the top while you walk the plates.
 function Spectrum() {
   const [on, setOn] = useState(0)
+  const [met, setMet] = useState(() => new Set(bus.experienced))
+  useEffect(() => bus.on((type) => type === 'experienced' && setMet(new Set(bus.experienced))), [])
   useEffect(() => {
     const io = new IntersectionObserver(
       (es) =>
@@ -121,6 +207,7 @@ function Spectrum() {
           <span className="mono">
             {a.no} {a.name}
           </span>
+          {met.has(a.id) && <i className="spectrum__met" />}
         </a>
       ))}
     </nav>
@@ -147,7 +234,10 @@ export default function Plates() {
       <div className="ten__plates">
         <Spectrum />
         {ARCHETYPES.map((a, i) => (
-          <Plate key={a.id} a={a} i={i} />
+          <div key={a.id} className="ten__step">
+            <Plate a={a} i={i} />
+            {i < ARCHETYPES.length - 1 && <Threshold a={a.id} b={ARCHETYPES[i + 1].id} />}
+          </div>
         ))}
       </div>
     </section>

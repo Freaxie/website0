@@ -34,5 +34,28 @@ npm run build:artifact   # single-file page in artifact/index.html
 6. **Your Constellation.** Answer seven questions, or spend fifteen points by hand, and see your shape.
 7. **Coda.** Ten imperatives, and one sentence.
 
+## Ten physical laws
+
+Each plate is a world as well as a page. Behind its text runs an environment with its own physics
+(`src/lib/worlds.js`): an observatory where clicked bodies become observations and a model emerges; a
+floating truss with gears whose nodes can be grabbed; a field of shards a fast cursor cuts in two; a
+canvas whose symmetry grows with every stroke; statements that sprout questions; a fogged map lit by a
+lantern; one breathing circle that ripples when disturbed; a crowd that falls into ranks, rings, wedges or
+columns; blooms of light; a floor that glitches by rows and twists around the cursor.
+
+- **Cursor.** Inside a plate the pointer becomes that world's instrument: a crosshair, a node, a blade
+  that turns with the stroke, a brush, a question mark, a lantern, a breathing ring, a diamond, a bloom,
+  a split square.
+- **Typography.** Each name enters and behaves the way its archetype moves: the scientist's letters settle
+  onto a grid, the engineer's lock in, the warrior's snap, the artist's flow like ink, the philosopher's
+  are typed, the monk's breathe, the sovereign's arrive as one rank, the trickster's scramble.
+- **Passages.** Between plates, scrolling turns one world's geometry into the next (`src/lib/forms.js`).
+  Any link to a plate plays a passage first: equations come apart into particles and settle as ink;
+  blades freeze into silence and leave one circle.
+- **Whispers.** Rare lines appear when the site notices how you behave. Each appears once.
+- **Secrets.** Not listed here.
+
+Everything respects `prefers-reduced-motion`: worlds slow almost to a stop, and passages are skipped.
+
 All data lives in `src/lib/archetypes.js`; the instruments in `src/lib/instruments.js`. The atlas
 positions and kinships are a curator's interpretation, not a measurement.
