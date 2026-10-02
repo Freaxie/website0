@@ -63,3 +63,5 @@ its own build. See its README.
 `oracle-algorithm/` is the eighth, *Oracle vs Algorithm*.
 
 `puer-aeternus/` is the ninth, *Puer Aeternus*.
+
+`ten-ways/` is the tenth, *Ten Ways of Encountering Reality*.
