@@ -520,7 +520,20 @@ dd {
   width: min(44vw, 80svh);
 }
 
+.hero__spin {
+  position: relative;
+}
+
+.hero__motes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
 .hero__wheel svg {
+  position: relative;
   display: block;
   width: 100%;
   height: auto;
@@ -798,8 +811,11 @@ dd {
   flex-direction: column;
   min-height: 100svh;
   padding: 64px calc(var(--gutter) + var(--navspace)) 7vh var(--gutter);
+  overflow: hidden;
+  isolation: isolate;
   background: var(--c);
   color: var(--fg);
+  transition: background 0.7s var(--ease), color 0.7s var(--ease);
 }
 
 .plate__bar {
@@ -1358,6 +1374,477 @@ dd {
   color: var(--paper);
 }
 
+/* ───────── additions: spectrum, shadows, mirrors ───────── */
+
+.spectrum {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  display: flex;
+  height: 8px;
+  transition: height 0.4s var(--ease);
+}
+
+.spectrum:hover,
+.spectrum:focus-within {
+  height: 30px;
+}
+
+.spectrum a {
+  position: relative;
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  overflow: hidden;
+  text-decoration: none;
+  transition: flex-grow 0.6s var(--ease);
+}
+
+.spectrum a.is-on {
+  flex-grow: 5;
+}
+
+.spectrum span {
+  white-space: nowrap;
+  font-size: 10px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.spectrum:hover span,
+.spectrum:focus-within span {
+  opacity: 1;
+}
+
+.ten__plates .plate {
+  margin-top: -8px;
+}
+
+.plate__mark {
+  position: absolute;
+  z-index: -1;
+  right: -12vw;
+  bottom: -18vh;
+  width: min(70vw, 900px);
+  opacity: 0.08;
+  animation: turn 160s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.plate__bar {
+  align-items: center;
+}
+
+.plate__shadow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  padding: 6px 12px;
+  background: none;
+  border: 1px solid currentColor;
+  transition: background 0.3s, color 0.3s;
+}
+
+.plate__shadow i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
+}
+
+.plate__shadow:hover {
+  background: var(--fg);
+  color: var(--c);
+}
+
+.plate__mirror {
+  display: block;
+  height: 0.42em;
+  margin-top: -0.3em;
+  overflow: hidden;
+  font-size: clamp(54px, 7.8vw, 140px);
+  line-height: 0.92;
+  transform: scaleY(-1);
+  opacity: 0.09;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.6s;
+}
+
+.plate--engineer .plate__mirror,
+.plate--explorer .plate__mirror {
+  font-size: clamp(36px, 5vw, 92px);
+}
+
+.plate--sovereign .plate__mirror {
+  font-size: clamp(36px, 4.8vw, 88px);
+}
+
+.plate--scientist .plate__mirror { font-family: var(--f-mono); font-weight: 500; letter-spacing: -0.06em; }
+.plate--engineer .plate__mirror { font-weight: 800; text-transform: uppercase; font-variation-settings: 'wdth' 125; }
+.plate--warrior .plate__mirror { font-weight: 900; text-transform: uppercase; font-variation-settings: 'wdth' 62; }
+.plate--artist .plate__mirror,
+.plate--hedonist .plate__mirror { font-family: var(--f-serif); font-style: italic; }
+.plate--philosopher .plate__mirror { font-family: var(--f-serif); }
+.plate--explorer .plate__mirror { font-weight: 200; text-transform: uppercase; font-variation-settings: 'wdth' 125; letter-spacing: 0.06em; }
+.plate--monk .plate__mirror { font-family: var(--f-serif); text-transform: lowercase; letter-spacing: 0.32em; }
+.plate--sovereign .plate__mirror { font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; }
+.plate--trickster .plate__mirror { font-weight: 900; text-transform: uppercase; font-variation-settings: 'wdth' 62; }
+
+.plate.is-shadow .plate__name span {
+  opacity: 0.35;
+  transition: opacity 0.6s;
+}
+
+.plate.is-shadow .plate__mirror {
+  opacity: 0.9;
+}
+
+.plate__verb .mono {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.plate.is-shadow .plate__verb {
+  font-style: italic;
+  font-size: clamp(20px, 1.9vw, 30px);
+  line-height: 1.15;
+}
+
+.plate.is-shadow .plate__shadow-fact {
+  padding: 10px 12px 12px;
+  background: var(--fg);
+  color: var(--c);
+}
+
+/* ───────── 04 one world, ten encounters ───────── */
+
+.enc {
+  position: relative;
+  padding: 18vh calc(var(--gutter) + var(--navspace)) 14vh var(--gutter);
+  background: var(--white);
+}
+
+.enc__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 64px);
+  align-items: end;
+}
+
+.enc__things {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.enc__things button {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 10px 12px;
+  background: none;
+  border: 1px solid rgba(12, 12, 12, 0.25);
+  text-align: left;
+  transition: background 0.3s, color 0.3s;
+}
+
+.enc__things svg {
+  width: 100%;
+  height: auto;
+}
+
+.enc__things path {
+  fill: currentColor;
+  opacity: 0.85;
+}
+
+.enc__things span {
+  font-family: var(--f-serif);
+  font-size: 20px;
+}
+
+.enc__things button.is-on,
+.enc__things button:hover {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.enc__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: clamp(20px, 3vw, 44px);
+  margin-top: 8vh;
+  align-items: start;
+}
+
+.enc__stage {
+  position: relative;
+  transition: background 0.5s var(--ease);
+}
+
+.enc__stage svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 62vh;
+}
+
+.enc__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 22px 22px;
+}
+
+.enc__caption .mono {
+  opacity: 0.75;
+}
+
+.enc__caption p {
+  min-height: 2.3em;
+  font-family: var(--f-serif);
+  font-size: clamp(22px, 2.2vw, 34px);
+  line-height: 1.1;
+}
+
+.enc__tiny {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+.enc__q {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 210px;
+}
+
+.enc__say {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 22px;
+}
+
+.enc__roman {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.14em;
+}
+
+.enc__who {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.enc__who button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 6px 12px 6px 6px;
+  background: none;
+  border: 1px solid transparent;
+  font-weight: 800;
+  font-size: 18px;
+  text-align: left;
+  text-transform: uppercase;
+  font-variation-settings: 'wdth' 62;
+  transition: background 0.3s, color 0.3s;
+}
+
+.enc__who button.is-on {
+  background: var(--c);
+  color: var(--fg);
+}
+
+.enc__who button:not(.is-on):hover {
+  border-color: var(--c);
+}
+
+.enc__sign {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--c);
+  color: var(--fg);
+}
+
+.enc__sign .glyph {
+  width: 18px;
+}
+
+/* ───────── atlas: you ───────── */
+
+.atl__map svg {
+  cursor: crosshair;
+  touch-action: pan-y;
+}
+
+.atl__tie {
+  stroke-width: 2;
+  stroke-dasharray: 5 6;
+}
+
+.atl__you-mark circle {
+  fill: var(--ink);
+}
+
+.atl__you-mark text {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  fill: var(--white);
+  pointer-events: none;
+}
+
+.atl__you-mark {
+  cursor: grab;
+}
+
+.atl__you {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+  font-family: var(--f-serif);
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.15;
+}
+
+.atl__you .mono {
+  opacity: 0.6;
+}
+
+.atl__you b {
+  font-family: var(--f-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-variation-settings: 'wdth' 62;
+}
+
+/* ───────── constellation: the quiz ───────── */
+
+.con__modes {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.con__modes button {
+  padding: 9px 14px;
+  background: none;
+  border: 1px solid rgba(247, 245, 240, 0.35);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.3s, color 0.3s;
+}
+
+.con__modes button.is-on {
+  background: var(--white);
+  color: var(--ink);
+}
+
+.con__quiz {
+  min-height: 460px;
+}
+
+.con__steps {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 26px;
+}
+
+.con__steps i {
+  flex: 1;
+  height: 6px;
+  background: rgba(247, 245, 240, 0.15);
+  transition: background 0.4s;
+}
+
+.con__steps i.is-now {
+  background: rgba(247, 245, 240, 0.6);
+}
+
+.con__q {
+  margin: 10px 0 22px;
+  font-family: var(--f-serif);
+  font-weight: 400;
+  font-size: clamp(30px, 3vw, 48px);
+  line-height: 1.05;
+}
+
+.con__opts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.con__opts button {
+  width: 100%;
+  padding: 14px 16px;
+  background: none;
+  border: 1px solid rgba(247, 245, 240, 0.25);
+  border-left: 6px solid var(--c);
+  font-family: var(--f-serif);
+  font-size: 20px;
+  text-align: left;
+  transition: background 0.25s, color 0.25s;
+}
+
+.con__opts button:hover,
+.con__opts button:focus-visible {
+  background: var(--c);
+  color: var(--cf);
+}
+
+.con__back {
+  margin-top: 16px;
+  padding: 0;
+  background: none;
+  border: 0;
+  opacity: 0.6;
+}
+
+.con__done p {
+  font-family: var(--f-serif);
+  font-size: 20px;
+  opacity: 0.8;
+}
+
+.con__done-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.con__done-btns button {
+  padding: 10px 14px;
+  background: none;
+  border: 1px solid rgba(247, 245, 240, 0.5);
+}
+
+.con__done-btns button:hover {
+  background: var(--white);
+  color: var(--ink);
+}
+
 /* ───────── narrow screens ───────── */
 
 @media (max-width: 820px) {
@@ -1452,6 +1939,42 @@ dd {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .enc__top,
+  .enc__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .enc__who {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .enc__who button {
+    font-size: 15px;
+  }
+
+  .enc__stage {
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+  }
+
+  .plate__shadow {
+    margin-left: 0;
+  }
+
+  .plate__bar {
+    flex-wrap: wrap;
+  }
+
+  .spectrum span {
+    display: none;
+  }
+
+  .plate__mark {
+    width: 120vw;
+    right: -40vw;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1461,7 +1984,8 @@ dd {
 
   .grain,
   .hero__scroll i,
-  .hero__ray.is-on {
+  .hero__ray.is-on,
+  .plate__mark {
     animation: none;
   }
 }

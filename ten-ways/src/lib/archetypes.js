@@ -162,3 +162,67 @@ export const LINKS = {
     ['explorer', 'monk', 'The pilgrim, who travels in order to arrive inward.'],
   ],
 }
+
+// One World, Ten Encounters: three things, and how each of the ten meets them.
+// Each thing is a silhouette in a 600 × 400 box, with a high point and a centre for the drawings to use.
+export const THINGS = [
+  {
+    id: 'mountain', name: 'A mountain',
+    path: 'M0 400L120 250L190 300L300 90L380 220L430 180L600 400Z', peak: [300, 90], centre: [300, 290],
+    lines: {
+      scientist: 'Measures its height, dates its rock, and asks how it rose.',
+      engineer: 'Sees where the tunnel should go.',
+      warrior: 'Climbs it. A mountain is an opponent that never tires.',
+      artist: 'Paints it again and again, as Hokusai made Thirty-six Views of Mount Fuji.',
+      philosopher: 'Asks whether it is the same mountain from both sides.',
+      explorer: 'Wants to know what is on the other side.',
+      monk: 'Sits at its foot until it is no longer separate.',
+      sovereign: 'Draws the border along its ridge.',
+      hedonist: 'Takes the cable car up, for the view and the lunch.',
+      trickster: 'Moves the summit marker ten metres, to see who notices.',
+    },
+  },
+  {
+    id: 'sea', name: 'The sea',
+    path: 'M0 210Q75 180 150 210T300 210T450 210T600 210L600 400L0 400Z', peak: [450, 210], centre: [300, 300],
+    lines: {
+      scientist: 'Samples its salt and charts its currents.',
+      engineer: 'Builds the harbour, the ship and the lighthouse.',
+      warrior: 'Rows against the storm.',
+      artist: 'Spends a lifetime on the colour of one wave.',
+      philosopher: 'Asks, after Heraclitus, whether anyone steps into the same water twice.',
+      explorer: 'Sails toward the edge of the chart.',
+      monk: 'Listens to it until there is only listening.',
+      sovereign: 'Claims twelve nautical miles of it.',
+      hedonist: 'Swims in it at midnight.',
+      trickster: 'Sends out a message in a bottle that says: do not open this.',
+    },
+  },
+  {
+    id: 'stranger', name: 'A stranger',
+    path: 'M245 150a55 55 0 1 0 110 0a55 55 0 1 0-110 0ZM160 400C160 290 225 245 300 245C375 245 440 290 440 400Z', peak: [300, 95], centre: [300, 300],
+    lines: {
+      scientist: 'Wonders what made them who they are.',
+      engineer: 'Asks what they need, and how it could be made.',
+      warrior: 'Decides quickly: friend, or threat.',
+      artist: 'Draws their face from memory that night.',
+      philosopher: 'Wonders whether they see the same red.',
+      explorer: 'Asks where they come from, and whether you could go there.',
+      monk: 'Sees no stranger at all.',
+      sovereign: 'Asks their name, and whether they mean to stay.',
+      hedonist: 'Invites them to dinner.',
+      trickster: 'Pretends to recognise them, to see what happens.',
+    },
+  },
+]
+
+// Seven questions for Your Constellation. Each answer gives its archetype two points.
+export const QUIZ = [
+  { q: 'A locked door stands in your way.', a: [['Work out how the lock works.', 'scientist'], ['Break it down.', 'warrior'], ['Ask why it was locked.', 'philosopher'], ['Find another way in.', 'explorer'], ['Knock, and ask if there is a party.', 'hedonist']] },
+  { q: 'You have a free year, and money enough.', a: [['Build something that will outlast it.', 'engineer'], ['Go where no map is any good.', 'explorer'], ['Make the work only you could make.', 'artist'], ['Eat, drink, love, stay up late.', 'hedonist']] },
+  { q: 'Your community is in disarray.', a: [['Draw up rules, and see them kept.', 'sovereign'], ['Make people laugh at what they fear.', 'trickster'], ['Fix the thing that is actually broken.', 'engineer'], ['Stand in front of whatever threatens it.', 'warrior']] },
+  { q: 'Someone tells you, with total confidence, how the world works.', a: [['Ask for the evidence.', 'scientist'], ['Ask what they mean by “the world”.', 'philosopher'], ['Agree, then say the opposite with the same face.', 'trickster'], ['Let it pass. It doesn’t touch what matters.', 'monk']] },
+  { q: 'A perfect evening is…', a: [['A long dinner, and nowhere to be.', 'hedonist'], ['Silence, and a candle.', 'monk'], ['Working late on something that is almost working.', 'engineer'], ['A conversation that goes on until three.', 'philosopher']] },
+  { q: 'Faced with chaos, you…', a: [['Impose an order on it.', 'sovereign'], ['Find the pattern in it.', 'scientist'], ['Make something beautiful out of it.', 'artist'], ['Join in.', 'trickster']] },
+  { q: 'What would you want said of you?', a: [['That they never gave up.', 'warrior'], ['That they saw what no one had seen.', 'explorer'], ['That they were at peace.', 'monk'], ['That they left things better ordered.', 'sovereign'], ['That they made something beautiful.', 'artist']] },
+]

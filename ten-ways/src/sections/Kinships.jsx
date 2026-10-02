@@ -25,7 +25,7 @@ export default function Kinships() {
   return (
     <section id="kinships" className="kin">
       <div className="kin__top">
-        <SectionHead no="04" title="Kinships" kicker="No way of being lives alone. Some are allies, some are opposites, and a few rare lives have joined two that should not fit." />
+        <SectionHead no="05" title="Kinships" kicker="No way of being lives alone. Some are allies, some are opposites, and a few rare lives have joined two that should not fit." />
         <div className="kin__modes" role="radiogroup" aria-label="Kind of relation">
           {MODES.map((m) => (
             <button key={m.id} type="button" role="radio" aria-checked={mode === m.id} className={mode === m.id ? 'is-on' : ''} onClick={() => setMode(m.id)}>

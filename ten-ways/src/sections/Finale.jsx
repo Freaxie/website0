@@ -7,7 +7,7 @@ export default function Finale() {
   return (
     <section id="coda" className="fin">
       <div className="fin__top mono">
-        <span>06</span>
+        <span>07</span>
         <span>Coda</span>
       </div>
 
@@ -28,7 +28,7 @@ export default function Finale() {
 
       <footer className="fin__foot">
         <div className="fin__colophon mono">
-          <p>Ten Ways of Encountering Reality: an atlas in six rooms. The positions, kinships and instruments are a curator’s interpretation, offered to be argued with.</p>
+          <p>Ten Ways of Encountering Reality: an atlas in seven rooms. The positions, kinships and instruments are a curator’s interpretation, offered to be argued with.</p>
           <p>Each archetype keeps its own colour throughout. Set in Archivo, Instrument Serif and JetBrains Mono.</p>
         </div>
         <a className="fin__return mono" href="#entrance">

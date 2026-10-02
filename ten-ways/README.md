@@ -13,10 +13,11 @@ npm run build:artifact   # single-file page in artifact/index.html
 
 ## Rooms
 
-1. **Entrance.** Ten rays converge on REALITY. Point at a sign, or let them turn: "To understand it",
+1. **Entrance.** Ten rays converge on REALITY, carrying streams of coloured particles. Point at a sign, or let them turn: "To understand it",
    "To build it", each verb set in its archetype's own type.
 2. **The Atlas.** A map of the ten on two chosen axes out of five (Inward–Outward, Change–Order,
-   Body–Mind, Alone–Together, Present–Future). Change an axis and they move.
+   Body–Mind, Alone–Together, Present–Future). Change an axis and they move. Drag the YOU marker to
+   find the archetype nearest you.
 3. **The Ten.** Ten full-colour plates, each with its question, instrument, gift, shadow, exemplars and a
    quotation, and a live instrument:
    the Scientist fits a line to your observations; the Engineer's truss sags under a moving load; the
@@ -24,9 +25,14 @@ npm run build:artifact   # single-file page in artifact/index.html
    grows questions; the Explorer clears fog from a map; the Monk's circle forms only in stillness; the
    Sovereign's crowd falls into ranks; the Hedonist's touches bloom and fade; the Trickster's sentence
    comes undone.
-4. **Kinships.** A ring of allies, opposites and unlikely unions (the warrior-monk, the philosopher-king).
-5. **Your Constellation.** Spend fifteen points across the ten and see your shape.
-6. **Coda.** Ten imperatives, and one sentence.
+   Every plate has a shadow switch that turns its colours, instrument and name inside out, a mirrored
+   reflection of its name, and its sign turning slowly behind it. A spectrum bar of the ten colours rides
+   along the top while you walk the plates.
+4. **One World, Ten Encounters.** A mountain, the sea or a stranger, redrawn by each of the ten: measured,
+   blueprinted, climbed, painted, questioned, explored, let go of, partitioned, savoured and turned over.
+5. **Kinships.** A ring of allies, opposites and unlikely unions (the warrior-monk, the philosopher-king).
+6. **Your Constellation.** Answer seven questions, or spend fifteen points by hand, and see your shape.
+7. **Coda.** Ten imperatives, and one sentence.
 
 All data lives in `src/lib/archetypes.js`; the instruments in `src/lib/instruments.js`. The atlas
 positions and kinships are a curator's interpretation, not a measurement.

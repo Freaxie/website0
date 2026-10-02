@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import SectionHead from '../components/SectionHead.jsx'
 import { ARCHETYPES, DIMS } from '../lib/archetypes.js'
@@ -11,6 +11,17 @@ export default function Atlas() {
   const [xd, setXd] = useState('act')
   const [yd, setYd] = useState('order')
   const [hover, setHover] = useState(null)
+  // the visitor's own position on the map, in map units
+  const [you, setYou] = useState({ x: W / 2, y: H / 2 })
+  const svg = useRef(null)
+  const dragging = useRef(false)
+  const toMap = (e) => {
+    const pt = svg.current.createSVGPoint()
+    pt.x = e.clientX
+    pt.y = e.clientY
+    const q = pt.matrixTransform(svg.current.getScreenCTM().inverse())
+    return { x: Math.min(W - PAD, Math.max(PAD, q.x)), y: Math.min(H - PAD, Math.max(PAD, q.y)) }
+  }
   const X = DIMS.find((d) => d.id === xd)
   const Y = DIMS.find((d) => d.id === yd)
 
@@ -28,6 +39,10 @@ export default function Atlas() {
   const px = (v) => PAD + ((v * 0.88 + 1) / 2) * (W - 2 * PAD)
   const py = (v) => H - PAD - ((v * 0.84 + 1) / 2) * (H - 2 * PAD)
   const h = hover && ARCHETYPES.find((a) => a.id === hover)
+  const near = ARCHETYPES.reduce((best, a) => {
+    const d = Math.hypot(px(a.at[xd]) - you.x, py(a.at[yd]) - you.y)
+    return d < best.d ? { a, d } : best
+  }, { a: null, d: Infinity }).a
 
   return (
     <section id="atlas" className="atl">
@@ -51,7 +66,18 @@ export default function Atlas() {
       </div>
 
       <div className="atl__map">
-        <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`The ten archetypes placed from ${X.lo} to ${X.hi} across, and from ${Y.lo} to ${Y.hi} upward`}>
+        <svg
+          ref={svg}
+          viewBox={`0 0 ${W} ${H}`}
+          onPointerDown={(e) => {
+            if (e.target.closest('a')) return
+            dragging.current = true
+            e.currentTarget.setPointerCapture(e.pointerId)
+            setYou(toMap(e))
+          }}
+          onPointerMove={(e) => dragging.current && setYou(toMap(e))}
+          onPointerUp={() => (dragging.current = false)}
+          role="img" aria-label={`The ten archetypes placed from ${X.lo} to ${X.hi} across, and from ${Y.lo} to ${Y.hi} upward`}>
           {Array.from({ length: 9 }, (_, i) => (
             <g key={i} className="atl__grid">
               <line x1={PAD + (i / 8) * (W - 2 * PAD)} x2={PAD + (i / 8) * (W - 2 * PAD)} y1={PAD} y2={H - PAD} />
@@ -72,6 +98,8 @@ export default function Atlas() {
           <text x={W / 2 + 12} y={H - PAD + 30} className="atl__end">
             ↓ {Y.lo}
           </text>
+          <motion.line x1={you.x} y1={you.y} initial={false} animate={{ x2: px(near.at[xd]), y2: py(near.at[yd]) }} transition={{ duration: 0.4 }} stroke={near.color} className="atl__tie" />
+          <motion.circle r="36" fill="none" stroke={near.color} strokeWidth="3" initial={false} animate={{ cx: px(near.at[xd]), cy: py(near.at[yd]) }} transition={{ type: 'spring', stiffness: 70, damping: 14 }} />
           {ARCHETYPES.map((a, i) => (
             <motion.g
               key={a.id}
@@ -91,6 +119,12 @@ export default function Atlas() {
               </a>
             </motion.g>
           ))}
+          <g transform={`translate(${you.x} ${you.y})`} className="atl__you-mark">
+            <circle r="18" />
+            <text y="4" textAnchor="middle">
+              YOU
+            </text>
+          </g>
         </svg>
         {h && (
           <div className="atl__card" style={{ left: `${(px(h.at[xd]) / W) * 100}%`, top: `${(py(h.at[yd]) / H) * 100}%`, borderColor: h.color }}>
@@ -106,6 +140,13 @@ export default function Atlas() {
           </div>
         )}
       </div>
+
+      <p className="atl__you" aria-live="polite">
+        <span className="mono">Drag the black marker, or click anywhere on the map, to place yourself.</span>
+        <span>
+          You are nearest the <b style={{ color: near.color }}>{near.name}</b>: to {near.verb} reality.
+        </span>
+      </p>
 
       <div className="atl__legend">
         {DIMS.map((d) => (
