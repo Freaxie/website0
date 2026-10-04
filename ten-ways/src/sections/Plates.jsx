@@ -21,6 +21,16 @@ const SECRET = {
   sovereign: 'Every rule began as someone’s wish.',
   hedonist: 'Again.',
   trickster: 'There is no secret here.',
+  cinephile: 'You have been on screen the whole time.',
+  musician: 'The rest is part of the music.',
+  entrepreneur: 'You were the product.',
+  biohacker: 'Sleep. It is free.',
+  looksmaxxer: 'No one was looking as closely as you.',
+  theologian: 'Even the question is a kind of prayer.',
+  gardener: 'Leave it alone for a while.',
+  storyteller: 'This is the part where you turn back.',
+  detective: 'The culprit is the one reading this.',
+  archivist: 'This moment has been filed.',
 }
 
 // The trickster's plate will not hold still: parts of it drift, swap and jump when touched.
@@ -95,7 +105,7 @@ function Plate({ a, i }) {
       <Glyph d={a.glyph} className="plate__mark" width={1.2} />
       <header className="plate__bar mono">
         <span>
-          Plate {a.no} of X
+          Plate {a.no} of XX
         </span>
         <button type="button" className="plate__shadow mono" aria-pressed={shadow} onClick={() => setShadow((v) => !v)}>
           <i aria-hidden="true" />
@@ -181,7 +191,7 @@ function Plate({ a, i }) {
   )
 }
 
-// A band of the ten colours that rides along the top while you walk the plates.
+// A band of the twenty colours that rides along the top while you walk the plates.
 function Spectrum() {
   const [on, setOn] = useState(0)
   const [met, setMet] = useState(() => new Set(bus.experienced))
@@ -201,7 +211,7 @@ function Spectrum() {
     return () => io.disconnect()
   }, [])
   return (
-    <nav className="spectrum" aria-label="The ten plates">
+    <nav className="spectrum" aria-label="The twenty plates">
       {ARCHETYPES.map((a, i) => (
         <a key={a.id} href={`#plate-${a.id}`} className={i === on ? 'is-on' : ''} style={{ background: a.color, color: a.fg }} aria-current={i === on ? 'true' : undefined}>
           <span className="mono">
@@ -218,7 +228,7 @@ export default function Plates() {
   return (
     <section id="ten" className="ten">
       <div className="ten__head">
-        <SectionHead no="03" title="The Ten" kicker="Ten plates, one for each way of meeting the world. Each has its question, its gift, its shadow, and an instrument you can use." />
+        <SectionHead no="03" title="The Twenty" kicker="Twenty plates, one for each way of meeting the world. Each has its question, its gift, its shadow, and an instrument you can use." />
         <ol className="ten__index">
           {ARCHETYPES.map((a) => (
             <li key={a.id}>

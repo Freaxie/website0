@@ -1,4 +1,4 @@
-// Ten worlds, one behind each plate: an environment with its own physics, ambience and cursor.
+// Worlds, one behind each plate (the second ten live in worlds-more.js): an environment with its own physics, ambience and cursor.
 //   init(w, h, look)                    -> state
 //   step(s, ctx, t, dt, P, w, h, look)  draws one frame
 //   down(s, P, w, h, look)              optional, on press
@@ -7,6 +7,7 @@
 // Each world reports what the visitor does to it through the bus, which decides when to whisper.
 import { TAU, clamp, lerp, rng } from './geom.js'
 import { bus } from './bus.js'
+import { MORE } from './worlds-more.js'
 
 const MONO = '500 10px "JetBrains Mono", monospace'
 const SERIF_I = 'italic 15px "Instrument Serif", serif'
@@ -880,4 +881,4 @@ const trickster = {
   },
 }
 
-export const WORLDS = { scientist, engineer, warrior, artist, philosopher, explorer, monk, sovereign, hedonist, trickster }
+export const WORLDS = { scientist, engineer, warrior, artist, philosopher, explorer, monk, sovereign, hedonist, trickster, ...MORE }

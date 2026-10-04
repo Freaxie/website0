@@ -12,7 +12,7 @@ const MODES = [
 const R = 220
 const pos = (id) => {
   const i = ARCHETYPES.findIndex((a) => a.id === id)
-  const ang = (i / 10) * TAU - Math.PI / 2
+  const ang = (i / ARCHETYPES.length) * TAU - Math.PI / 2
   return [Math.cos(ang) * R, Math.sin(ang) * R, ang]
 }
 
@@ -38,7 +38,7 @@ export default function Kinships() {
 
       <div className="kin__body">
         <div className="kin__ring">
-          <svg viewBox="-300 -300 600 600" role="img" aria-label={`${MODES.find((m) => m.id === mode).name} among the ten archetypes`}>
+          <svg viewBox="-370 -290 740 580" role="img" aria-label={`${MODES.find((m) => m.id === mode).name} among the twenty archetypes`}>
             <circle r={R} className="kin__circle" />
             <AnimatePresence>
               {shown.map(([a, b]) => {
@@ -72,9 +72,9 @@ export default function Kinships() {
                   onClick={() => setFocus((f) => (f === a.id ? null : a.id))}
                   onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setFocus((f) => (f === a.id ? null : a.id)))}
                 >
-                  <circle r={focus === a.id ? 32 : 26} fill={a.color} />
-                  <path d={a.glyph} transform="translate(-13 -13) scale(0.26)" stroke={a.fg} strokeWidth="7" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                  <text x={Math.cos(ang) * 50} y={Math.sin(ang) * 50 + 4} textAnchor={Math.cos(ang) > 0.3 ? 'start' : Math.cos(ang) < -0.3 ? 'end' : 'middle'} className="kin__label">
+                  <circle r={focus === a.id ? 24 : 18} fill={a.color} />
+                  <path d={a.glyph} transform="translate(-9 -9) scale(0.18)" stroke={a.fg} strokeWidth="9" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                  <text x={Math.cos(ang) * 32} y={Math.sin(ang) * 32 + 4} textAnchor={Math.cos(ang) > 0.3 ? 'start' : Math.cos(ang) < -0.3 ? 'end' : 'middle'} className="kin__label">
                     {a.name}
                   </text>
                 </g>

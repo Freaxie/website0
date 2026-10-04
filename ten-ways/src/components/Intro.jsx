@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ARCHETYPES } from '../lib/archetypes.js'
 
-// The curtain: ten coloured bands, one per way of meeting the world. They leave one by one.
+// The curtain: twenty coloured bands, one per way of meeting the world. They leave one by one.
 export default function Intro() {
   const [open, setOpen] = useState(false)
   const [n, setN] = useState(0)
@@ -37,7 +37,7 @@ export default function Intro() {
           </div>
           <motion.div className="intro__count mono" exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
             <span>{String(n).padStart(3, '0')}</span>
-            <span>Ten ways of encountering reality</span>
+            <span>Twenty ways of encountering reality</span>
           </motion.div>
         </motion.div>
       )}

@@ -46,6 +46,37 @@ const SHAPES = {
       <rect x="21" y="21" width="12" height="12" />
     </g>
   ),
+  cinephile: <path d="M8 16V8H16M32 8H40V16M40 32V40H32M16 40H8V32M24 22V26M22 24H26" />,
+  musician: (
+    <>
+      <ellipse cx="20" cy="31" rx="6" ry="4.2" transform="rotate(-20 20 31)" className="fill" />
+      <path d="M25.5 30V10L33 14" />
+    </>
+  ),
+  entrepreneur: <path d="M10 38L38 10M22 10H38V26" />,
+  biohacker: <path d="M4 26H15L18 20L22 34L26 12L30 30L33 26H44" className="pulse" />,
+  looksmaxxer: (
+    <>
+      <path d="M24 10A14 14 0 0 0 24 38" />
+      <path d="M24 10A14 14 0 0 1 24 38" className="ghost" />
+      <path d="M24 4V44" className="axis" />
+    </>
+  ),
+  theologian: <path d="M24 6V42M6 24H42M13 13L35 35M35 13L13 35" className="star" />,
+  gardener: <path d="M24 40C14 32 14 16 24 8C34 16 34 32 24 40ZM24 40V16" />,
+  storyteller: <path d="M24 42L16 22L24 6L32 22ZM24 42V28M24 28a2 2 0 1 0 0.01 0" />,
+  detective: (
+    <>
+      <circle cx="24" cy="18" r="7" />
+      <path d="M21 24L18 40H30L27 24" />
+    </>
+  ),
+  archivist: (
+    <>
+      <rect x="10" y="12" width="28" height="24" />
+      <path d="M15 20H33M15 26H27" />
+    </>
+  ),
 }
 
 export default function Cursor() {

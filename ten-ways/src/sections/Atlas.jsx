@@ -47,7 +47,7 @@ export default function Atlas() {
   return (
     <section id="atlas" className="atl">
       <div className="atl__top">
-        <SectionHead no="02" title="The Atlas" kicker="A map of the ten. Choose what runs across and what runs up, and watch them move. Click any of them to visit its plate." />
+        <SectionHead no="02" title="The Atlas" kicker="A map of the twenty. Choose what runs across and what runs up, and watch them move. Click any of them to visit its plate." />
         <div className="atl__pickers">
           {[
             ['x', 'Across', xd],
@@ -77,7 +77,7 @@ export default function Atlas() {
           }}
           onPointerMove={(e) => dragging.current && setYou(toMap(e))}
           onPointerUp={() => (dragging.current = false)}
-          role="img" aria-label={`The ten archetypes placed from ${X.lo} to ${X.hi} across, and from ${Y.lo} to ${Y.hi} upward`}>
+          role="img" aria-label={`The twenty archetypes placed from ${X.lo} to ${X.hi} across, and from ${Y.lo} to ${Y.hi} upward`}>
           {Array.from({ length: 9 }, (_, i) => (
             <g key={i} className="atl__grid">
               <line x1={PAD + (i / 8) * (W - 2 * PAD)} x2={PAD + (i / 8) * (W - 2 * PAD)} y1={PAD} y2={H - PAD} />
@@ -99,7 +99,7 @@ export default function Atlas() {
             ↓ {Y.lo}
           </text>
           <motion.line x1={you.x} y1={you.y} initial={false} animate={{ x2: px(near.at[xd]), y2: py(near.at[yd]) }} transition={{ duration: 0.4 }} stroke={near.color} className="atl__tie" />
-          <motion.circle r="36" fill="none" stroke={near.color} strokeWidth="3" initial={false} animate={{ cx: px(near.at[xd]), cy: py(near.at[yd]) }} transition={{ type: 'spring', stiffness: 70, damping: 14 }} />
+          <motion.circle r="30" fill="none" stroke={near.color} strokeWidth="3" initial={false} animate={{ cx: px(near.at[xd]), cy: py(near.at[yd]) }} transition={{ type: 'spring', stiffness: 70, damping: 14 }} />
           {ARCHETYPES.map((a, i) => (
             <motion.g
               key={a.id}
@@ -111,9 +111,9 @@ export default function Atlas() {
               onPointerLeave={() => setHover(null)}
             >
               <a href={`#plate-${a.id}`} aria-label={`${a.name}: ${X.lo}–${X.hi} ${a.at[xd].toFixed(1)}, ${Y.lo}–${Y.hi} ${a.at[yd].toFixed(1)}`} onFocus={() => setHover(a.id)} onBlur={() => setHover(null)}>
-                <circle r="26" fill={a.color} />
-                <path d={a.glyph} transform="translate(-13 -13) scale(0.26)" stroke={a.fg} strokeWidth="7" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                <text y="44" textAnchor="middle" className="atl__name">
+                <circle r="21" fill={a.color} />
+                <path d={a.glyph} transform="translate(-10.5 -10.5) scale(0.21)" stroke={a.fg} strokeWidth="8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                <text y="38" textAnchor="middle" className="atl__name">
                   {a.name}
                 </text>
               </a>

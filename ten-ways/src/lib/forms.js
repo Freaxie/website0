@@ -87,6 +87,54 @@ const BUILD = {
     const shift = Array.from({ length: 15 }, () => (r() < 0.4 ? (r() - 0.5) * 0.3 : 0))
     return { fill: true, pts: Array.from({ length: N }, (_, i) => { const row = Math.floor(i / 28); return { x: ((i % 28) + 0.5) / 28 + shift[row], y: (row + 0.5) / 15 } }) }
   },
+  cinephile() {
+    // three strips of film, frame after frame
+    const segs = []
+    for (const y0 of [0.2, 0.5, 0.8]) for (let k = 0; k < 7; k++) {
+      const x0 = 0.03 + k * 0.137
+      const x1 = x0 + 0.12
+      segs.push([x0, y0 - 0.08, x1, y0 - 0.08], [x1, y0 - 0.08, x1, y0 + 0.08], [x1, y0 + 0.08, x0, y0 + 0.08], [x0, y0 + 0.08, x0, y0 - 0.08])
+    }
+    return { fill: true, pts: evenly(segs, N) }
+  },
+  musician() {
+    return { fill: true, pts: Array.from({ length: N }, (_, i) => { const line = i % 5; const k = Math.floor(i / 5) / (N / 5); return { x: k, y: 0.5 + (line - 2) * 0.07 + 0.16 * Math.sin(k * TAU * 1.5), line } }) }
+  },
+  entrepreneur() {
+    const r = rng(53)
+    return { fill: false, pts: Array.from({ length: N }, (_, i) => { const k = i / N; const y = (Math.exp(4 * k) - 1) / (Math.exp(4) - 1); const sp = (r() - 0.5) * 0.08 * k; return { x: 0.06 + k * 0.88 + sp, y: 0.92 - y * 0.84 - sp } }) }
+  },
+  biohacker() {
+    const g = (p, c, wd) => Math.exp(-(((p - c) / wd) ** 2))
+    const beat = (p) => 0.12 * g(p, 0.14, 0.03) - 0.12 * g(p, 0.27, 0.008) + g(p, 0.3, 0.011) - 0.28 * g(p, 0.33, 0.012) + 0.3 * g(p, 0.56, 0.045)
+    return { fill: true, pts: Array.from({ length: N }, (_, i) => { const row = i % 3; const k = Math.floor(i / 3) / (N / 3); return { x: k, y: 0.25 + row * 0.25 - beat((k * 4) % 1) * 0.16 } }) }
+  },
+  looksmaxxer() {
+    return { fill: false, pts: Array.from({ length: N }, (_, i) => { if (i < N * 0.55) { const a = (i / (N * 0.55)) * TAU; return { x: 0.5 + Math.cos(a) * 0.3, y: 0.5 + Math.sin(a) * 0.4 } } const k = (i - N * 0.55) / (N * 0.45); const a = k * TAU * 2.2; const r = 0.3 * Math.pow(1.618, -a / (Math.PI / 2)); return { x: 0.5 + Math.cos(a) * r * (i % 2 ? 1 : -1), y: 0.5 + Math.sin(a) * r } }) }
+  },
+  theologian() {
+    const segs = []
+    for (let k = 0; k < 16; k++) { const a = (k / 16) * TAU; segs.push([0.5 + Math.cos(a) * 0.08, 0.5 + Math.sin(a) * 0.08, 0.5 + Math.cos(a) * 0.45, 0.5 + Math.sin(a) * 0.45]) }
+    for (const R of [0.08, 0.24, 0.45]) for (let k = 0; k < 32; k++) { const a = (k / 32) * TAU; const b = ((k + 1) / 32) * TAU; segs.push([0.5 + Math.cos(a) * R, 0.5 + Math.sin(a) * R, 0.5 + Math.cos(b) * R, 0.5 + Math.sin(b) * R]) }
+    return { fill: false, pts: evenly(segs, N) }
+  },
+  gardener() {
+    // Vogel's sunflower: every seed turned by the golden angle
+    return { fill: false, pts: Array.from({ length: N }, (_, i) => { const a = i * 2.39996; const r = 0.022 * Math.sqrt(i); return { x: 0.5 + Math.cos(a) * r, y: 0.5 + Math.sin(a) * r, a } }) }
+  },
+  storyteller() {
+    const arc = (k) => (k < 0.2 ? 0.05 : k < 0.6 ? 0.05 + ((k - 0.2) / 0.4) * 0.9 : k < 0.86 ? 0.95 - ((k - 0.6) / 0.26) * 0.8 : 0.15)
+    return { fill: true, pts: Array.from({ length: N }, (_, i) => { const row = i % 4; const k = Math.floor(i / 4) / (N / 4); return { x: 0.04 + k * 0.92, y: 0.2 + row * 0.2 + 0.12 - arc(k) * 0.16 } }) }
+  },
+  detective() {
+    const r = rng(59)
+    const pins = Array.from({ length: 12 }, () => [0.08 + r() * 0.84, 0.1 + r() * 0.8])
+    const segs = pins.slice(1).map((p, i) => [...pins[i], ...p])
+    return { fill: true, pts: evenly(segs, N) }
+  },
+  archivist() {
+    return { fill: true, pts: Array.from({ length: N }, (_, i) => ({ x: ((i % 30) + 0.5) / 30, y: (Math.floor(i / 30) + 0.5) / 14 })) }
+  },
   reality() {
     return { fill: false, pts: Array.from({ length: N }, (_, i) => { const a = (i / N) * TAU * 3; const r = i < N * 0.8 ? 0.36 : 0.06 * ((i * 7) % 10) / 10; return { x: 0.5 + Math.cos(a) * r, y: 0.5 + Math.sin(a) * r } }) }
   },
@@ -104,6 +152,7 @@ export function place(f, w, h) {
   return f.pts.map((p) => (f.fill ? { x: p.x * w, y: p.y * h } : { x: (w - s) / 2 + p.x * s, y: (h - s) / 2 + p.y * s }))
 }
 
+const TALE = 'onceuponatimetherewas'
 const GLYPHS = '0123456789=+−×∑∫π∂λ'
 const WARM = ['#fff1e6', '#ffd23f', '#e8432e', '#ffffff']
 const INK = ['#ffd23f', '#0c0c0c', '#ffb3d6']
@@ -203,6 +252,100 @@ export function drawStyle(ctx, id, f, P, alpha, fg) {
         ctx.fillStyle = c
         P.forEach((p) => ctx.fillRect(p.x + dx - 2.5, p.y - 2.5, 5, 5))
       }
+      break
+    case 'cinephile':
+      ctx.lineWidth = 1
+      P.forEach((p, i) => i % 2 === 0 && ctx.strokeRect(p.x - 2.5, p.y - 2, 5, 4))
+      break
+    case 'musician':
+      ctx.beginPath()
+      for (let i = 5; i < P.length; i++) {
+        const q = P[i - 5]
+        if (Math.hypot(P[i].x - q.x, P[i].y - q.y) < 40) {
+          ctx.moveTo(q.x, q.y)
+          ctx.lineTo(P[i].x, P[i].y)
+        }
+      }
+      ctx.stroke()
+      P.forEach((p, i) => {
+        if (i % 23) return
+        ctx.beginPath()
+        ctx.ellipse(p.x, p.y, 6, 4, -0.35, 0, TAU)
+        ctx.fill()
+      })
+      break
+    case 'entrepreneur':
+      P.forEach((p, i) => {
+        if (i % 2) return
+        ctx.beginPath()
+        ctx.moveTo(p.x, p.y - 4)
+        ctx.lineTo(p.x + 3.5, p.y + 2.5)
+        ctx.lineTo(p.x - 3.5, p.y + 2.5)
+        ctx.fill()
+      })
+      break
+    case 'biohacker':
+      ctx.lineWidth = 1.6
+      ctx.beginPath()
+      for (let i = 3; i < P.length; i++) {
+        const q = P[i - 3]
+        if (Math.hypot(P[i].x - q.x, P[i].y - q.y) < 60) {
+          ctx.moveTo(q.x, q.y)
+          ctx.lineTo(P[i].x, P[i].y)
+        }
+      }
+      ctx.stroke()
+      break
+    case 'looksmaxxer':
+      P.forEach((p) => {
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, 2, 0, TAU)
+        ctx.stroke()
+      })
+      break
+    case 'theologian':
+      ctx.beginPath()
+      P.forEach((p, i) => {
+        if (i % 2) return
+        ctx.moveTo(p.x - 3, p.y)
+        ctx.lineTo(p.x + 3, p.y)
+        ctx.moveTo(p.x, p.y - 3)
+        ctx.lineTo(p.x, p.y + 3)
+      })
+      ctx.stroke()
+      break
+    case 'gardener':
+      P.forEach((p, i) => {
+        ctx.beginPath()
+        ctx.ellipse(p.x, p.y, 4, 1.8, f.pts[i].a || 0, 0, TAU)
+        ctx.fill()
+      })
+      break
+    case 'storyteller':
+      ctx.font = 'italic 14px "Instrument Serif", serif'
+      ctx.textAlign = 'center'
+      P.forEach((p, i) => i % 2 === 0 && ctx.fillText(TALE[(i / 2) % TALE.length], p.x, p.y))
+      break
+    case 'detective':
+      ctx.strokeStyle = '#d2453a'
+      ctx.beginPath()
+      for (let i = 1; i < P.length; i++) {
+        if (Math.hypot(P[i].x - P[i - 1].x, P[i].y - P[i - 1].y) < 40) {
+          ctx.moveTo(P[i - 1].x, P[i - 1].y)
+          ctx.lineTo(P[i].x, P[i].y)
+        }
+      }
+      ctx.stroke()
+      P.forEach((p, i) => {
+        if (i % 35) return
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, 4, 0, TAU)
+        ctx.fill()
+      })
+      break
+    case 'archivist':
+      ctx.lineWidth = 1
+      P.forEach((p) => ctx.strokeRect(p.x - 4, p.y - 6, 8, 12))
       break
     default:
       P.forEach((p) => ctx.fillRect(p.x - 1, p.y - 1, 2, 2))

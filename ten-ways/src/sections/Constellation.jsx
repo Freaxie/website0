@@ -6,9 +6,9 @@ import { ARCHETYPES, LINKS, QUIZ, byId } from '../lib/archetypes.js'
 import { bus } from '../lib/bus.js'
 import { TAU } from '../lib/geom.js'
 
-const BUDGET = 15
+const BUDGET = 25
 const MAX = 5
-const ING = { understand: 'understanding', build: 'building', overcome: 'overcoming', create: 'creating', question: 'questioning', discover: 'discovering', transcend: 'transcending', shape: 'shaping', experience: 'experiencing', disrupt: 'disrupting' }
+const ING = { understand: 'understanding', build: 'building', overcome: 'overcoming', create: 'creating', question: 'questioning', discover: 'discovering', transcend: 'transcending', shape: 'shaping', experience: 'experiencing', disrupt: 'disrupting', frame: 'framing', tune: 'tuning', seize: 'seizing', optimise: 'optimising', polish: 'polishing', revere: 'revering', tend: 'tending', tell: 'telling', solve: 'solving', remember: 'remembering' }
 
 function list(words) {
   return words.length < 2 ? words.join('') : `${words.slice(0, -1).join(', ')} and ${words.at(-1)}`
@@ -21,6 +21,11 @@ const FUSIONS = {
   'artist+scientist': 'The Renaissance Mind',
   'engineer+trickster': 'The Hacker',
   'explorer+monk': 'The Pilgrim',
+  'scientist+theologian': 'The Priest-Physicist',
+  'gardener+scientist': 'The Naturalist Friar',
+  'musician+scientist': 'The Pythagorean',
+  'storyteller+warrior': 'The Bard',
+  'cinephile+entrepreneur': 'The Mogul',
 }
 
 const empty = () => Object.fromEntries(ARCHETYPES.map((a) => [a.id, 0]))
@@ -47,12 +52,12 @@ export default function Constellation() {
   const ranked = ARCHETYPES.filter((a) => pts[a.id] > 0).sort((a, b) => pts[b.id] - pts[a.id])
   const top = ranked.slice(0, 3)
   let title = 'Unwritten'
-  let text = mode === 'quiz' ? 'Answer the seven questions, and your shape draws itself as you go.' : `You have ${BUDGET} points. Give them to the ways you actually meet the world, not the ones you admire.`
+  let text = mode === 'quiz' ? 'Answer the eight questions, and your shape draws itself as you go.' : `You have ${BUDGET} points. Give them to the ways you actually meet the world, not the ones you admire.`
   if (ranked.length) {
     title = top.map((a) => a.name).join(' · ')
     text = `You meet reality chiefly by ${list(top.map((a) => `${ING[a.verb]} it`))}.`
     if (pts[ranked[0].id] / Math.max(1, spent) > 0.45 && spent >= 6) text += ` Mostly the ${ranked[0].name.toLowerCase()}: a specialist of one way.`
-    else if (ranked.length >= 7) text += ' Spread across most of the ten: a generalist of ways.'
+    else if (ranked.length >= 9) text += ' Spread across many of the twenty: a generalist of ways.'
     if (left > 0 && mode === 'hand') text += ` ${left} point${left === 1 ? '' : 's'} still to give.`
   }
 
@@ -71,7 +76,7 @@ export default function Constellation() {
 
   const C = 170
   const vert = (i, v) => {
-    const ang = (i / 10) * TAU - Math.PI / 2
+    const ang = (i / ARCHETYPES.length) * TAU - Math.PI / 2
     const r = (v / MAX) * C
     return [Math.cos(ang) * r, Math.sin(ang) * r]
   }
@@ -80,7 +85,7 @@ export default function Constellation() {
   return (
     <section id="yours" className="con">
       <div className="con__top">
-        <SectionHead no="06" title="Your Constellation" kicker="Everyone uses more than one. Spend fifteen points across the ten and see the shape of how you meet the world." />
+        <SectionHead no="06" title="Your Constellation" kicker="Everyone uses more than one. Spend twenty-five points across the twenty and see the shape of how you meet the world." />
         <div className="con__verdict" aria-live="polite">
           <span className="mono">
             {mode === 'quiz' ? `${answers.length} of ${QUIZ.length} answered` : `${spent} of ${BUDGET} points given`}
@@ -104,7 +109,7 @@ export default function Constellation() {
         <div className="con__left">
           <div className="con__modes" role="tablist" aria-label="How to draw your constellation">
             <button type="button" role="tab" aria-selected={mode === 'quiz'} className={mode === 'quiz' ? 'is-on' : ''} onClick={() => setMode('quiz')}>
-              Seven questions
+              Eight questions
             </button>
             <button
               type="button"
@@ -151,7 +156,7 @@ export default function Constellation() {
                   </motion.div>
                 ) : (
                   <motion.div key="done" className="con__done" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                    <span className="mono">All seven answered</span>
+                    <span className="mono">All eight answered</span>
                     <h3 className="con__q">Your answers are drawn on the right.</h3>
                     <p>You can keep them, adjust them point by point, or start again.</p>
                     <div className="con__done-btns">
@@ -208,7 +213,7 @@ export default function Constellation() {
         </div>
 
         <div className="con__chart">
-          <svg viewBox="-240 -240 480 480" role="img" aria-label={`Your constellation: ${ranked.map((a) => `${a.name} ${pts[a.id]}`).join(', ') || 'empty'}`}>
+          <svg viewBox="-300 -270 600 540" role="img" aria-label={`Your constellation: ${ranked.map((a) => `${a.name} ${pts[a.id]}`).join(', ') || 'empty'}`}>
             {[1, 2, 3, 4, 5].map((k) => (
               <polygon key={k} points={ARCHETYPES.map((_, i) => vert(i, k).join(',')).join(' ')} className="con__web" />
             ))}
@@ -218,8 +223,8 @@ export default function Constellation() {
               return (
                 <g key={a.id}>
                   <line x1="0" y1="0" x2={x} y2={y} className="con__spoke" />
-                  <circle cx={lx} cy={ly} r="9" fill={a.color} />
-                  <text x={lx} y={ly + (ly > 0 ? 26 : -16)} textAnchor="middle" className="con__label">
+                  <circle cx={lx} cy={ly} r="7" fill={a.color} />
+                  <text x={lx + (Math.abs(lx) < 20 ? 0 : Math.sign(lx) * 13)} y={ly + (Math.abs(lx) < 20 ? (ly > 0 ? 24 : -14) : 5)} textAnchor={Math.abs(lx) < 20 ? 'middle' : lx > 0 ? 'start' : 'end'} className="con__label">
                     {a.name}
                   </text>
                 </g>

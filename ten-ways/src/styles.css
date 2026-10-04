@@ -274,7 +274,7 @@ dd {
   margin: 0;
 }
 
-/* ───────── the ten voices ─────────
+/* ───────── the twenty voices ─────────
    Each archetype speaks in its own type, wherever its name or verb appears. */
 
 .plate--scientist .plate__name,
@@ -369,6 +369,98 @@ dd {
   font-variation-settings: 'wdth' 62;
   letter-spacing: -0.03em;
   transform: rotate(-3deg);
+}
+
+.plate--cinephile .plate__name,
+.hero__verb--cinephile,
+.fin__verb--cinephile {
+  font-family: var(--f-display);
+  font-weight: 300;
+  text-transform: uppercase;
+  font-variation-settings: 'wdth' 125;
+  letter-spacing: 0.3em;
+}
+
+.plate--musician .plate__name,
+.hero__verb--musician,
+.fin__verb--musician {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.plate--entrepreneur .plate__name,
+.hero__verb--entrepreneur,
+.fin__verb--entrepreneur {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-variation-settings: 'wdth' 100;
+  letter-spacing: -0.05em;
+}
+
+.plate--biohacker .plate__name,
+.hero__verb--biohacker,
+.fin__verb--biohacker {
+  font-family: var(--f-mono);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: -0.04em;
+}
+
+.plate--looksmaxxer .plate__name,
+.hero__verb--looksmaxxer,
+.fin__verb--looksmaxxer {
+  font-family: var(--f-serif);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.plate--theologian .plate__name,
+.hero__verb--theologian,
+.fin__verb--theologian {
+  font-family: var(--f-serif);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.plate--gardener .plate__name,
+.hero__verb--gardener,
+.fin__verb--gardener {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0;
+}
+
+.plate--storyteller .plate__name,
+.hero__verb--storyteller,
+.fin__verb--storyteller {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.plate--detective .plate__name,
+.hero__verb--detective,
+.fin__verb--detective {
+  font-family: var(--f-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+}
+
+.plate--archivist .plate__name,
+.hero__verb--archivist,
+.fin__verb--archivist {
+  font-family: var(--f-display);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-variation-settings: 'wdth' 62;
+  letter-spacing: 0.08em;
 }
 
 /* ───────── intro ───────── */
@@ -881,6 +973,19 @@ dd {
   font-size: clamp(36px, 4.8vw, 88px);
 }
 
+.plate--cinephile .plate__name,
+.plate--theologian .plate__name {
+  font-size: clamp(30px, 4.2vw, 80px);
+}
+
+.plate--entrepreneur .plate__name,
+.plate--looksmaxxer .plate__name,
+.plate--storyteller .plate__name,
+.plate--detective .plate__name,
+.plate--biohacker .plate__name {
+  font-size: clamp(40px, 6vw, 112px);
+}
+
 .plate__verb {
   font-family: var(--f-serif);
   font-size: clamp(24px, 2.4vw, 38px);
@@ -1033,8 +1138,13 @@ dd {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: clamp(20px, 4vw, 64px);
-  align-items: center;
+  align-items: start;
   margin-top: 8vh;
+}
+
+.kin__ring {
+  position: sticky;
+  top: 10vh;
 }
 
 .kin__ring svg {
@@ -1190,7 +1300,7 @@ dd {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(20px, 4vw, 64px);
-  align-items: center;
+  align-items: start;
   margin-top: 8vh;
 }
 
@@ -1268,6 +1378,11 @@ dd {
   border: 1px solid rgba(247, 245, 240, 0.4);
 }
 
+.con__chart {
+  position: sticky;
+  top: 10vh;
+}
+
 .con__chart svg {
   display: block;
   width: 100%;
@@ -1319,10 +1434,10 @@ dd {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-flow: column;
-  grid-template-rows: repeat(5, auto);
-  gap: 0.15em 4vw;
+  grid-template-rows: repeat(10, auto);
+  gap: 0.1em 4vw;
   margin: 10vh 0 6vh;
-  font-size: clamp(36px, 5.2vw, 96px);
+  font-size: clamp(30px, 4vw, 76px);
   line-height: 1.05;
 }
 
@@ -1490,6 +1605,19 @@ dd {
   font-size: clamp(36px, 4.8vw, 88px);
 }
 
+.plate--cinephile .plate__mirror,
+.plate--theologian .plate__mirror {
+  font-size: clamp(30px, 4.2vw, 80px);
+}
+
+.plate--entrepreneur .plate__mirror,
+.plate--looksmaxxer .plate__mirror,
+.plate--storyteller .plate__mirror,
+.plate--detective .plate__mirror,
+.plate--biohacker .plate__mirror {
+  font-size: clamp(40px, 6vw, 112px);
+}
+
 .plate--scientist .plate__mirror { font-family: var(--f-mono); font-weight: 500; letter-spacing: -0.06em; }
 .plate--engineer .plate__mirror { font-weight: 800; text-transform: uppercase; font-variation-settings: 'wdth' 125; }
 .plate--warrior .plate__mirror { font-weight: 900; text-transform: uppercase; font-variation-settings: 'wdth' 62; }
@@ -1500,6 +1628,16 @@ dd {
 .plate--monk .plate__mirror { font-family: var(--f-serif); text-transform: lowercase; letter-spacing: 0.32em; }
 .plate--sovereign .plate__mirror { font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; }
 .plate--trickster .plate__mirror { font-weight: 900; text-transform: uppercase; font-variation-settings: 'wdth' 62; }
+.plate--cinephile .plate__mirror { font-weight: 300; text-transform: uppercase; font-variation-settings: 'wdth' 125; letter-spacing: 0.3em; }
+.plate--musician .plate__mirror,
+.plate--gardener .plate__mirror,
+.plate--storyteller .plate__mirror { font-family: var(--f-serif); font-style: italic; }
+.plate--entrepreneur .plate__mirror { font-weight: 800; letter-spacing: -0.05em; }
+.plate--biohacker .plate__mirror { font-family: var(--f-mono); text-transform: lowercase; }
+.plate--looksmaxxer .plate__mirror { font-family: var(--f-serif); }
+.plate--theologian .plate__mirror { font-family: var(--f-serif); text-transform: uppercase; letter-spacing: 0.16em; }
+.plate--detective .plate__mirror { font-family: var(--f-mono); font-weight: 700; text-transform: uppercase; }
+.plate--archivist .plate__mirror { font-weight: 500; text-transform: uppercase; font-variation-settings: 'wdth' 62; letter-spacing: 0.08em; }
 
 .plate.is-shadow .plate__name span {
   opacity: 0.35;
@@ -1636,6 +1774,16 @@ dd {
   font-size: 22px;
 }
 
+.enc__clef {
+  font-family: var(--f-serif);
+  font-size: 84px;
+}
+
+.enc__micro {
+  font-family: var(--f-mono);
+  font-size: 8px;
+}
+
 .enc__roman {
   font-family: var(--f-display);
   font-weight: 600;
@@ -1644,9 +1792,10 @@ dd {
 }
 
 .enc__who {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 4px;
+  align-content: start;
 }
 
 .enc__who button {
@@ -1962,6 +2111,42 @@ dd {
   }
 }
 
+.cursor .pulse {
+  stroke-dasharray: 80;
+  animation: cursor-pulse 1s linear infinite;
+}
+
+@keyframes cursor-pulse {
+  from {
+    stroke-dashoffset: 160;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.cursor .ghost {
+  opacity: 0.35;
+  stroke-dasharray: 2 3;
+}
+
+.cursor .axis {
+  opacity: 0.5;
+  stroke-dasharray: 1 3;
+}
+
+.cursor .star {
+  transform-origin: 24px 24px;
+  animation: cursor-star 6s linear infinite;
+  stroke-width: 1;
+}
+
+@keyframes cursor-star {
+  to {
+    transform: rotate(45deg);
+  }
+}
+
 /* physical typography: each name behaves the way its archetype moves */
 
 /* (more specific than .plate__name span, which would stack the letters) */
@@ -2058,6 +2243,87 @@ dd {
   50% {
     transform: rotate(-6deg) translateY(-4%);
   }
+}
+
+.kname--musician .kname__l {
+  animation: bob 2.5s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.3125s);
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5%);
+  }
+}
+
+.kname--entrepreneur .kname__l {
+  transition: transform 0.4s cubic-bezier(0.5, 0, 0.1, 1);
+}
+
+.kname--entrepreneur:hover .kname__l {
+  transform: translateY(calc(var(--i) * -1.4%));
+}
+
+.kname--biohacker .kname__l {
+  animation: blink-led 4.8s steps(1) infinite;
+  animation-delay: calc(var(--i) * 0.6s);
+}
+
+@keyframes blink-led {
+  0%,
+  96% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 0.25;
+  }
+}
+
+.kname--looksmaxxer .kname__l {
+  transition: transform 0.6s cubic-bezier(0.6, 0, 0.2, 1);
+}
+
+.kname--looksmaxxer:hover .kname__l {
+  transform: scaleX(-1);
+}
+
+.kname--gardener .kname__l {
+  transform-origin: 50% 100%;
+  animation: grow-sway 6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.7s);
+}
+
+@keyframes grow-sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(2.5deg);
+  }
+}
+
+.kname--gardener .kname__c {
+  transform-origin: 50% 100%;
+}
+
+.kname--archivist {
+  perspective: 600px;
+}
+
+.plate__name .kname--detective .kname__c {
+  position: relative;
+}
+
+.plate__name .kname__bar {
+  position: absolute;
+  inset: 0.14em -0.02em 0.1em;
+  background: currentColor;
+  transform-origin: 100% 50%;
 }
 
 /* passages between worlds */
@@ -2318,7 +2584,7 @@ body.is-tricked main {
     grid-template-columns: minmax(0, 1fr);
     grid-auto-flow: row;
     grid-template-rows: none;
-    font-size: 11vw;
+    font-size: 9.5vw;
   }
 
   .fin__foot {
@@ -2378,8 +2644,11 @@ body.is-tricked main {
   .plate__mark,
   .kname__l,
   .kname__caret,
+  .plate__name .kname__bar,
   .cursor .breath,
   .cursor .split .a,
+  .cursor .pulse,
+  .cursor .star,
   .stillness__circle {
     animation: none;
   }

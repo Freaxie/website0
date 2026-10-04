@@ -7,7 +7,7 @@ import { bus } from '../lib/bus.js'
 
 const INKS = ['#ffd23f', '#0c0c0c', '#ffb3d6', '#1f4fd8', '#f7f5f0']
 
-// Ten ways of drawing the same thing. Each gets the silhouette, its clip, and the archetype's colours.
+// Twenty ways of drawing the same thing. Each gets the silhouette, its clip, and the archetype's colours.
 function Treatment({ a, t }) {
   const clip = `url(#enc-clip-${t.id})`
   const [px, py] = t.peak
@@ -149,6 +149,183 @@ function Treatment({ a, t }) {
           ))}
         </g>
       )
+    case 'cinephile':
+      return (
+        <g>
+          <path d={t.path} fill={fg} opacity="0.85" />
+          <rect x="0" y="0" width="600" height="58" fill="#000" />
+          <rect x="0" y="342" width="600" height="58" fill="#000" />
+          {[200, 400].map((x) => (
+            <line key={x} x1={x} x2={x} y1="58" y2="342" stroke={fg} strokeWidth="1" opacity="0.5" />
+          ))}
+          {[152, 248].map((y) => (
+            <line key={y} x1="0" x2="600" y1={y} y2={y} stroke={fg} strokeWidth="1" opacity="0.5" />
+          ))}
+          <circle cx="30" cy="30" r="6" fill="#d2453a" />
+          <text x="44" y="35" className="enc__tiny" fill={fg}>
+            REC
+          </text>
+          <text x="580" y="35" textAnchor="end" className="enc__tiny" fill={fg}>
+            00:01:24:16 · 2.39:1
+          </text>
+          <text x="300" y="378" textAnchor="middle" className="enc__tiny" fill={fg}>
+            SC. 12 · TAKE 3
+          </text>
+        </g>
+      )
+    case 'musician':
+      return (
+        <g>
+          {[0, 1, 2, 3, 4].map((k) => (
+            <line key={k} x1="0" x2="600" y1={300 + k * 16} y2={300 + k * 16} stroke={fg} strokeWidth="1.2" opacity="0.6" />
+          ))}
+          <path d={t.path} fill="none" stroke={fg} strokeWidth="9" strokeDasharray="1 26" strokeLinecap="round" />
+          <path d={t.path} fill="none" stroke={fg} strokeWidth="1" opacity="0.4" />
+          <text x="18" y="362" className="enc__clef" fill={fg}>
+            𝄞
+          </text>
+          {Array.from({ length: 8 }, (_, i) => {
+            const x = 90 + i * 62
+            const y = 340 - ((i * 3) % 5) * 8
+            return (
+              <g key={i}>
+                <ellipse cx={x} cy={y} rx="8" ry="5.5" transform={`rotate(-20 ${x} ${y})`} fill={fg} />
+                <line x1={x + 7} x2={x + 7} y1={y} y2={y - 34} stroke={fg} strokeWidth="1.5" />
+              </g>
+            )
+          })}
+        </g>
+      )
+    case 'entrepreneur':
+      return (
+        <g>
+          <path d={t.path} fill="none" stroke={fg} strokeWidth="2" opacity="0.5" />
+          <g clipPath={clip}>
+            {Array.from({ length: 12 }, (_, i) => {
+              const hh = 18 * Math.exp(i * 0.26)
+              return <rect key={i} x={20 + i * 48} y={400 - hh} width="30" height={hh} fill={fg} />
+            })}
+          </g>
+          <path d="M40 360C220 350 400 300 540 80" fill="none" stroke={fg} strokeWidth="3" />
+          <path d="M520 80H545V105" fill="none" stroke={fg} strokeWidth="3" />
+          <text x="500" y="70" textAnchor="end" className="enc__tiny" fill={fg}>
+            +340% YOY
+          </text>
+        </g>
+      )
+    case 'biohacker':
+      return (
+        <g>
+          {Array.from({ length: 25 }, (_, i) => (
+            <line key={`v${i}`} x1={i * 25} x2={i * 25} y1="0" y2="400" stroke={fg} opacity="0.12" />
+          ))}
+          {Array.from({ length: 17 }, (_, i) => (
+            <line key={`h${i}`} y1={i * 25} y2={i * 25} x1="0" x2="600" stroke={fg} opacity="0.12" />
+          ))}
+          <path d={t.path} fill="none" stroke={fg} strokeWidth="1.5" opacity="0.5" />
+          <path d={`M0 ${cy}H${px - 60}L${px - 48} ${cy - 10}L${px - 36} ${cy}L${px - 20} ${cy + 14}L${px} ${py}L${px + 20} ${cy + 40}L${px + 34} ${cy}L${px + 70} ${cy - 24}L${px + 100} ${cy}H600`} fill="none" stroke={fg} strokeWidth="3" strokeLinejoin="round" />
+          <text x="580" y="30" textAnchor="end" className="enc__tiny" fill={fg}>
+            HR 58 · HRV 71 · VO2 52
+          </text>
+        </g>
+      )
+    case 'looksmaxxer':
+      return (
+        <g>
+          <g clipPath="url(#enc-half)">
+            <path d={t.path} fill={fg} opacity="0.85" />
+          </g>
+          <path d={t.path} fill="none" stroke={fg} strokeWidth="2" transform="translate(600 0) scale(-1 1)" strokeDasharray="3 5" />
+          <line x1="300" x2="300" y1="0" y2="400" stroke={fg} strokeWidth="1" strokeDasharray="2 6" />
+          <path d="M120 40H491M120 32V48M491 32V48" stroke={fg} strokeWidth="1.5" />
+          <text x="305" y="28" textAnchor="middle" className="enc__tiny" fill={fg}>
+            1 : 1.618
+          </text>
+        </g>
+      )
+    case 'theologian':
+      return (
+        <g>
+          {[-1, 0, 1].map((k) => (
+            <path key={k} d={`M${260 + k * 70} 0L${300 + k * 70} 0L${380 + k * 130} 400L${300 + k * 130} 400Z`} fill={fg} opacity="0.14" />
+          ))}
+          <path d={t.path} fill="none" stroke={fg} strokeWidth="2.5" />
+          <circle cx={px} cy={py - 34} r="22" fill="none" stroke={fg} strokeWidth="2" />
+          <circle cx={px} cy={py - 34} r="30" fill="none" stroke={fg} strokeWidth="1" opacity="0.5" />
+          <path d={`M${px} ${py - 70}V${py - 100}M${px - 12} ${py - 88}H${px + 12}`} stroke={fg} strokeWidth="2" />
+        </g>
+      )
+    case 'gardener':
+      return (
+        <g>
+          <path d={t.path} fill="none" stroke={fg} strokeWidth="2" />
+          <g clipPath={clip}>
+            {Array.from({ length: 60 }, (_, i) => {
+              const x = (i * 73) % 600
+              const y = 80 + ((i * 131) % 320)
+              const r = (i * 47) % 180
+              return <ellipse key={i} cx={x} cy={y} rx="16" ry="6" transform={`rotate(${r} ${x} ${y})`} fill={fg} opacity={0.5 + (i % 3) * 0.2} />
+            })}
+          </g>
+          <path d={`M${px} ${py}C${px - 10} ${py - 30} ${px + 14} ${py - 46} ${px} ${py - 70}`} fill="none" stroke={fg} strokeWidth="2" />
+          <ellipse cx={px + 10} cy={py - 50} rx="10" ry="4" transform={`rotate(-30 ${px + 10} ${py - 50})`} fill={fg} />
+        </g>
+      )
+    case 'storyteller':
+      return (
+        <g>
+          <path d={t.path} fill={fg} opacity="0.16" />
+          <path d="M30 330L150 320L360 70L470 280L570 300" fill="none" stroke={fg} strokeWidth="2.5" />
+          {[[30, 330, 'once'], [150, 320, 'then'], [360, 70, 'until'], [470, 280, 'and so'], [570, 300, 'the end']].map(([x, y, w]) => (
+            <g key={w}>
+              <circle cx={x} cy={y} r="5" fill={fg} />
+              <text x={x} y={y - 14} textAnchor="middle" className="enc__say" fill={fg}>
+                {w}
+              </text>
+            </g>
+          ))}
+        </g>
+      )
+    case 'detective':
+      return (
+        <g>
+          <rect x="0" y="0" width="600" height="400" fill="#000" opacity="0.4" />
+          <circle cx={px} cy={py + 40} r="120" fill={fg} opacity="0.1" />
+          <path d={t.path} fill="none" stroke={fg} strokeWidth="1.5" strokeDasharray="5 5" />
+          {[[px, py], [120, 300], [cx, cy + 40], [520, 330]].map(([x, y], i, arr) => (
+            <g key={i}>
+              {i > 0 && <path d={`M${arr[i - 1][0]} ${arr[i - 1][1]}Q${(arr[i - 1][0] + x) / 2} ${(arr[i - 1][1] + y) / 2 + 30} ${x} ${y}`} fill="none" stroke="#d2453a" strokeWidth="2" />}
+              <circle cx={x} cy={y} r="6" fill="#d2453a" />
+              <text x={x + 10} y={y - 8} className="enc__tiny" fill={fg}>
+                EXHIBIT {String.fromCharCode(65 + i)}
+              </text>
+            </g>
+          ))}
+        </g>
+      )
+    case 'archivist':
+      return (
+        <g>
+          <g clipPath={clip}>
+            {Array.from({ length: 96 }, (_, i) => {
+              const x = (i % 12) * 50
+              const y = Math.floor(i / 12) * 50
+              return (
+                <g key={i}>
+                  <rect x={x + 3} y={y + 3} width="44" height="44" fill="none" stroke={fg} strokeWidth="1" />
+                  <text x={x + 7} y={y + 16} className="enc__micro" fill={fg}>
+                    {String(i + 1).padStart(3, '0')}
+                  </text>
+                </g>
+              )
+            })}
+          </g>
+          <path d={t.path} fill="none" stroke={fg} strokeWidth="2.5" />
+          <text x="20" y="30" className="enc__tiny" fill={fg}>
+            NO. 001–096 · FILED
+          </text>
+        </g>
+      )
     default:
       // trickster
       return (
@@ -184,7 +361,7 @@ export default function Encounters() {
   return (
     <section id="encounters" className="enc" ref={ref}>
       <div className="enc__top">
-        <SectionHead no="04" title="One World, Ten Encounters" kicker="The same thing, met ten ways. Choose a thing, then an archetype, and watch it redraw what it sees." />
+        <SectionHead no="04" title="One World, Twenty Encounters" kicker="The same thing, met twenty ways. Choose a thing, then an archetype, and watch it redraw what it sees." />
         <div className="enc__things" role="radiogroup" aria-label="What is encountered">
           {THINGS.map((x) => (
             <button key={x.id} type="button" role="radio" aria-checked={thing === x.id} className={thing === x.id ? 'is-on' : ''} onClick={() => setThing(x.id)}>
@@ -206,6 +383,9 @@ export default function Encounters() {
                   <path d={x.path} />
                 </clipPath>
               ))}
+              <clipPath id="enc-half">
+                <rect x="0" y="0" width="300" height="400" />
+              </clipPath>
             </defs>
             <AnimatePresence mode="wait">
               <motion.g key={`${a.id}-${t.id}`} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -14 }} transition={{ duration: 0.45 }}>

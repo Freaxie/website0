@@ -21,7 +21,7 @@ export default function Nav({ rooms }) {
   return (
     <>
       <a className="mark mono" href="#entrance" aria-label="Back to the entrance">
-        X<span>/</span>R
+        XX<span>/</span>R
       </a>
       <div className="room-label mono" aria-live="polite">
         <motion.span key={current.id} initial={{ y: '100%' }} animate={{ y: 0 }} transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}>

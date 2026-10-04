@@ -26,7 +26,7 @@ export default function Secrets() {
         document.body.classList.add('is-tricked')
         setTimeout(() => document.body.classList.remove('is-tricked'), 1400)
       }
-      if (type === 'all') bus.whisper('all', 'All ten. The coda has changed.', '#0c0c0c')
+      if (type === 'all') bus.whisper('all', 'All twenty. The coda has changed.', '#0c0c0c')
     })
     return () => {
       evs.forEach((e) => window.removeEventListener(e, wake))

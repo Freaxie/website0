@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { useLoop } from '../lib/useLoop.js'
-import { ARCHETYPES } from '../lib/archetypes.js'
+import { ARCHETYPES, ink } from '../lib/archetypes.js'
 import { TAU, range, rng } from '../lib/geom.js'
 import { bus } from '../lib/bus.js'
 
-const R = 168 // radius of the ring of signs
+const R = 200 // radius of the ring of signs
 const CORE = 44
 
 // Particles that travel along each ray toward reality; the chosen ray runs fastest.
 const r = rng(12)
-const MOTES = ARCHETYPES.flatMap((_, k) => Array.from({ length: 14 }, () => ({ k, u: r(), sp: 0.08 + r() * 0.1, off: (r() - 0.5) * 10 })))
+const MOTES = ARCHETYPES.flatMap((_, k) => Array.from({ length: 8 }, () => ({ k, u: r(), sp: 0.08 + r() * 0.1, off: (r() - 0.5) * 10 })))
 
 export default function Hero() {
   const ref = useRef(null)
@@ -49,8 +49,8 @@ export default function Hero() {
       const on = m.k === activeRef.current
       m.u -= m.sp * dt * (on ? 4 : 1)
       if (m.u < 0) m.u += 1
-      const ang = (m.k / 10) * TAU - Math.PI / 2
-      const rad = CORE + 8 + m.u * (R - 34 - CORE - 8)
+      const ang = (m.k / ARCHETYPES.length) * TAU - Math.PI / 2
+      const rad = CORE + 8 + m.u * (R - 26 - CORE - 8)
       const nx = -Math.sin(ang)
       const ny = Math.cos(ang)
       ctx.globalAlpha = (on ? 1 : 0.55) * Math.min(1, m.u * 4) * Math.min(1, (1 - m.u) * 6)
@@ -75,14 +75,14 @@ export default function Hero() {
     <section id="entrance" className="hero" ref={ref}>
       <motion.div className="hero__meta mono" style={{ opacity: fade }}>
         <span>An atlas in seven rooms</span>
-        <span>Ten archetypes · one reality</span>
+        <span>Twenty archetypes · one reality</span>
       </motion.div>
 
       <div className="hero__text">
-        <h1 className="hero__title" aria-label="Ten ways of encountering reality">
+        <h1 className="hero__title" aria-label="Twenty ways of encountering reality">
           <span className="hero__clip">
             <motion.span className="hero__ten" initial={{ y: '105%' }} animate={{ y: 0 }} transition={{ duration: 1, delay: 1.3, ease }}>
-              Ten ways
+              Twenty ways
             </motion.span>
           </span>
           <motion.span className="hero__of" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, delay: 1.7 }}>
@@ -99,7 +99,7 @@ export default function Hero() {
           <span className="hero__to">To</span>
           <span className="hero__verb-box">
             <AnimatePresence mode="popLayout" initial={false}>
-              <motion.span key={a.id} className={`hero__verb hero__verb--${a.id}`} style={{ color: a.color }} initial={{ y: '100%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: '-100%', opacity: 0 }} transition={{ duration: 0.6, ease }}>
+              <motion.span key={a.id} className={`hero__verb hero__verb--${a.id}`} style={{ color: ink(a) }} initial={{ y: '100%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: '-100%', opacity: 0 }} transition={{ duration: 0.6, ease }}>
                 {a.verb} <span className="hero__it">it.</span>
               </motion.span>
             </AnimatePresence>
@@ -113,11 +113,11 @@ export default function Hero() {
       <motion.div className="hero__wheel" initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.6, delay: 1.2, ease }} onPointerLeave={() => setHeld(false)}>
         <motion.div className="hero__spin" style={{ rotate: spin }}>
           <canvas ref={canvas} className="hero__motes" aria-hidden="true" />
-          <svg viewBox="-260 -260 520 520" role="group" aria-label="The ten archetypes around reality">
+          <svg viewBox="-260 -260 520 520" role="group" aria-label="The twenty archetypes around reality">
             <circle r={R} className="hero__ring" />
             <circle r={R * 0.62} className="hero__ring hero__ring--dash" />
             {ARCHETYPES.map((x, i) => {
-              const ang = (i / 10) * TAU - Math.PI / 2
+              const ang = (i / ARCHETYPES.length) * TAU - Math.PI / 2
               const gx = Math.cos(ang) * R
               const gy = Math.sin(ang) * R
               const on = i === active
@@ -138,11 +138,11 @@ export default function Hero() {
                     }}
                   >
                     <g transform={`translate(${gx} ${gy})`}>
-                      <motion.g animate={{ scale: on ? 1.25 : 1 }} transition={{ type: 'spring', stiffness: 300, damping: 18 }}>
-                        <circle r="34" fill={x.color} className="hero__disc" />
-                        <path d={x.glyph} transform="translate(-17 -17) scale(0.34)" stroke={x.fg} strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                      <motion.g animate={{ scale: on ? 1.4 : 1 }} transition={{ type: 'spring', stiffness: 300, damping: 18 }}>
+                        <circle r="23" fill={x.color} className="hero__disc" />
+                        <path d={x.glyph} transform="translate(-12 -12) scale(0.24)" stroke={x.fg} strokeWidth="8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                       </motion.g>
-                      <motion.text y={Math.sin(ang) > 0.3 ? 58 : -48} textAnchor="middle" className="hero__label" animate={{ opacity: on ? 1 : 0.55 }}>
+                      <motion.text x={Math.cos(ang) * 44} y={Math.sin(ang) * 40 + 4} textAnchor={Math.abs(Math.cos(ang)) < 0.3 ? 'middle' : Math.cos(ang) > 0 ? 'start' : 'end'} className="hero__label" initial={false} animate={{ opacity: on ? 1 : 0 }}>
                         {x.name}
                       </motion.text>
                     </g>

@@ -1,6 +1,9 @@
 // The exhibition's nervous system: a tiny event bus, and the memory of what the visitor has done.
 // Whispers are shown once per visit; reactions should feel like discoveries, not notifications.
 
+import { ARCHETYPES } from './archetypes.js'
+
+const TOTAL = ARCHETYPES.length
 const subs = new Set()
 
 export const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -26,7 +29,7 @@ export const bus = {
     if (this.experienced.has(id)) return
     this.experienced.add(id)
     this.emit('experienced', id)
-    if (this.experienced.size === 10) this.emit('all')
+    if (this.experienced.size === TOTAL) this.emit('all')
   },
   // rapid switching between archetypes wakes the trickster
   switched() {

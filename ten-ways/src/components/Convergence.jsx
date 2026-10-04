@@ -6,9 +6,9 @@ import { form } from '../lib/forms.js'
 import { TAU, clamp, lerp, smooth } from '../lib/geom.js'
 import { bus } from '../lib/bus.js'
 
-// Unlocked by meeting all ten worlds: each world's geometry leaves its place and joins one orbit.
+// Unlocked by meeting all twenty worlds: each world's geometry leaves its place and joins one orbit.
 export default function Convergence() {
-  const [open, setOpen] = useState(() => bus.experienced.size === 10)
+  const [open, setOpen] = useState(() => bus.experienced.size === ARCHETYPES.length)
   useEffect(() => bus.on((type) => type === 'all' && setOpen(true)), [])
   return open ? <Orbit /> : null
 }
@@ -40,17 +40,17 @@ function Orbit() {
     const R2 = Math.min(w, h) * 0.26
     ARCHETYPES.forEach((a, k) => {
       const f = form(a.id)
-      const home = (k / 10) * TAU - Math.PI / 2
+      const home = (k / ARCHETYPES.length) * TAU - Math.PI / 2
       const hx = cx + Math.cos(home) * R1
       const hy = cy + Math.sin(home) * R1
-      const cell = Math.min(w, h) * 0.12
+      const cell = Math.min(w, h) * 0.08
       ctx.fillStyle = a.color
-      for (let j = 0; j < 42; j++) {
-        const q = f.pts[j * 10]
+      for (let j = 0; j < 21; j++) {
+        const q = f.pts[j * 20]
         const sx = hx + (q.x - 0.5) * cell
         const sy = hy + (q.y - 0.5) * cell
-        const ang = ((k * 42 + j) / 420) * TAU + (t - t0.current) * 0.12
-        const k2 = smooth(0.15 + k * 0.03, 0.75 + k * 0.02, p)
+        const ang = ((k * 21 + j) / 420) * TAU + (t - t0.current) * 0.12
+        const k2 = smooth(0.15 + k * 0.015, 0.75 + k * 0.01, p)
         const x = lerp(sx, cx + Math.cos(ang) * R2, k2)
         const y = lerp(sy, cy + Math.sin(ang) * R2, k2)
         ctx.globalAlpha = 0.9
@@ -69,7 +69,7 @@ function Orbit() {
   return (
     <motion.div className="conv" ref={ref} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
       <canvas ref={canvas} aria-hidden="true" />
-      <p>You have met reality ten ways. It was one reality each time.</p>
+      <p>You have met reality twenty ways. It was one reality each time.</p>
     </motion.div>
   )
 }

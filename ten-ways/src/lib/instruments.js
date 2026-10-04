@@ -1,9 +1,10 @@
-// Ten small instruments, one per archetype. Each draws its way of meeting the world on a canvas:
+// Small instruments, one per archetype (the second ten live in instruments-more.js). Each draws its way of meeting the world on a canvas:
 //   init(w, h, look)                       -> state
 //   step(state, ctx, t, dt, P, w, h, look) draws one frame
 //   click(state, P, w, h)                  optional
 // P is the pointer in canvas pixels: { x, y, on, speed }. look = { fg, bg }.
 import { TAU, clamp, lerp, rng } from './geom.js'
+import { MORE } from './instruments-more.js'
 
 const MONO = '500 11px "JetBrains Mono", monospace'
 
@@ -590,4 +591,4 @@ const trickster = {
   },
 }
 
-export const INSTRUMENTS = { scientist, engineer, warrior, artist, philosopher, explorer, monk, sovereign, hedonist, trickster }
+export const INSTRUMENTS = { scientist, engineer, warrior, artist, philosopher, explorer, monk, sovereign, hedonist, trickster, ...MORE }
