@@ -74,7 +74,7 @@ export default function Hero() {
   return (
     <section id="entrance" className="hero" ref={ref}>
       <motion.div className="hero__meta mono" style={{ opacity: fade }}>
-        <span>An atlas in seven rooms</span>
+        <span>An atlas in eight rooms</span>
         <span>Twenty archetypes · one reality</span>
       </motion.div>
 

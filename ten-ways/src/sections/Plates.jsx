@@ -4,6 +4,7 @@ import SectionHead from '../components/SectionHead.jsx'
 import Glyph from '../components/Glyph.jsx'
 import Instrument from '../components/Instrument.jsx'
 import World from '../components/World.jsx'
+import Dossier from '../components/Dossier.jsx'
 import KineticName from '../components/KineticName.jsx'
 import Threshold from '../components/Threshold.jsx'
 import { ARCHETYPES } from '../lib/archetypes.js'
@@ -187,6 +188,8 @@ function Plate({ a, i }) {
           </p>
         </motion.div>
       </div>
+
+      <Dossier a={a} />
     </motion.article>
   )
 }

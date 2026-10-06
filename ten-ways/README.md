@@ -31,6 +31,9 @@ npm run build:artifact   # single-file page in artifact/index.html
    the Theologian's rose window fills with light; the Gardener's plants grow when watered and wilt when
    not; the Storyteller's beats draw a plot; the Detective ties red string across an evidence board; the
    Archivist keeps fading memories by giving them numbers.
+   Below each plate is its dossier: a short essay, its figure in myth, a dated lineage, a four-word
+   lexicon, its daily practice, the signs of it in a person, and three works to begin with
+   (`src/lib/dossiers.js`).
    Every plate has a shadow switch that turns its colours, instrument and name inside out, a mirrored
    reflection of its name, and its sign turning slowly behind it. A spectrum bar of the twenty colours rides
    along the top while you walk the plates.
@@ -38,8 +41,11 @@ npm run build:artifact   # single-file page in artifact/index.html
    measured, blueprinted, climbed, painted, questioned, explored, let go of, partitioned, savoured, turned
    over, filmed, scored, charted, monitored, mirrored, haloed, planted, plotted, investigated and filed.
 5. **Kinships.** A ring of allies, opposites and unlikely unions (the warrior-monk, the philosopher-king, the priest-physicist).
-6. **Your Constellation.** Answer eight questions, or spend twenty-five points by hand, and see your shape.
-7. **Coda.** Twenty imperatives, and one sentence.
+6. **Lineages.** Every dated moment from the dossiers, 84 of them, on one logarithmic timeline from a
+   flute carved forty thousand years ago to a word coined online, with a lane for each archetype, a
+   reader that walks through them in order, and a list filtered by era.
+7. **Your Constellation.** Answer eight questions, or spend twenty-five points by hand, and see your shape.
+8. **Coda.** Twenty imperatives, and one sentence.
 
 ## Twenty physical laws
 

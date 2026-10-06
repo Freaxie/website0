@@ -85,7 +85,7 @@ export default function Constellation() {
   return (
     <section id="yours" className="con">
       <div className="con__top">
-        <SectionHead no="06" title="Your Constellation" kicker="Everyone uses more than one. Spend twenty-five points across the twenty and see the shape of how you meet the world." />
+        <SectionHead no="07" title="Your Constellation" kicker="Everyone uses more than one. Spend twenty-five points across the twenty and see the shape of how you meet the world." />
         <div className="con__verdict" aria-live="polite">
           <span className="mono">
             {mode === 'quiz' ? `${answers.length} of ${QUIZ.length} answered` : `${spent} of ${BUDGET} points given`}

@@ -1,4 +1,4 @@
-/* Ten Ways of Encountering Reality — one sheet for six rooms and ten plates. */
+/* Twenty Ways of Encountering Reality — one sheet for eight rooms and twenty plates. */
 
 :root {
   --paper: #eeebe4;
@@ -461,6 +461,432 @@ dd {
   text-transform: uppercase;
   font-variation-settings: 'wdth' 62;
   letter-spacing: 0.08em;
+}
+
+/* ───────── the dossier behind each plate ───────── */
+
+.dossier {
+  position: relative;
+  margin-top: 9vh;
+  padding-top: 18px;
+  border-top: 1px solid currentColor;
+}
+
+.dossier__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  opacity: 0.75;
+}
+
+.dossier__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 48px);
+  align-items: start;
+}
+
+.dossier h4 {
+  margin: 0 0 12px;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.dossier h4:not(:first-child) {
+  margin-top: 28px;
+}
+
+.dossier__essay p:first-child {
+  font-family: var(--f-serif);
+  font-size: clamp(20px, 1.75vw, 28px);
+  line-height: 1.22;
+  letter-spacing: -0.005em;
+}
+
+.dossier__essay p:first-child::first-letter {
+  float: left;
+  margin: 0.06em 0.08em 0 0;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 3.3em;
+  line-height: 0.72;
+  font-variation-settings: 'wdth' 62;
+}
+
+.dossier__figure {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px dashed currentColor;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.dossier__figure .mono {
+  font-style: normal;
+  opacity: 0.7;
+}
+
+.dossier__line li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 0 14px 18px;
+  font-family: var(--f-serif);
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+/* a thread down the lineage, with a knot at each moment */
+.dossier__line li::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 6px;
+  bottom: -6px;
+  width: 1px;
+  background: currentColor;
+  opacity: 0.4;
+}
+
+.dossier__line li:last-child::before {
+  display: none;
+}
+
+.dossier__line li::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.dossier__line .mono {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+}
+
+.dossier__lex div {
+  padding: 8px 0;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+}
+
+.dossier__lex dt {
+  font-weight: 800;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.dossier__lex dd {
+  margin: 2px 0 0;
+  font-family: var(--f-serif);
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+.dossier__list li {
+  padding: 5px 0 5px 18px;
+  font-family: var(--f-serif);
+  font-size: 17px;
+  line-height: 1.2;
+  text-indent: -18px;
+}
+
+.dossier__list li::before {
+  content: '—';
+  display: inline-block;
+  width: 18px;
+  text-indent: 0;
+}
+
+.dossier__signs li {
+  font-style: italic;
+}
+
+.dossier__works li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 0;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+}
+
+.dossier__works cite {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.1;
+}
+
+.dossier__works .mono {
+  font-size: 11px;
+  opacity: 0.75;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+/* ───────── lineages ───────── */
+
+.lin {
+  position: relative;
+  padding: 18vh calc(var(--gutter) + var(--navspace)) 14vh var(--gutter);
+  background: var(--white);
+}
+
+.lin__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: clamp(20px, 4vw, 64px);
+  align-items: end;
+}
+
+.lin__now {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 18px;
+}
+
+.lin__year {
+  display: block;
+  font-weight: 900;
+  font-size: clamp(56px, 7vw, 120px);
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  font-variation-settings: 'wdth' 62;
+}
+
+.lin__who {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  text-decoration: none;
+}
+
+.lin__who i,
+.lin__la i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.lin__text {
+  margin-top: 10px;
+  max-width: 34ch;
+  font-family: var(--f-serif);
+  font-size: clamp(24px, 2.2vw, 34px);
+  line-height: 1.12;
+}
+
+.lin__step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.lin__step button,
+.lin__eras button {
+  padding: 8px 12px;
+  background: none;
+  border: 1px solid currentColor;
+  color: inherit;
+  cursor: pointer;
+}
+
+.lin__step button:hover,
+.lin__eras button:hover,
+.lin__eras button.is-on {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.lin__chart {
+  margin-top: 8vh;
+}
+
+.lin__chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.lin__tick {
+  stroke: var(--ink);
+  stroke-opacity: 0.12;
+}
+
+.lin__tlabel,
+.lin__lname {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  fill: var(--ink);
+}
+
+.lin__tlabel {
+  fill-opacity: 0.6;
+}
+
+.lin__lname {
+  fill-opacity: 0.55;
+  transition: fill-opacity 0.3s;
+}
+
+.is-on .lin__lname {
+  fill-opacity: 1;
+  font-weight: 700;
+}
+
+.lin__lane {
+  stroke-width: 1;
+  stroke-opacity: 0.55;
+}
+
+.is-on .lin__lane {
+  stroke-width: 3;
+  stroke-opacity: 1;
+}
+
+.lin__guide {
+  stroke-dasharray: 3 4;
+  transition: all 0.4s var(--ease);
+}
+
+.lin__dot {
+  cursor: pointer;
+  outline: none;
+}
+
+.lin__dot circle {
+  transition: r 0.25s;
+}
+
+.lin__hit {
+  fill: transparent;
+}
+
+.lin__dot:focus-visible circle:last-child {
+  stroke: var(--ink);
+}
+
+.lin__scale {
+  margin-top: 10px;
+  opacity: 0.6;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.lin__eras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 7vh 0 22px;
+}
+
+.lin__eras span {
+  margin-left: 8px;
+  opacity: 0.6;
+}
+
+.lin__list {
+  columns: 3 300px;
+  column-gap: clamp(20px, 3vw, 48px);
+}
+
+.lin__list li {
+  break-inside: avoid;
+}
+
+.lin__list button {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 12px;
+  width: 100%;
+  padding: 10px 0;
+  background: none;
+  border: 0;
+  border-top: 1px solid rgba(12, 12, 12, 0.18);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.lin__list li.is-on button {
+  border-top-color: var(--ink);
+  border-top-width: 2px;
+}
+
+.lin__ly {
+  padding-top: 2px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.lin__lt {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--f-serif);
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+.lin__la {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+@media (max-width: 1100px) {
+  .dossier__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .dossier__grid,
+  .lin__top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dossier__head span:last-child {
+    display: none;
+  }
+
+  .lin__chart {
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+    padding: 0 var(--gutter);
+    overflow-x: auto;
+  }
+
+  .lin__chart svg {
+    min-width: 760px;
+  }
+
+  .lin__now {
+    min-height: 0;
+  }
 }
 
 /* ───────── intro ───────── */

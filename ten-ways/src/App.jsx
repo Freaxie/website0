@@ -11,6 +11,7 @@ import Atlas from './sections/Atlas.jsx'
 import Plates from './sections/Plates.jsx'
 import Encounters from './sections/Encounters.jsx'
 import Kinships from './sections/Kinships.jsx'
+import Lineages from './sections/Lineages.jsx'
 import Constellation from './sections/Constellation.jsx'
 import Finale from './sections/Finale.jsx'
 
@@ -20,8 +21,9 @@ export const ROOMS = [
   { id: 'ten', no: '03', name: 'The Twenty' },
   { id: 'encounters', no: '04', name: 'One World, Twenty Encounters' },
   { id: 'kinships', no: '05', name: 'Kinships' },
-  { id: 'yours', no: '06', name: 'Your Constellation' },
-  { id: 'coda', no: '07', name: 'Coda' },
+  { id: 'lineages', no: '06', name: 'Lineages' },
+  { id: 'yours', no: '07', name: 'Your Constellation' },
+  { id: 'coda', no: '08', name: 'Coda' },
 ]
 
 export default function App() {
@@ -35,6 +37,7 @@ export default function App() {
         <Plates />
         <Encounters />
         <Kinships />
+        <Lineages />
         <Constellation />
         <Finale />
       </main>
