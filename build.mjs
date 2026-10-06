@@ -3,13 +3,15 @@
 //   dist/hub.html        the lobby as a page fragment, for hosting as a claude.ai Artifact
 //   dist/<pair>.html     each exhibition, byte-for-byte, plus one inline <script> for navigation
 // The four exhibitions in exhibitions/ are never modified; they are compiled single-file builds.
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 
 const at = (p) => new URL(p, import.meta.url)
 const read = (p) => readFileSync(at(p), 'utf8')
 
 const pairs = JSON.parse(read('src/pairs.json'))
 const pairsJs = JSON.stringify(pairs)
+// start clean: labs/ builds into dist/ afterwards without emptying it
+rmSync(at('dist/'), { recursive: true, force: true })
 mkdirSync(at('dist/'), { recursive: true })
 
 const hub = read('src/hub.html').replaceAll('__PAIRS__', pairsJs)
