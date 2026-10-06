@@ -369,9 +369,8 @@ export function drawMorph(ctx, w, h, a, b, p, t) {
   ctx.fillStyle = mix(A.color, B.color, c)
   ctx.fillRect(0, 0, w, h)
   const fg = mix(A.fg, B.fg, c)
-  // the middle of every passage is a cloud of loose points; going toward the monk, it freezes and goes quiet
-  const quiet = b === 'monk'
-  const jit = Math.sin(p * Math.PI) * (quiet ? Math.max(0, 1 - p * 2.4) : 1) * 14
+  // the middle of every passage is a cloud of loose points
+  const jit = Math.sin(p * Math.PI) * 14
   const P = pa.map((q, i) => {
     const sx = r() * w
     const sy = r() * h
@@ -392,19 +391,9 @@ export function drawMorph(ctx, w, h, a, b, p, t) {
   const dots = smooth(0.3, 0.45, p) * (1 - smooth(0.55, 0.7, p))
   drawStyle(ctx, a, fa, P, 1 - smooth(0.3, 0.48, p), fg)
   ctx.fillStyle = fg
-  ctx.globalAlpha = dots * (quiet && p > 0.5 ? 0.3 : 0.8)
+  ctx.globalAlpha = dots * 0.8
   P.forEach((q) => ctx.fillRect(q.x - 1.2, q.y - 1.2, 2.4, 2.4))
   drawStyle(ctx, b, fb, P, smooth(0.52, 0.72, p), fg)
-  if (quiet && p > 0.6) {
-    // one breathing circle remains
-    const s = Math.min(w, h) * 0.92 * 0.32
-    ctx.globalAlpha = smooth(0.6, 0.9, p)
-    ctx.strokeStyle = fg
-    ctx.lineWidth = 1.5
-    ctx.beginPath()
-    ctx.arc(w / 2, h / 2, s * (1 + Math.sin(t * 0.8) * 0.03), 0, TAU)
-    ctx.stroke()
-  }
   ctx.globalAlpha = 1
 }
 

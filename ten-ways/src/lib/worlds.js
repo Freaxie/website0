@@ -832,32 +832,20 @@ const hedonist = {
   },
 }
 
-// X · Trickster: the floor is not reliable. A dot field glitches by rows; near the cursor it twists.
+// X · Trickster: a dot field that twists around the cursor, like a floor that is not quite reliable.
 const trickster = {
   init() {
-    return { shifts: new Float32Array(40), next: 0, blocks: [] }
+    return {}
   },
-  step(s, ctx, t, dt, P, w, h, { fg, bg }) {
+  step(s, ctx, t, dt, P, w, h, { fg }) {
     const gap = 28
-    const rows = Math.ceil(h / gap)
-    if (t > s.next) {
-      s.next = t + 0.6 + Math.random() * 1.6
-      const r0 = Math.floor(Math.random() * rows)
-      const n = 1 + Math.floor(Math.random() * 4)
-      const d = (Math.random() - 0.5) * 120
-      for (let r = r0; r < Math.min(rows, r0 + n); r++) s.shifts[r % 40] = d
-      if (Math.random() < 0.5) s.blocks.push({ x: Math.random() * w, y: Math.random() * h, w: 40 + Math.random() * 200, h: 6 + Math.random() * 24, t })
-    }
-    for (let r = 0; r < 40; r++) s.shifts[r] *= Math.exp(-dt * 1.2)
-    s.blocks = s.blocks.filter((b) => t - b.t < 0.5)
     ctx.fillStyle = fg
-    for (let r = 0; r < rows; r++) {
-      const y = r * gap + gap / 2
+    ctx.globalAlpha = 0.35
+    for (let y = gap / 2; y < h; y += gap) {
       for (let x = gap / 2; x < w; x += gap) {
-        let X = x + s.shifts[r % 40]
+        let X = x
         let Y = y
         if (P.on) {
-          // the cursor twists the floor around itself
           const dx = X - P.x
           const dy = Y - P.y
           const d = Math.hypot(dx, dy)
@@ -867,15 +855,8 @@ const trickster = {
             Y = P.y + dx * Math.sin(a) + dy * Math.cos(a)
           }
         }
-        ctx.globalAlpha = 0.35
         ctx.fillRect(X - 1.5, Y - 1.5, 3, 3)
       }
-    }
-    for (const b of s.blocks) {
-      ctx.globalAlpha = 0.85
-      ctx.fillStyle = Math.random() < 0.5 ? fg : bg
-      ctx.fillRect(b.x, b.y, b.w, b.h)
-      ctx.fillStyle = fg
     }
     ctx.globalAlpha = 1
   },

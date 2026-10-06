@@ -2525,16 +2525,7 @@ dd {
 }
 
 .cursor .split .a {
-  animation: cursor-split 0.9s steps(2) infinite;
-}
-
-@keyframes cursor-split {
-  0% {
-    transform: translate(-3px, 2px);
-  }
-  50% {
-    transform: translate(4px, -3px);
-  }
+  transform: translate(-3px, 2px);
 }
 
 .cursor .pulse {
@@ -2642,21 +2633,6 @@ dd {
 @keyframes caret {
   50% {
     opacity: 0;
-  }
-}
-
-.kname--monk .kname__l {
-  animation: breathe-letter 11s ease-in-out infinite;
-  animation-delay: calc(var(--i) * 1.1s);
-}
-
-@keyframes breathe-letter {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.18;
   }
 }
 
@@ -2808,82 +2784,6 @@ dd {
   height: 8px;
   border-radius: 50%;
   box-shadow: 0 0 0 1px rgba(247, 245, 240, 0.4);
-}
-
-/* secrets */
-
-.stillness {
-  position: fixed;
-  inset: 0;
-  z-index: 98;
-  display: grid;
-  place-items: center;
-  background: var(--paper);
-  pointer-events: none;
-}
-
-.stillness__circle {
-  position: absolute;
-  width: 34vmin;
-  height: 34vmin;
-  border: 1.5px solid #e3a21a;
-  border-radius: 50%;
-  animation: stillness 10s ease-in-out infinite;
-}
-
-@keyframes stillness {
-  0%,
-  100% {
-    transform: scale(0.94);
-  }
-  40% {
-    transform: scale(1.06);
-  }
-}
-
-.stillness p {
-  position: absolute;
-  bottom: 18vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  color: #8a6a10;
-}
-
-.stillness p span {
-  opacity: 0;
-  animation: appear 3s ease forwards;
-  animation-delay: 3s;
-}
-
-.stillness p span + span {
-  animation-delay: 8s;
-}
-
-@keyframes appear {
-  to {
-    opacity: 1;
-  }
-}
-
-body.is-tricked main {
-  animation: tricked 0.14s steps(2) 10;
-}
-
-@keyframes tricked {
-  0% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(-9px, 3px) skewX(4deg);
-  }
-  50% {
-    transform: translate(7px, -2px);
-  }
-  75% {
-    transform: translate(-3px, 6px) skewX(-6deg);
-  }
 }
 
 .spectrum__met {
@@ -3074,12 +2974,7 @@ body.is-tricked main {
   .cursor .breath,
   .cursor .split .a,
   .cursor .pulse,
-  .cursor .star,
-  .stillness__circle {
-    animation: none;
-  }
-
-  body.is-tricked main {
+  .cursor .star {
     animation: none;
   }
 }

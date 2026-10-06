@@ -1,7 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { rng } from '../lib/geom.js'
-import { reduced } from '../lib/bus.js'
 
 // An archetype's name, letter by letter, entering the way that archetype moves.
 // The parent plate decides when ("hidden" → "show"); each name decides how.
@@ -65,8 +64,6 @@ function entrance(id, i, n, r) {
   }
 }
 
-const GLITCH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&?!'
-
 export default function KineticName({ a }) {
   const letters = a.name.split('')
   const n = letters.length
@@ -74,30 +71,10 @@ export default function KineticName({ a }) {
     const r = rng(a.no.length * 31 + n)
     return letters.map((_, i) => entrance(a.id, i, n, r))
   }, [a.id])
-  // the trickster's letters will not stay put
-  const [shown, setShown] = useState(letters)
-  useEffect(() => {
-    if (a.id !== 'trickster' || reduced) return
-    let restore
-    const id = setInterval(() => {
-      const next = [...letters]
-      if (Math.random() < 0.5) {
-        const i = Math.floor(Math.random() * n)
-        const j = Math.floor(Math.random() * n)
-        ;[next[i], next[j]] = [next[j], next[i]]
-      } else for (let k = 0; k < 2; k++) next[Math.floor(Math.random() * n)] = GLITCH[Math.floor(Math.random() * GLITCH.length)]
-      setShown(next)
-      restore = setTimeout(() => setShown(letters), 420 + Math.random() * 500)
-    }, 2400)
-    return () => {
-      clearInterval(id)
-      clearTimeout(restore)
-    }
-  }, [a.id])
 
   return (
     <span className={`kname kname--${a.id}`} aria-label={a.name}>
-      {shown.map((ch, i) => (
+      {letters.map((ch, i) => (
         <motion.span key={i} className="kname__c" variants={variants[i]} aria-hidden="true">
           <span className="kname__l" style={{ '--i': i }}>
             {ch}

@@ -12,7 +12,6 @@ export const bus = {
   current: null, // the archetype whose world is on screen, or null
   seen: new Set(),
   experienced: new Set(),
-  switches: [],
   on(fn) {
     subs.add(fn)
     return () => subs.delete(fn)
@@ -31,14 +30,7 @@ export const bus = {
     this.emit('experienced', id)
     if (this.experienced.size === TOTAL) this.emit('all')
   },
-  // rapid switching between archetypes wakes the trickster
-  switched() {
-    const now = performance.now()
-    this.switches = this.switches.filter((t) => now - t < 4000)
-    this.switches.push(now)
-    if (this.switches.length >= 8) {
-      this.switches = []
-      this.emit('trick')
-    }
-  },
+  // kept as a no-op so the places that report switching need not change
+  switched() {},
+
 }
