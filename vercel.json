@@ -1,8 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "installCommand": "",
-  "buildCommand": "node build.mjs",
+  "installCommand": "npm ci --prefix observer",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "cleanUrls": true
 }
