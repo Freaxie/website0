@@ -7,7 +7,7 @@ import { bus } from '../lib/bus.js'
 
 const INKS = ['#ffd23f', '#0c0c0c', '#ffb3d6', '#1f4fd8', '#f7f5f0']
 
-// Twenty ways of drawing the same thing. Each gets the silhouette, its clip, and the archetype's colours.
+// Twenty-four ways of drawing the same thing. Each gets the silhouette, its clip, and the archetype's colours.
 function Treatment({ a, t }) {
   const clip = `url(#enc-clip-${t.id})`
   const [px, py] = t.peak
@@ -303,6 +303,62 @@ function Treatment({ a, t }) {
           ))}
         </g>
       )
+    case 'healer':
+      return (
+        <g>
+          <path d={t.path} fill={fg} opacity="0.12" />
+          <path d={t.path} fill="none" stroke={fg} strokeWidth="2" />
+          {[0, 1, 2, 3].map((k) => (
+            <circle key={k} cx={cx} cy={cy - 20} r={30 + k * 34} fill="none" stroke={fg} strokeWidth="1.2" opacity={0.6 - k * 0.13} />
+          ))}
+          <path d={`M${cx - 16} ${cy - 20}H${cx + 16}M${cx} ${cy - 36}V${cy - 4}`} stroke={fg} strokeWidth="5" />
+          <text x="20" y="30" className="enc__tiny" fill={fg}>
+            PULSE 64 · TEMP 36.8 · RESP 14
+          </text>
+        </g>
+      )
+    case 'teacher':
+      return (
+        <g>
+          <path d={t.path} fill="none" stroke={fg} strokeWidth="2.5" strokeDasharray="14 5" />
+          {[[px, py, 'A', -1], [cx - 120, cy + 40, 'B', 1], [cx + 140, cy + 20, 'C', -1]].map(([x, y, n, s]) => (
+            <g key={n}>
+              <path d={`M${x + s * 70} ${y - 50}L${x + s * 8} ${y - 6}`} stroke={fg} strokeWidth="1.5" />
+              <circle cx={x + s * 78} cy={y - 56} r="13" fill="none" stroke={fg} strokeWidth="1.5" />
+              <text x={x + s * 78} y={y - 51} textAnchor="middle" className="enc__say" fill={fg}>
+                {n}
+              </text>
+            </g>
+          ))}
+          <path d="M560 380L470 290" stroke={fg} strokeWidth="4" strokeLinecap="round" />
+          <text x="20" y="384" className="enc__say" fill={fg}>
+            Explain why A is higher than C.
+          </text>
+        </g>
+      )
+    case 'lover':
+      return (
+        <g>
+          <path d={t.path} fill={fg} opacity="0.85" transform="translate(-26 0)" />
+          <path d={t.path} fill="none" stroke={fg} strokeWidth="2" transform="translate(26 0)" />
+          <path d={`M${px - 26} ${py}C${px - 26} ${py - 80} ${px + 26} ${py - 80} ${px + 26} ${py}`} fill="none" stroke={fg} strokeWidth="1.5" strokeDasharray="2 5" />
+        </g>
+      )
+    case 'rebel':
+      return (
+        <g>
+          <g clipPath="url(#enc-left)">
+            <path d={t.path} fill={fg} />
+          </g>
+          <g clipPath="url(#enc-right)" transform="translate(18 10) rotate(3 300 200)">
+            <path d={t.path} fill={fg} />
+          </g>
+          <path d="M300 0L270 90L320 160L280 250L330 320L300 400" fill="none" stroke={fg} strokeWidth="2" />
+          {[60, 140, 220, 300].map((y) => (
+            <line key={y} x1="0" x2="600" y1={y} y2={y} stroke={fg} strokeWidth="1" opacity="0.25" strokeDasharray="4 8" />
+          ))}
+        </g>
+      )
     case 'archivist':
       return (
         <g>
@@ -361,7 +417,7 @@ export default function Encounters() {
   return (
     <section id="encounters" className="enc" ref={ref}>
       <div className="enc__top">
-        <SectionHead no="04" title="One World, Twenty Encounters" kicker="The same thing, met twenty ways. Choose a thing, then an archetype, and watch it redraw what it sees." />
+        <SectionHead no="04" title="One World, Twenty-Four Encounters" kicker="The same thing, met twenty-four ways. Choose a thing, then an archetype, and watch it redraw what it sees." />
         <div className="enc__things" role="radiogroup" aria-label="What is encountered">
           {THINGS.map((x) => (
             <button key={x.id} type="button" role="radio" aria-checked={thing === x.id} className={thing === x.id ? 'is-on' : ''} onClick={() => setThing(x.id)}>
@@ -383,6 +439,12 @@ export default function Encounters() {
                   <path d={x.path} />
                 </clipPath>
               ))}
+              <clipPath id="enc-left">
+                <path d="M0 0H300L270 90L320 160L280 250L330 320L300 400H0Z" />
+              </clipPath>
+              <clipPath id="enc-right">
+                <path d="M600 0H300L270 90L320 160L280 250L330 320L300 400H600Z" />
+              </clipPath>
               <clipPath id="enc-half">
                 <rect x="0" y="0" width="300" height="400" />
               </clipPath>

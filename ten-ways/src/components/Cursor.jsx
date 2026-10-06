@@ -77,6 +77,20 @@ const SHAPES = {
       <path d="M15 20H33M15 26H27" />
     </>
   ),
+  healer: (
+    <>
+      <circle cx="24" cy="24" r="15" />
+      <path d="M24 16V32M16 24H32" />
+    </>
+  ),
+  teacher: <path d="M24 6C31 14 31 20 24 26C17 20 17 14 24 6ZM19 30H29L27 42H21Z" />,
+  lover: (
+    <>
+      <circle cx="19" cy="24" r="9" />
+      <circle cx="29" cy="24" r="9" className="soft-line" />
+    </>
+  ),
+  rebel: <path d="M24 42V8M16 16L24 8L32 16M8 28H40" className="blade" />,
 }
 
 export default function Cursor() {
@@ -90,7 +104,8 @@ export default function Cursor() {
     let last = { x: 0, y: 0 }
     let cur = null
     const move = (e) => {
-      const w = e.target.closest?.('[data-world]')
+      // inside an entry the cursor is an ordinary pointer again: that part of the plate is for reading
+      const w = e.target.closest?.('.entry') ? null : e.target.closest?.('[data-world]')
       const busy = e.target.closest?.('a, button, input, label, [role="button"], [role="radio"], [role="tab"]')
       const k = w && !busy ? w.dataset.world : null
       if (k !== cur) {

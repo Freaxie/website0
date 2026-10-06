@@ -5,6 +5,7 @@
 // P is the pointer in canvas pixels: { x, y, on, speed }. look = { fg, bg }.
 import { TAU, clamp, lerp, rng } from './geom.js'
 import { MORE } from './instruments-more.js'
+import { FOUR } from './instruments-four.js'
 
 const MONO = '500 11px "JetBrains Mono", monospace'
 
@@ -591,4 +592,4 @@ const trickster = {
   },
 }
 
-export const INSTRUMENTS = { scientist, engineer, warrior, artist, philosopher, explorer, monk, sovereign, hedonist, trickster, ...MORE }
+export const INSTRUMENTS = { scientist, engineer, warrior, artist, philosopher, explorer, monk, sovereign, hedonist, trickster, ...MORE, ...FOUR }

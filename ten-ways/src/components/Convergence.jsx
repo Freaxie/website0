@@ -45,11 +45,11 @@ function Orbit() {
       const hy = cy + Math.sin(home) * R1
       const cell = Math.min(w, h) * 0.08
       ctx.fillStyle = a.color
-      for (let j = 0; j < 21; j++) {
-        const q = f.pts[j * 20]
+      for (let j = 0; j < 17; j++) {
+        const q = f.pts[j * 24]
         const sx = hx + (q.x - 0.5) * cell
         const sy = hy + (q.y - 0.5) * cell
-        const ang = ((k * 21 + j) / 420) * TAU + (t - t0.current) * 0.12
+        const ang = ((k * 17 + j) / 408) * TAU + (t - t0.current) * 0.12
         const k2 = smooth(0.15 + k * 0.015, 0.75 + k * 0.01, p)
         const x = lerp(sx, cx + Math.cos(ang) * R2, k2)
         const y = lerp(sy, cy + Math.sin(ang) * R2, k2)
@@ -69,7 +69,7 @@ function Orbit() {
   return (
     <motion.div className="conv" ref={ref} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
       <canvas ref={canvas} aria-hidden="true" />
-      <p>You have met reality twenty ways. It was one reality each time.</p>
+      <p>You have met reality twenty-four ways. It was one reality each time.</p>
     </motion.div>
   )
 }

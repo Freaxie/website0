@@ -1,4 +1,4 @@
-/* Twenty Ways of Encountering Reality — one sheet for eight rooms and twenty plates. */
+/* Twenty Ways of Encountering Reality — one sheet for eight rooms and twenty-four plates. */
 
 :root {
   --paper: #eeebe4;
@@ -274,7 +274,7 @@ dd {
   margin: 0;
 }
 
-/* ───────── the twenty voices ─────────
+/* ───────── the twenty-four voices ─────────
    Each archetype speaks in its own type, wherever its name or verb appears. */
 
 .plate--scientist .plate__name,
@@ -463,177 +463,421 @@ dd {
   letter-spacing: 0.08em;
 }
 
-/* ───────── the dossier behind each plate ───────── */
+/* ───────── the encyclopedia entry under each plate ───────── */
 
-.dossier {
+/* the world is confined to the top of the plate; the entry below is still paper for reading */
+.plate__hero {
   position: relative;
-  margin-top: 9vh;
-  padding-top: 18px;
-  border-top: 1px solid currentColor;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - 64px - 7vh);
 }
 
-.dossier__head {
+.plate__hero > .world {
+  top: -64px;
+  left: calc(-1 * var(--gutter));
+  width: calc(100% + 2 * var(--gutter) + var(--navspace));
+  height: calc(100% + 64px + 7vh);
+}
+
+.entry {
+  position: relative;
+  margin-top: 7vh;
+  padding-top: 22px;
+  border-top: 2px solid currentColor;
+}
+
+.entry__crumb {
   display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 6px 22px;
   opacity: 0.75;
 }
 
-.dossier__grid {
+.entry__word {
+  margin: 4vh 0 0;
+  font-family: var(--f-serif);
+  font-weight: 400;
+  font-size: clamp(56px, 7vw, 120px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.entry__pos {
+  margin-left: 0.35em;
+  font-style: italic;
+  font-size: 0.3em;
+  letter-spacing: 0;
+  opacity: 0.7;
+}
+
+.entry__etym {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
-  gap: clamp(20px, 3vw, 48px);
+  grid-template-columns: 120px minmax(0, 62ch);
+  gap: 16px;
+  margin-top: 26px;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.entry__etym .mono,
+.entry__def::before {
+  font-style: normal;
+  opacity: 0.7;
+  padding-top: 4px;
+}
+
+.entry__def {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 30ch);
+  gap: 16px;
+  margin-top: 22px;
+  font-family: var(--f-serif);
+  font-size: clamp(26px, 2.6vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.entry__def::before {
+  content: 'Definition';
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.entry__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 88px);
+  margin-top: 8vh;
   align-items: start;
 }
 
-.dossier h4 {
-  margin: 0 0 12px;
+.entry__h {
+  display: flex;
+  gap: 12px;
+  margin: 0 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 35%, transparent);
   font-weight: 500;
-  opacity: 0.7;
 }
 
-.dossier h4:not(:first-child) {
-  margin-top: 28px;
+.entry__h span {
+  opacity: 0.6;
 }
 
-.dossier__essay p:first-child {
+.entry__main {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 66ch;
+}
+
+.entry__sec p {
   font-family: var(--f-serif);
-  font-size: clamp(20px, 1.75vw, 28px);
-  line-height: 1.22;
-  letter-spacing: -0.005em;
+  font-size: clamp(18px, 1.35vw, 21px);
+  line-height: 1.45;
+  hyphens: auto;
 }
 
-.dossier__essay p:first-child::first-letter {
+.entry__sec p + p {
+  margin-top: 0.8em;
+  text-indent: 1.4em;
+}
+
+.entry__lead::first-letter {
   float: left;
-  margin: 0.06em 0.08em 0 0;
+  margin: 0.04em 0.08em 0 0;
   font-family: var(--f-display);
   font-weight: 900;
-  font-size: 3.3em;
-  line-height: 0.72;
+  font-size: 4.1em;
+  line-height: 0.74;
   font-variation-settings: 'wdth' 62;
 }
 
-.dossier__figure {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 22px;
-  padding-top: 14px;
-  border-top: 1px dashed currentColor;
-  font-family: var(--f-serif);
-  font-style: italic;
-  font-size: 19px;
-  line-height: 1.2;
+.entry__dist div + div {
+  margin-top: 18px;
 }
 
-.dossier__figure .mono {
-  font-style: normal;
-  opacity: 0.7;
-}
-
-.dossier__line li {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 0 0 14px 18px;
-  font-family: var(--f-serif);
-  font-size: 17px;
-  line-height: 1.2;
-}
-
-/* a thread down the lineage, with a knot at each moment */
-.dossier__line li::before {
-  content: '';
-  position: absolute;
-  left: 3px;
-  top: 6px;
-  bottom: -6px;
-  width: 1px;
-  background: currentColor;
-  opacity: 0.4;
-}
-
-.dossier__line li:last-child::before {
-  display: none;
-}
-
-.dossier__line li::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 3px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: currentColor;
-}
-
-.dossier__line .mono {
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  opacity: 0.75;
-}
-
-.dossier__lex div {
-  padding: 8px 0;
-  border-bottom: 1px solid color-mix(in srgb, currentColor 25%, transparent);
-}
-
-.dossier__lex dt {
+.entry__dist dt {
   font-weight: 800;
   font-size: 15px;
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
 
-.dossier__lex dd {
-  margin: 2px 0 0;
+.entry__dist dd {
+  margin: 4px 0 0;
+  font-family: var(--f-serif);
+  font-size: clamp(18px, 1.35vw, 21px);
+  line-height: 1.4;
+}
+
+.entry__side {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.entry__myth p {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: clamp(22px, 1.8vw, 28px);
+  line-height: 1.15;
+}
+
+.entry__line li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 12px;
+  padding: 0 0 12px 18px;
+  font-family: var(--f-serif);
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+/* a thread down the lineage, with a knot at each moment */
+.entry__line li::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 7px;
+  bottom: -7px;
+  width: 1px;
+  background: currentColor;
+  opacity: 0.45;
+}
+
+.entry__line li:last-child::before {
+  display: none;
+}
+
+.entry__line li::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.entry__line .mono,
+.entry__figs .mono,
+.entry__read .mono {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  opacity: 0.75;
+}
+
+.entry__line .mono {
+  padding-top: 2px;
+}
+
+.entry__figs li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+}
+
+.entry__figs b {
+  font-weight: 800;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.entry__figs span:last-child {
+  grid-column: 1 / -1;
   font-family: var(--f-serif);
   font-size: 17px;
   line-height: 1.2;
 }
 
-.dossier__list li {
-  padding: 5px 0 5px 18px;
+.entry__lex div {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+}
+
+.entry__lex dt {
+  font-weight: 800;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.entry__lex dd {
+  margin: 0;
+  font-family: var(--f-serif);
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+.entry__pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.entry__dash li {
+  padding: 4px 0 4px 18px;
   font-family: var(--f-serif);
   font-size: 17px;
   line-height: 1.2;
   text-indent: -18px;
 }
 
-.dossier__list li::before {
+.entry__dash li::before {
   content: '—';
   display: inline-block;
   width: 18px;
   text-indent: 0;
 }
 
-.dossier__signs li {
+.entry__signs li {
   font-style: italic;
 }
 
-.dossier__works li {
+.entry__read li {
   display: flex;
   flex-direction: column;
   gap: 2px;
   padding: 8px 0;
-  border-bottom: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, currentColor 22%, transparent);
 }
 
-.dossier__works cite {
+.entry__read cite {
   font-family: var(--f-serif);
   font-style: italic;
   font-size: 19px;
   line-height: 1.1;
 }
 
-.dossier__works .mono {
-  font-size: 11px;
-  opacity: 0.75;
-  text-transform: none;
-  letter-spacing: 0.02em;
+.entry__see li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 9px 0;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+  font-family: var(--f-serif);
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.entry__see a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.entry__see a:hover b {
+  text-decoration: underline;
+}
+
+.entry__see i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px color-mix(in srgb, currentColor 40%, transparent);
+}
+
+.entry__see .mono {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.entry__see b {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+/* the index of the twenty-four, by order */
+
+.ten__orders {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6vh clamp(20px, 3vw, 44px);
+  margin-top: 10vh;
+}
+
+.ten__order header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.ten__order h3 {
+  margin: 0;
+  font-weight: 900;
+  font-size: clamp(30px, 3vw, 48px);
+  line-height: 0.9;
+  text-transform: uppercase;
+  font-variation-settings: 'wdth' 62;
+}
+
+.ten__order p {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 40ch;
+  font-family: var(--f-serif);
+  font-size: 17px;
+  line-height: 1.25;
+  opacity: 0.85;
+}
+
+.ten__order p .mono {
+  opacity: 0.7;
+}
+
+@media (max-width: 1100px) {
+  .entry__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .entry__side {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 28px;
+  }
+
+  .ten__orders {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .entry__side,
+  .entry__pair,
+  .ten__orders {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .entry__etym,
+  .entry__def {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .entry__line li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
 }
 
 /* ───────── lineages ───────── */
@@ -889,6 +1133,43 @@ dd {
   }
 }
 
+.plate--healer .plate__name,
+.hero__verb--healer,
+.fin__verb--healer {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-variation-settings: 'wdth' 112;
+  letter-spacing: 0.01em;
+}
+
+.plate--teacher .plate__name,
+.hero__verb--teacher,
+.fin__verb--teacher {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-variation-settings: 'wdth' 100;
+  letter-spacing: -0.015em;
+}
+
+.plate--lover .plate__name,
+.hero__verb--lover,
+.fin__verb--lover {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+.plate--rebel .plate__name,
+.hero__verb--rebel,
+.fin__verb--rebel {
+  font-family: var(--f-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-variation-settings: 'wdth' 100;
+  letter-spacing: -0.04em;
+}
+
 /* ───────── intro ───────── */
 
 .intro {
@@ -975,12 +1256,16 @@ dd {
   padding-bottom: 0.03em;
 }
 
+.hero__ten span {
+  display: block;
+}
+
 .hero__ten,
 .hero__reality {
   display: block;
   font-family: var(--f-display);
   font-weight: 900;
-  font-size: min(12.2vw, 21svh);
+  font-size: min(10.4vw, 16svh);
   line-height: 0.84;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -1289,9 +1574,8 @@ dd {
 
 .ten__index {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
-  margin-top: 10vh;
   background: rgba(247, 245, 240, 0.15);
 }
 
@@ -1858,12 +2142,12 @@ dd {
 
 .fin__verbs {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-auto-flow: column;
-  grid-template-rows: repeat(10, auto);
-  gap: 0.1em 4vw;
+  grid-template-rows: repeat(8, auto);
+  gap: 0.1em 3vw;
   margin: 10vh 0 6vh;
-  font-size: clamp(30px, 4vw, 76px);
+  font-size: clamp(24px, 2.9vw, 56px);
   line-height: 1.05;
 }
 
@@ -2064,6 +2348,10 @@ dd {
 .plate--theologian .plate__mirror { font-family: var(--f-serif); text-transform: uppercase; letter-spacing: 0.16em; }
 .plate--detective .plate__mirror { font-family: var(--f-mono); font-weight: 700; text-transform: uppercase; }
 .plate--archivist .plate__mirror { font-weight: 500; text-transform: uppercase; font-variation-settings: 'wdth' 62; letter-spacing: 0.08em; }
+.plate--healer .plate__mirror { font-weight: 400; font-variation-settings: 'wdth' 112; }
+.plate--teacher .plate__mirror { font-weight: 700; letter-spacing: -0.015em; }
+.plate--lover .plate__mirror { font-family: var(--f-serif); font-style: italic; letter-spacing: 0.06em; }
+.plate--rebel .plate__mirror { font-weight: 900; text-transform: uppercase; letter-spacing: -0.04em; }
 
 .plate.is-shadow .plate__name span {
   opacity: 0.35;
@@ -2233,7 +2521,7 @@ dd {
   background: none;
   border: 1px solid transparent;
   font-weight: 800;
-  font-size: 18px;
+  font-size: 16px;
   text-align: left;
   text-transform: uppercase;
   font-variation-settings: 'wdth' 62;
@@ -2454,6 +2742,14 @@ dd {
   .plate button {
     cursor: pointer;
   }
+
+  .plate[data-world] .entry {
+    cursor: auto;
+  }
+
+  .plate[data-world] .entry a {
+    cursor: pointer;
+  }
 }
 
 /* the cursor as an instrument */
@@ -2488,6 +2784,11 @@ dd {
 .cursor .fill {
   fill: currentColor;
   stroke: none;
+}
+
+.cursor .soft-line {
+  opacity: 0.6;
+  stroke-dasharray: 2 3;
 }
 
 .cursor .soft {
@@ -2878,10 +3179,6 @@ dd {
 
   .atl__card {
     display: none;
-  }
-
-  .ten__index {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .plate__facts {

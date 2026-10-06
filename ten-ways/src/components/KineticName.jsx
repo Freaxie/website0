@@ -59,6 +59,18 @@ function entrance(id, i, n, r) {
     case 'archivist':
       // filed, one card after another
       return { hidden: { opacity: 0, y: 40, rotateX: 80 }, show: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.6, delay: i * 0.08, ease: [0.2, 0.8, 0.2, 1] } } }
+    case 'healer':
+      // each letter arrives with a single heartbeat
+      return { hidden: { opacity: 0, scale: 0.7 }, show: { opacity: 1, scale: [0.7, 1.12, 0.96, 1], transition: { duration: 0.9, delay: 0.2 + i * 0.12, times: [0, 0.3, 0.6, 1] } } }
+    case 'teacher':
+      // written on the board, left to right, at the pace of an explanation
+      return { hidden: { opacity: 0, x: -10, rotate: -4 }, show: { opacity: 1, x: 0, rotate: 0, transition: { duration: 0.5, delay: 0.2 + i * 0.16, ease: 'easeOut' } } }
+    case 'lover':
+      // the two halves of the word come toward each other
+      return { hidden: { opacity: 0, x: (i < n / 2 ? -1 : 1) * 70 }, show: { opacity: 1, x: 0, transition: { duration: 1.6, delay: 0.2 + Math.abs(i - (n - 1) / 2) * 0.12, ease: [0.2, 0.8, 0.2, 1] } } }
+    case 'rebel':
+      // the letters are knocked loose and land out of line, then straighten, reluctantly
+      return { hidden: { opacity: 0, y: 40, rotate: (r() - 0.5) * 50 }, show: { opacity: 1, y: 0, rotate: 0, transition: { type: 'spring', stiffness: 260, damping: 9, delay: 0.1 + r() * 0.5 } } }
     default:
       return { hidden: {}, show: {} }
   }

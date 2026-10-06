@@ -47,7 +47,7 @@ export default function Atlas() {
   return (
     <section id="atlas" className="atl">
       <div className="atl__top">
-        <SectionHead no="02" title="The Atlas" kicker="A map of the twenty. Choose what runs across and what runs up, and watch them move. Click any of them to visit its plate." />
+        <SectionHead no="02" title="The Atlas" kicker="A map of the twenty-four. Choose what runs across and what runs up, and watch them move. Click any of them to visit its plate." />
         <div className="atl__pickers">
           {[
             ['x', 'Across', xd],
@@ -77,7 +77,7 @@ export default function Atlas() {
           }}
           onPointerMove={(e) => dragging.current && setYou(toMap(e))}
           onPointerUp={() => (dragging.current = false)}
-          role="img" aria-label={`The twenty archetypes placed from ${X.lo} to ${X.hi} across, and from ${Y.lo} to ${Y.hi} upward`}>
+          role="img" aria-label={`The twenty-four archetypes placed from ${X.lo} to ${X.hi} across, and from ${Y.lo} to ${Y.hi} upward`}>
           {Array.from({ length: 9 }, (_, i) => (
             <g key={i} className="atl__grid">
               <line x1={PAD + (i / 8) * (W - 2 * PAD)} x2={PAD + (i / 8) * (W - 2 * PAD)} y1={PAD} y2={H - PAD} />

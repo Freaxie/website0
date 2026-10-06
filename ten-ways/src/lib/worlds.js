@@ -8,6 +8,7 @@
 import { TAU, clamp, lerp, rng } from './geom.js'
 import { bus } from './bus.js'
 import { MORE } from './worlds-more.js'
+import { FOUR } from './worlds-four.js'
 
 const MONO = '500 10px "JetBrains Mono", monospace'
 const SERIF_I = 'italic 15px "Instrument Serif", serif'
@@ -862,4 +863,4 @@ const trickster = {
   },
 }
 
-export const WORLDS = { scientist, engineer, warrior, artist, philosopher, explorer, monk, sovereign, hedonist, trickster, ...MORE }
+export const WORLDS = { scientist, engineer, warrior, artist, philosopher, explorer, monk, sovereign, hedonist, trickster, ...MORE, ...FOUR }

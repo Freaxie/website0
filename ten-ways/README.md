@@ -1,9 +1,8 @@
-# Twenty Ways of Encountering Reality
+# Twenty-Four Ways of Encountering Reality
 
-An interactive atlas and digital museum of twenty archetypal modes of being: Scientist, Engineer, Warrior,
-Artist, Philosopher, Explorer, Monk, Sovereign, Hedonist, Trickster, Cinephile, Musician, Entrepreneur,
-Biohacker, Looksmaxxer, Theologian, Gardener, Storyteller, Detective and Archivist. React + Vite + Framer Motion,
-SVG, canvas and CSS.
+An interactive encyclopedia and digital museum of twenty-four archetypal modes of being, arranged in six
+orders of four. React + Vite + Framer Motion, SVG, canvas and CSS. (The folder keeps its first name: the
+exhibition began with ten.)
 
 ```
 npm install
@@ -12,71 +11,59 @@ npm run build            # static site in dist/
 npm run build:artifact   # single-file page in artifact/index.html
 ```
 
+## The taxonomy
+
+Each order is defined by what its four ways attend to.
+
+| Order | Attends to | Archetypes |
+| --- | --- | --- |
+| I · Knowing | the true | Scientist, Philosopher, Theologian, Detective |
+| II · Making | the made | Engineer, Artist, Musician, Storyteller |
+| III · Disciplines | the self | Warrior, Monk, Biohacker, Looksmaxxer |
+| IV · The City | the shared order | Sovereign, Rebel, Entrepreneur, Trickster |
+| V · Beholding | the given world | Explorer, Hedonist, Cinephile, Archivist |
+| VI · Tending | the other | Healer, Teacher, Lover, Gardener |
+
+The last four to be added (Healer, Teacher, Lover, Rebel) fill the gaps the first twenty left: almost
+every other way faces the world, the self or the order, and none cared for another person, passed
+understanding on, or bound itself to one other; the City had a ruler, a dealer and a mocker, but no one
+who openly refuses.
+
 ## Rooms
 
-1. **Entrance.** Twenty rays converge on REALITY, carrying streams of coloured particles. Point at a sign, or let them turn: "To understand it",
-   "To build it", each verb set in its archetype's own type.
-2. **The Atlas.** A map of the twenty on two chosen axes out of five (Inward–Outward, Change–Order,
-   Body–Mind, Alone–Together, Present–Future). Change an axis and they move. Drag the YOU marker to
-   find the archetype nearest you.
-3. **The Twenty.** Twenty full-colour plates, each with its question, instrument, gift, shadow, exemplars and a
-   quotation, and a live instrument:
-   the Scientist fits a line to your observations; the Engineer's truss sags under a moving load; the
-   Warrior cuts a current; the Artist's marks are answered five more times; the Philosopher's statement
-   grows questions; the Explorer clears fog from a map; the Monk's circle forms only in stillness; the
-   Sovereign's crowd falls into ranks; the Hedonist's touches bloom and fade; the Trickster's sentence
-   comes undone; the Cinephile frames a small world and cuts shots into a storyboard; the Musician's
-   eight strings pluck and sound; the Entrepreneur seizes opportunities, some of them traps; the
-   Biohacker runs trials along a hormesis curve; the Looksmaxxer rearranges a face for a symmetry score;
-   the Theologian's rose window fills with light; the Gardener's plants grow when watered and wilt when
-   not; the Storyteller's beats draw a plot; the Detective ties red string across an evidence board; the
-   Archivist keeps fading memories by giving them numbers.
-   Below each plate is its dossier: a short essay, its figure in myth, a dated lineage, a four-word
-   lexicon, its daily practice, the signs of it in a person, and three works to begin with
-   (`src/lib/dossiers.js`).
-   Every plate has a shadow switch that turns its colours, instrument and name inside out, a mirrored
-   reflection of its name, and its sign turning slowly behind it. A spectrum bar of the twenty colours rides
-   along the top while you walk the plates.
-4. **One World, Twenty Encounters.** A mountain, the sea or a stranger, redrawn by each of the twenty:
-   measured, blueprinted, climbed, painted, questioned, explored, let go of, partitioned, savoured, turned
-   over, filmed, scored, charted, monitored, mirrored, haloed, planted, plotted, investigated and filed.
-5. **Kinships.** A ring of allies, opposites and unlikely unions (the warrior-monk, the philosopher-king, the priest-physicist).
-6. **Lineages.** Every dated moment from the dossiers, 84 of them, on one logarithmic timeline from a
-   flute carved forty thousand years ago to a word coined online, with a lane for each archetype, a
-   reader that walks through them in order, and a list filtered by era.
-7. **Your Constellation.** Answer eight questions, or spend twenty-five points by hand, and see your shape.
-8. **Coda.** Twenty imperatives, and one sentence.
+1. **Entrance.** Twenty-four rays converge on REALITY. Point at a sign, or let them turn.
+2. **The Atlas.** The twenty-four on two chosen axes out of five (Inward–Outward, Change–Order,
+   Body–Mind, Alone–Together, Present–Future). Drag the YOU marker to find the archetype nearest you.
+3. **The Twenty-Four.** An index by order, then twenty-four full-colour plates. Each plate has its
+   question, instrument, gift, shadow, exemplars and a quotation, a live instrument, and a world behind it.
+   Below each plate is an **encyclopedia entry** (`src/lib/entries-*.js`):
+   - headword, etymology and definition
+   - five numbered sections: Overview, History, Distinctions, Criticism, Now
+   - a margin with its figure in myth, a lineage of eight dated moments, four figures with dates, five
+     terms, practice and signs, five works of further reading, and cross-references to its kin
+4. **One World, Twenty-Four Encounters.** A mountain, the sea or a stranger, redrawn by each archetype.
+5. **Kinships.** Allies, opposites and unlikely unions (the warrior-monk, the philosopher-king, Ibn Sina
+   the physician-philosopher, the mystics who spoke of God as a lover).
+6. **Lineages.** All 192 dated moments on one logarithmic timeline, from a pig painted on a Sulawesi cave
+   wall at least 45,000 years ago to a word coined online, with a reader and an era-filtered list.
+7. **Your Constellation.** Answer eight questions, or spend thirty points by hand, and see your shape.
+8. **Coda.** Twenty-four imperatives, and one sentence.
 
-## Twenty physical laws
+## Worlds
 
-Each plate is a world as well as a page. Behind its text runs an environment with its own physics
-(`src/lib/worlds.js`): an observatory where clicked bodies become observations and a model emerges; a
-floating truss with gears whose nodes can be grabbed; a field of shards a fast cursor cuts in two; a
-canvas whose symmetry grows with every stroke; statements that sprout questions; a fogged map lit by a
-lantern; one breathing circle that ripples when disturbed; a crowd that falls into ranks, rings, wedges or
-columns; blooms of light; a floor that glitches by rows and twists around the cursor. The second ten
-(`src/lib/worlds-more.js`): projected film with grain, scratches and a letterbox; staves where the cursor
-writes notes in time; a network of ventures that compound; a heart monitor driven by your movement; a
-mirror down the middle of the room; shafts of light with turning dust and a bell; a vine that follows the
-cursor and stays; a sentence written along your path; a dark room searched by torchlight; a wall of
-fading index cards.
+Each plate's top is a world with its own physics, and its own cursor and typography: an observatory, a
+truss, a field of shards, a fogged map, ranks, blooms, a heart monitor, a mirror, a vine, a dark room
+searched by torchlight, a wall of fading index cards, a network of vessels with a resting pulse, a
+blackboard, two points that follow each other, ranks of bars that a click can crack
+(`src/lib/worlds.js`, `worlds-more.js`, `worlds-four.js`; instruments in the matching `instruments*` files).
 
-- **Cursor.** Inside a plate the pointer becomes that world's instrument: a crosshair, a node, a blade
-  that turns with the stroke, a brush, a question mark, a lantern, a breathing ring, a diamond, a bloom,
-  a split square, a viewfinder, a note, an arrow, a pulse, a half-mirror, a star of light, a leaf, a pen
-  nib, a keyhole, an index card.
-- **Typography.** Each name enters and behaves the way its archetype moves: the scientist's letters settle
-  onto a grid, the engineer's lock in, the warrior's snap, the artist's flow like ink, the philosopher's
-  are typed, the monk's breathe, the sovereign's arrive as one rank, the trickster's scramble; the cinephile's open like credits, the looksmaxxer's turn from their
-  reflection, the gardener's grow from the soil, the detective's lose their redaction bars.
-- **Passages.** Between plates, scrolling turns one world's geometry into the next (`src/lib/forms.js`).
-  Any link to a plate plays a passage first: equations come apart into particles and settle as ink;
-  blades freeze into silence and leave one circle.
-- **Whispers.** Rare lines appear when the site notices how you behave. Each appears once.
-- **Secrets.** Not listed here.
+The world stops at the top of the plate. Nothing moves behind an encyclopedia entry, and over an entry
+the cursor is an ordinary pointer again. Nothing interrupts reading or navigation: there are no
+page-wide effects. Rare whispers appear when you do something in a world, once each.
 
-Everything respects `prefers-reduced-motion`: worlds slow almost to a stop, and passages are skipped.
+Between plates, scrolling turns one world's geometry into the next (`src/lib/forms.js`). Everything
+respects `prefers-reduced-motion`.
 
-All data lives in `src/lib/archetypes.js`; the instruments in `src/lib/instruments.js` and
-`src/lib/instruments-more.js`. The atlas
-positions and kinships are a curator's interpretation, not a measurement.
+All archetype data lives in `src/lib/archetypes.js`. The atlas positions and kinships are a curator's
+interpretation, not a measurement. The encyclopedia text was written for this exhibition; dates marked
+c. are approximate, and the further-reading lists are places to begin rather than sources cited.

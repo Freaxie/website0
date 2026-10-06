@@ -64,4 +64,4 @@ its own build. See its README.
 
 `puer-aeternus/` is the ninth, *Puer Aeternus*.
 
-`ten-ways/` is the tenth, *Twenty Ways of Encountering Reality* (it began with ten).
+`ten-ways/` is the tenth, *Twenty-Four Ways of Encountering Reality*: an encyclopedia of archetypes in six orders of four (it began with ten).

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion, useInView } from 'framer-motion'
 import SectionHead from '../components/SectionHead.jsx'
 import { ARCHETYPES, byId, ink } from '../lib/archetypes.js'
-import { EVENTS } from '../lib/dossiers.js'
+import { EVENTS } from '../lib/encyclopedia.js'
 import { bus } from '../lib/bus.js'
 
 const W = 1000
@@ -11,7 +11,7 @@ const LANE = 26
 const TOP = 34
 const H = TOP + ARCHETYPES.length * LANE + 30
 const NOW = 2026
-const FAR = Math.log10(NOW + 40000)
+const FAR = Math.log10(NOW + 46000)
 // time runs on a logarithmic scale of years before now, so forty thousand years and the last forty both fit;
 // the scale stops ten years short of the present
 const xOf = (year) => L + ((FAR - Math.log10(Math.max(10, NOW - year))) / (FAR - 1)) * (W - L - 24)
@@ -63,7 +63,7 @@ export default function Lineages() {
         <SectionHead
           no="06"
           title="Lineages"
-          kicker={`Every way of meeting reality has a history. ${EVENTS.length} dated moments, from a flute carved forty thousand years ago to a word coined online, laid on one line.`}
+          kicker={`Every way of meeting reality has a history. ${EVENTS.length} dated moments, eight for each of the twenty-four, from a pig painted on a cave wall at least 45,000 years ago to a word coined online, laid on one line.`}
         />
         <div className="lin__now" aria-live="polite">
           <AnimatePresence mode="wait">
@@ -91,7 +91,7 @@ export default function Lineages() {
       </div>
 
       <div className="lin__chart" onPointerLeave={() => setHeld(false)}>
-        <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`A timeline of ${EVENTS.length} moments across the twenty archetypes, on a logarithmic scale of years before now`}>
+        <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`A timeline of ${EVENTS.length} moments across the twenty-four archetypes, on a logarithmic scale of years before now`}>
           {TICKS.map(([y, t]) => (
             <g key={y}>
               <line x1={xOf(y)} x2={xOf(y)} y1={TOP - 10} y2={H - 26} className="lin__tick" />

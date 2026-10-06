@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import SectionHead from '../components/SectionHead.jsx'
 import Glyph from '../components/Glyph.jsx'
-import { ARCHETYPES, LINKS, QUIZ, byId } from '../lib/archetypes.js'
+import { ARCHETYPES, LINKS, QUIZ, byId, mark } from '../lib/archetypes.js'
 import { bus } from '../lib/bus.js'
 import { TAU } from '../lib/geom.js'
 
-const BUDGET = 25
+const BUDGET = 30
 const MAX = 5
-const ING = { understand: 'understanding', build: 'building', overcome: 'overcoming', create: 'creating', question: 'questioning', discover: 'discovering', transcend: 'transcending', shape: 'shaping', experience: 'experiencing', disrupt: 'disrupting', frame: 'framing', tune: 'tuning', seize: 'seizing', optimise: 'optimising', polish: 'polishing', revere: 'revering', tend: 'tending', tell: 'telling', solve: 'solving', remember: 'remembering' }
+const ING = { understand: 'understanding', build: 'building', overcome: 'overcoming', create: 'creating', question: 'questioning', discover: 'discovering', transcend: 'transcending', shape: 'shaping', experience: 'experiencing', disrupt: 'disrupting', frame: 'framing', tune: 'tuning', seize: 'seizing', optimise: 'optimising', polish: 'polishing', revere: 'revering', tend: 'tending', tell: 'telling', solve: 'solving', remember: 'remembering', heal: 'healing', teach: 'teaching', love: 'loving', refuse: 'refusing' }
 
 function list(words) {
   return words.length < 2 ? words.join('') : `${words.slice(0, -1).join(', ')} and ${words.at(-1)}`
@@ -26,6 +26,9 @@ const FUSIONS = {
   'musician+scientist': 'The Pythagorean',
   'storyteller+warrior': 'The Bard',
   'cinephile+entrepreneur': 'The Mogul',
+  'healer+philosopher': 'The Physician-Philosopher',
+  'lover+theologian': 'The Mystic',
+  'rebel+teacher': 'The Liberator',
 }
 
 const empty = () => Object.fromEntries(ARCHETYPES.map((a) => [a.id, 0]))
@@ -57,7 +60,7 @@ export default function Constellation() {
     title = top.map((a) => a.name).join(' · ')
     text = `You meet reality chiefly by ${list(top.map((a) => `${ING[a.verb]} it`))}.`
     if (pts[ranked[0].id] / Math.max(1, spent) > 0.45 && spent >= 6) text += ` Mostly the ${ranked[0].name.toLowerCase()}: a specialist of one way.`
-    else if (ranked.length >= 9) text += ' Spread across many of the twenty: a generalist of ways.'
+    else if (ranked.length >= 10) text += ' Spread across many of the twenty-four: a generalist of ways.'
     if (left > 0 && mode === 'hand') text += ` ${left} point${left === 1 ? '' : 's'} still to give.`
   }
 
@@ -85,7 +88,7 @@ export default function Constellation() {
   return (
     <section id="yours" className="con">
       <div className="con__top">
-        <SectionHead no="07" title="Your Constellation" kicker="Everyone uses more than one. Spend twenty-five points across the twenty and see the shape of how you meet the world." />
+        <SectionHead no="07" title="Your Constellation" kicker="Everyone uses more than one. Spend thirty points across the twenty-four and see the shape of how you meet the world." />
         <div className="con__verdict" aria-live="polite">
           <span className="mono">
             {mode === 'quiz' ? `${answers.length} of ${QUIZ.length} answered` : `${spent} of ${BUDGET} points given`}
@@ -129,7 +132,7 @@ export default function Constellation() {
             <div className="con__quiz">
               <div className="con__steps" aria-hidden="true">
                 {QUIZ.map((_, i) => (
-                  <i key={i} style={{ background: answers[i] ? byId[answers[i]].color : undefined }} className={i === answers.length ? 'is-now' : ''} />
+                  <i key={i} style={{ background: answers[i] ? mark(byId[answers[i]]) : undefined }} className={i === answers.length ? 'is-now' : ''} />
                 ))}
               </div>
               <AnimatePresence mode="wait">
@@ -223,7 +226,7 @@ export default function Constellation() {
               return (
                 <g key={a.id}>
                   <line x1="0" y1="0" x2={x} y2={y} className="con__spoke" />
-                  <circle cx={lx} cy={ly} r="7" fill={a.color} />
+                  <circle cx={lx} cy={ly} r="7" fill={mark(a)} />
                   <text x={lx + (Math.abs(lx) < 20 ? 0 : Math.sign(lx) * 13)} y={ly + (Math.abs(lx) < 20 ? (ly > 0 ? 24 : -14) : 5)} textAnchor={Math.abs(lx) < 20 ? 'middle' : lx > 0 ? 'start' : 'end'} className="con__label">
                     {a.name}
                   </text>
@@ -233,7 +236,7 @@ export default function Constellation() {
             <motion.polygon points={poly} className="con__shape" initial={false} animate={{ points: poly }} transition={{ type: 'spring', stiffness: 120, damping: 16 }} />
             {ARCHETYPES.map((a, i) => {
               const [x, y] = vert(i, pts[a.id])
-              return pts[a.id] ? <circle key={a.id} cx={x} cy={y} r="6" fill={a.color} className="con__dot" /> : null
+              return pts[a.id] ? <circle key={a.id} cx={x} cy={y} r="6" fill={mark(a)} className="con__dot" /> : null
             })}
           </svg>
         </div>

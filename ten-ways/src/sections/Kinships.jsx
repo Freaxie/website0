@@ -9,7 +9,7 @@ const MODES = [
   { id: 'opposites', name: 'Opposites', note: 'Ways that pull in contrary directions.' },
   { id: 'unions', name: 'Unlikely unions', note: 'Opposites, or near-strangers, joined in one life.' },
 ]
-const R = 220
+const R = 232
 const pos = (id) => {
   const i = ARCHETYPES.findIndex((a) => a.id === id)
   const ang = (i / ARCHETYPES.length) * TAU - Math.PI / 2
@@ -38,7 +38,7 @@ export default function Kinships() {
 
       <div className="kin__body">
         <div className="kin__ring">
-          <svg viewBox="-370 -290 740 580" role="img" aria-label={`${MODES.find((m) => m.id === mode).name} among the twenty archetypes`}>
+          <svg viewBox="-370 -290 740 580" role="img" aria-label={`${MODES.find((m) => m.id === mode).name} among the twenty-four archetypes`}>
             <circle r={R} className="kin__circle" />
             <AnimatePresence>
               {shown.map(([a, b]) => {
@@ -72,9 +72,9 @@ export default function Kinships() {
                   onClick={() => setFocus((f) => (f === a.id ? null : a.id))}
                   onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setFocus((f) => (f === a.id ? null : a.id)))}
                 >
-                  <circle r={focus === a.id ? 24 : 18} fill={a.color} />
-                  <path d={a.glyph} transform="translate(-9 -9) scale(0.18)" stroke={a.fg} strokeWidth="9" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                  <text x={Math.cos(ang) * 32} y={Math.sin(ang) * 32 + 4} textAnchor={Math.cos(ang) > 0.3 ? 'start' : Math.cos(ang) < -0.3 ? 'end' : 'middle'} className="kin__label">
+                  <circle r={focus === a.id ? 22 : 16} fill={a.color} />
+                  <path d={a.glyph} transform="translate(-8 -8) scale(0.16)" stroke={a.fg} strokeWidth="10" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                  <text x={Math.cos(ang) * 28} y={Math.sin(ang) * 28 + 4} textAnchor={Math.cos(ang) > 0.12 ? 'start' : Math.cos(ang) < -0.12 ? 'end' : 'middle'} className="kin__label">
                     {a.name}
                   </text>
                 </g>

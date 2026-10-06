@@ -24,14 +24,14 @@ export default function Finale() {
       </motion.ol>
 
       <motion.p className="fin__last" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.6 }} transition={{ duration: 1.4, delay: 0.4 }}>
-        Reality is large enough for all twenty.
+        Reality is large enough for all twenty-four.
       </motion.p>
 
       <Convergence />
 
       <footer className="fin__foot">
         <div className="fin__colophon mono">
-          <p>Twenty Ways of Encountering Reality: an atlas in eight rooms. The positions, kinships and instruments are a curator’s interpretation, offered to be argued with.</p>
+          <p>Twenty-Four Ways of Encountering Reality: an atlas in eight rooms. The positions, kinships and instruments are a curator’s interpretation, offered to be argued with.</p>
           <p>Each archetype keeps its own colour throughout. Set in Archivo, Instrument Serif and JetBrains Mono.</p>
         </div>
         <a className="fin__return mono" href="#entrance">

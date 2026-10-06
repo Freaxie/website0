@@ -135,6 +135,27 @@ const BUILD = {
   archivist() {
     return { fill: true, pts: Array.from({ length: N }, (_, i) => ({ x: ((i % 30) + 0.5) / 30, y: (Math.floor(i / 30) + 0.5) / 14 })) }
   },
+  healer() {
+    // a cross within a circle
+    const segs = [[0.38, 0.12, 0.62, 0.12], [0.62, 0.12, 0.62, 0.38], [0.62, 0.38, 0.88, 0.38], [0.88, 0.38, 0.88, 0.62], [0.88, 0.62, 0.62, 0.62], [0.62, 0.62, 0.62, 0.88], [0.62, 0.88, 0.38, 0.88], [0.38, 0.88, 0.38, 0.62], [0.38, 0.62, 0.12, 0.62], [0.12, 0.62, 0.12, 0.38], [0.12, 0.38, 0.38, 0.38], [0.38, 0.38, 0.38, 0.12]]
+    for (let k = 0; k < 40; k++) { const a = (k / 40) * TAU; const b = ((k + 1) / 40) * TAU; segs.push([0.5 + Math.cos(a) * 0.47, 0.5 + Math.sin(a) * 0.47, 0.5 + Math.cos(b) * 0.47, 0.5 + Math.sin(b) * 0.47]) }
+    return { fill: false, pts: evenly(segs, N) }
+  },
+  teacher() {
+    // a lecture room seen from the front: tiered arcs of seats
+    return { fill: true, pts: Array.from({ length: N }, (_, i) => { const row = i % 7; const k = Math.floor(i / 7) / (N / 7); const r = 0.25 + row * 0.12; const a = Math.PI * (0.15 + 0.7 * k); return { x: 0.5 - Math.cos(a) * r * 0.95, y: 0.08 + Math.sin(a) * r } }) }
+  },
+  lover() {
+    // two circles, overlapping
+    return { fill: false, pts: Array.from({ length: N }, (_, i) => { const side = i % 2; const a = (Math.floor(i / 2) / (N / 2)) * TAU; return { x: 0.5 + (side ? 0.13 : -0.13) + Math.cos(a) * 0.3, y: 0.5 + Math.sin(a) * 0.3, side } }) }
+  },
+  rebel() {
+    // ranks of bars, and one line breaking through them
+    const segs = []
+    for (const y of [0.2, 0.4, 0.6, 0.8]) segs.push([0.04, y, 0.44, y], [0.56, y, 0.96, y])
+    segs.push([0.5, 0.98, 0.5, 0.04], [0.42, 0.12, 0.5, 0.04], [0.5, 0.04, 0.58, 0.12])
+    return { fill: true, pts: evenly(segs, N) }
+  },
   reality() {
     return { fill: false, pts: Array.from({ length: N }, (_, i) => { const a = (i / N) * TAU * 3; const r = i < N * 0.8 ? 0.36 : 0.06 * ((i * 7) % 10) / 10; return { x: 0.5 + Math.cos(a) * r, y: 0.5 + Math.sin(a) * r } }) }
   },
@@ -342,6 +363,42 @@ export function drawStyle(ctx, id, f, P, alpha, fg) {
         ctx.arc(p.x, p.y, 4, 0, TAU)
         ctx.fill()
       })
+      break
+    case 'healer':
+      ctx.beginPath()
+      P.forEach((p, i) => {
+        if (i % 2) return
+        ctx.moveTo(p.x - 3, p.y)
+        ctx.lineTo(p.x + 3, p.y)
+        ctx.moveTo(p.x, p.y - 3)
+        ctx.lineTo(p.x, p.y + 3)
+      })
+      ctx.stroke()
+      break
+    case 'teacher':
+      P.forEach((p, i) => {
+        if (i % 2) return
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, 2.6, 0, TAU)
+        ctx.fill()
+      })
+      break
+    case 'lover':
+      P.forEach((p, i) => {
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, 2.2, 0, TAU)
+        f.pts[i].side ? ctx.stroke() : ctx.fill()
+      })
+      break
+    case 'rebel':
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      P.forEach((p, i) => {
+        if (i % 2) return
+        ctx.moveTo(p.x, p.y - 4)
+        ctx.lineTo(p.x + 2, p.y + 4)
+      })
+      ctx.stroke()
       break
     case 'archivist':
       ctx.lineWidth = 1

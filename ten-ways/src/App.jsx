@@ -18,8 +18,8 @@ import Finale from './sections/Finale.jsx'
 export const ROOMS = [
   { id: 'entrance', no: '01', name: 'Entrance' },
   { id: 'atlas', no: '02', name: 'The Atlas' },
-  { id: 'ten', no: '03', name: 'The Twenty' },
-  { id: 'encounters', no: '04', name: 'One World, Twenty Encounters' },
+  { id: 'ten', no: '03', name: 'The Twenty-Four' },
+  { id: 'encounters', no: '04', name: 'One World, Twenty-Four Encounters' },
   { id: 'kinships', no: '05', name: 'Kinships' },
   { id: 'lineages', no: '06', name: 'Lineages' },
   { id: 'yours', no: '07', name: 'Your Constellation' },

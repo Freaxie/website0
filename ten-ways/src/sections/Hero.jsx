@@ -75,14 +75,15 @@ export default function Hero() {
     <section id="entrance" className="hero" ref={ref}>
       <motion.div className="hero__meta mono" style={{ opacity: fade }}>
         <span>An atlas in eight rooms</span>
-        <span>Twenty archetypes · one reality</span>
+        <span>Twenty-four archetypes · six orders · one reality</span>
       </motion.div>
 
       <div className="hero__text">
-        <h1 className="hero__title" aria-label="Twenty ways of encountering reality">
+        <h1 className="hero__title" aria-label="Twenty-four ways of encountering reality">
           <span className="hero__clip">
             <motion.span className="hero__ten" initial={{ y: '105%' }} animate={{ y: 0 }} transition={{ duration: 1, delay: 1.3, ease }}>
-              Twenty ways
+              <span>Twenty-</span>
+              <span>four ways</span>
             </motion.span>
           </span>
           <motion.span className="hero__of" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, delay: 1.7 }}>
@@ -113,7 +114,7 @@ export default function Hero() {
       <motion.div className="hero__wheel" initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.6, delay: 1.2, ease }} onPointerLeave={() => setHeld(false)}>
         <motion.div className="hero__spin" style={{ rotate: spin }}>
           <canvas ref={canvas} className="hero__motes" aria-hidden="true" />
-          <svg viewBox="-260 -260 520 520" role="group" aria-label="The twenty archetypes around reality">
+          <svg viewBox="-260 -260 520 520" role="group" aria-label="The twenty-four archetypes around reality">
             <circle r={R} className="hero__ring" />
             <circle r={R * 0.62} className="hero__ring hero__ring--dash" />
             {ARCHETYPES.map((x, i) => {
@@ -139,8 +140,8 @@ export default function Hero() {
                   >
                     <g transform={`translate(${gx} ${gy})`}>
                       <motion.g animate={{ scale: on ? 1.4 : 1 }} transition={{ type: 'spring', stiffness: 300, damping: 18 }}>
-                        <circle r="23" fill={x.color} className="hero__disc" />
-                        <path d={x.glyph} transform="translate(-12 -12) scale(0.24)" stroke={x.fg} strokeWidth="8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                        <circle r="21" fill={x.color} className="hero__disc" />
+                        <path d={x.glyph} transform="translate(-10.5 -10.5) scale(0.21)" stroke={x.fg} strokeWidth="9" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                       </motion.g>
                       <motion.text x={Math.cos(ang) * 44} y={Math.sin(ang) * 40 + 4} textAnchor={Math.abs(Math.cos(ang)) < 0.3 ? 'middle' : Math.cos(ang) > 0 ? 'start' : 'end'} className="hero__label" initial={false} animate={{ opacity: on ? 1 : 0 }}>
                         {x.name}
