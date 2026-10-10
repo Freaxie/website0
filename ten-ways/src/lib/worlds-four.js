@@ -185,7 +185,8 @@ const lover = {
     ctx.arc(b.x, b.y, 5, 0, TAU)
     ctx.fill()
     if (d < 70) {
-      s.close += dt
+      if (P.on) s.close += dt
+      else s.close = 0
       s.ring -= dt
       if (s.ring <= 0) {
         s.ring = 0.6

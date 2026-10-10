@@ -46,7 +46,12 @@ who openly refuses.
    the physician-philosopher, the mystics who spoke of God as a lover).
 6. **Lineages.** All 192 dated moments on one logarithmic timeline, from a pig painted on a Sulawesi cave
    wall at least 45,000 years ago to a word coined online, with a reader and an era-filtered list.
-7. **Your Constellation.** Answer eight questions, or spend thirty points by hand, and see your shape.
+7. **Your Constellation.** A test of sixteen small scenes from ordinary life (`src/lib/quiz.js`), six
+   answers each; every archetype is the main answer to exactly four, so the questions favour no one. Each
+   answer draws a reply from the archetype you chose, and the shape draws itself on a radar as you go. At
+   the end comes a reading: an epithet, your three strongest ways with a portrait, superpower, blind spot,
+   party behaviour and something to try for each, your balance across the six orders, good company, your
+   opposite, the way you hardly use, and your shadow. Or spend thirty points by hand.
 8. **Coda.** Twenty-four imperatives, and one sentence.
 
 ## Worlds

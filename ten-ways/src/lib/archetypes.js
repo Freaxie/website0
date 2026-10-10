@@ -316,6 +316,16 @@ export const byId = Object.fromEntries(ARCHETYPES.map((a) => [a.id, a]))
 export const ink = (a) => a.ink || a.color
 
 // The archetype's colour as a mark on the dark rooms: near-black colours show their foreground instead.
+// The archetype's colour as text on the dark rooms: dark colours are lifted toward white until they read.
+export const onDark = (a) => {
+  const c = mark(a)
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16))
+  const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255
+  if (lum > 0.38) return c
+  const k = Math.min(0.75, (0.38 - lum) * 2 + 0.25)
+  return `rgb(${[r, g, b].map((v) => Math.round(v + (247 - v) * k)).join(',')})`
+}
+
 export const mark = (a) => {
   const [r, g, b] = [1, 3, 5].map((i) => parseInt(a.color.slice(i, i + 2), 16))
   return r + g + b < 120 ? a.fg : a.color
@@ -473,16 +483,4 @@ export const THINGS = [
       rebel: 'Asks whose side they are on.',
     },
   },
-]
-
-// Eight questions for Your Constellation. Each answer gives its archetype two points.
-export const QUIZ = [
-  { q: 'A locked door stands in your way.', a: [['Work out how the lock works.', 'scientist'], ['Break it down.', 'warrior'], ['Ask why it was locked.', 'philosopher'], ['Find another way in.', 'explorer'], ['Knock, and ask if there is a party.', 'hedonist'], ['Look for clues about who locked it.', 'detective'], ['Refuse to accept that it stays locked.', 'rebel']] },
-  { q: 'You have a free year, and money enough.', a: [['Build something that will outlast it.', 'engineer'], ['Go where no map is any good.', 'explorer'], ['Make the work only you could make.', 'artist'], ['Eat, drink, love, stay up late.', 'hedonist'], ['Start a company.', 'entrepreneur'], ['Make a film.', 'cinephile'], ['Volunteer where people need care.', 'healer']] },
-  { q: 'Your community is in disarray.', a: [['Draw up rules, and see them kept.', 'sovereign'], ['Make people laugh at what they fear.', 'trickster'], ['Fix the thing that is actually broken.', 'engineer'], ['Stand in front of whatever threatens it.', 'warrior'], ['Tell a story that makes sense of it.', 'storyteller'], ['Plant a garden together.', 'gardener'], ['Look after the ones who are hurt.', 'healer'], ['Organise people to change what caused it.', 'rebel']] },
-  { q: 'Someone tells you, with total confidence, how the world works.', a: [['Ask for the evidence.', 'scientist'], ['Ask what they mean by “the world”.', 'philosopher'], ['Agree, then say the opposite with the same face.', 'trickster'], ['Let it pass. It doesn’t touch what matters.', 'monk'], ['Ask what they believe, and why.', 'theologian'], ['Ask how the story ends.', 'storyteller'], ['Ask how they would explain it to a child.', 'teacher']] },
-  { q: 'A perfect evening is…', a: [['A long dinner, and nowhere to be.', 'hedonist'], ['Silence, and a candle.', 'monk'], ['Working late on something that is almost working.', 'engineer'], ['A conversation that goes on until three.', 'philosopher'], ['A film in a dark room.', 'cinephile'], ['Playing music with friends.', 'musician'], ['One person, and a conversation that does not end.', 'lover']] },
-  { q: 'Faced with chaos, you…', a: [['Impose an order on it.', 'sovereign'], ['Find the pattern in it.', 'scientist'], ['Make something beautiful out of it.', 'artist'], ['Join in.', 'trickster'], ['Write it all down and file it.', 'archivist'], ['Find the variable, and fix it.', 'biohacker'], ['Explain it to someone until it makes sense.', 'teacher']] },
-  { q: 'What would you want said of you?', a: [['That they never gave up.', 'warrior'], ['That they saw what no one had seen.', 'explorer'], ['That they were at peace.', 'monk'], ['That they left things better ordered.', 'sovereign'], ['That they made something beautiful.', 'artist'], ['That they looked the part, and earned it.', 'looksmaxxer'], ['That they found out the truth.', 'detective'], ['That they loved well.', 'lover']] },
-  { q: 'Your morning…', a: [['A cold shower, supplements, a sleep score.', 'biohacker'], ['Skincare, posture, a good mirror.', 'looksmaxxer'], ['Prayer, before anything else.', 'theologian'], ['Watering the plants.', 'gardener'], ['Scales, slowly, then faster.', 'musician'], ['Inbox zero and a pitch deck.', 'entrepreneur'], ['An old letter, reread.', 'archivist']] },
 ]

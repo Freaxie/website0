@@ -56,12 +56,10 @@ function Plate({ a, i }) {
       data-world={a.id}
       className={`plate plate--${a.id} ${shadow ? 'is-shadow' : ''}`}
       style={{ '--c': c, '--fg': fg }}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.25 }}
     >
       {/* the world lives only behind the top of the plate, so nothing moves behind the entry while you read */}
-      <div className="plate__hero">
+      {/* the hero observes the viewport: the plate itself is now too tall for a share of it ever to be on screen */}
+      <motion.div className="plate__hero" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
         <World kind={a.id} fg={fg} bg={c} color={a.color} host={ref} />
         <Glyph d={a.glyph} className="plate__mark" width={1.2} />
         <header className="plate__bar mono">
@@ -148,7 +146,7 @@ function Plate({ a, i }) {
             </p>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       <Entry a={a} />
     </motion.article>

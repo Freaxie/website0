@@ -101,18 +101,29 @@ export default function Cursor() {
 
   useEffect(() => {
     if (!fine) return
-    let last = { x: 0, y: 0 }
+    let last = { x: -100, y: -100 }
     let cur = null
-    const move = (e) => {
-      // inside an entry the cursor is an ordinary pointer again: that part of the plate is for reading
-      const w = e.target.closest?.('.entry') ? null : e.target.closest?.('[data-world]')
-      const busy = e.target.closest?.('a, button, input, label, [role="button"], [role="radio"], [role="tab"]')
+    let tint = null
+    // which world, if any, is under a given element; inside an entry the cursor is an ordinary pointer
+    // again, because that part of the plate is for reading
+    const classify = (target) => {
+      const w = !target || target.closest?.('.entry') ? null : target.closest?.('[data-world]')
+      const busy = target?.closest?.('a, button, input, label, [role="button"], [role="radio"], [role="tab"]')
       const k = w && !busy ? w.dataset.world : null
+      const c = w ? getComputedStyle(w).getPropertyValue('--fg').trim() || '#000' : tint
       if (k !== cur) {
         cur = k
         setKind(k)
-        if (w) setColor(getComputedStyle(w).getPropertyValue('--fg').trim() || '#000')
       }
+      // the shadow switch changes a plate's colours without the pointer moving to another world
+      if (c !== tint) {
+        tint = c
+        setColor(c)
+      }
+      return k
+    }
+    const move = (e) => {
+      const k = classify(e.target)
       const dx = e.clientX - last.x
       const dy = e.clientY - last.y
       last = { x: e.clientX, y: e.clientY }
@@ -124,8 +135,27 @@ export default function Cursor() {
         el.current.style.setProperty('--sp', k === 'artist' ? sp : 1)
       }
     }
+    // scrolling moves the page under a still pointer: look again at what is now beneath it,
+    // so a plate's cursor does not linger over the next room
+    let raf = 0
+    const look = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => classify(document.elementFromPoint(last.x, last.y)))
+    }
+    const leave = (e) => {
+      if (!e.relatedTarget) classify(null)
+    }
     window.addEventListener('pointermove', move, { passive: true })
-    return () => window.removeEventListener('pointermove', move)
+    window.addEventListener('scroll', look, { passive: true })
+    window.addEventListener('click', look, { passive: true })
+    document.addEventListener('pointerout', leave)
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('pointermove', move)
+      window.removeEventListener('scroll', look)
+      window.removeEventListener('click', look)
+      document.removeEventListener('pointerout', leave)
+    }
   }, [fine])
 
   if (!fine) return null

@@ -1170,6 +1170,242 @@ dd {
   letter-spacing: -0.04em;
 }
 
+/* the test: a reaction to the last answer, a letter for each option */
+
+.con__react {
+  margin: 0 0 18px;
+  padding-left: 12px;
+  border-left: 2px solid rgba(247, 245, 240, 0.4);
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 19px;
+  opacity: 0.8;
+}
+
+.con__letter {
+  flex: none;
+  width: 18px;
+  opacity: 0.55;
+}
+
+/* the reading */
+
+.reading {
+  margin-top: 12vh;
+  padding-top: 26px;
+  border-top: 2px solid rgba(247, 245, 240, 0.8);
+}
+
+.reading__title {
+  margin: 14px 0 0;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(54px, 7vw, 120px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.reading__sub {
+  max-width: 44ch;
+  margin-top: 18px;
+  font-family: var(--f-serif);
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.2;
+  opacity: 0.85;
+}
+
+.reading__three {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 48px);
+  margin-top: 8vh;
+}
+
+.reading__three li {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 16px;
+  border-top: 6px solid var(--c);
+}
+
+.reading__rank {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0.85;
+}
+
+.reading__sign {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+
+.reading__sign .glyph {
+  width: 22px;
+}
+
+.reading__three h4 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  font-weight: 900;
+  font-size: clamp(30px, 2.8vw, 46px);
+  line-height: 0.9;
+  text-transform: uppercase;
+  font-variation-settings: 'wdth' 62;
+}
+
+.reading__three h4 em {
+  font-family: var(--f-serif);
+  font-weight: 400;
+  font-size: 0.62em;
+  text-transform: none;
+  letter-spacing: 0;
+  font-variation-settings: normal;
+  color: var(--c);
+}
+
+.reading__three p {
+  font-family: var(--f-serif);
+  font-size: 19px;
+  line-height: 1.35;
+}
+
+.reading__three dl div {
+  padding: 9px 0;
+  border-top: 1px solid rgba(247, 245, 240, 0.18);
+}
+
+.reading__three dt {
+  opacity: 0.6;
+}
+
+.reading__three dd {
+  margin: 3px 0 0;
+  font-family: var(--f-serif);
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.reading__go {
+  margin-top: auto;
+  padding-top: 8px;
+  text-decoration: none;
+  color: var(--c);
+}
+
+.reading__go:hover {
+  text-decoration: underline;
+}
+
+.reading__more {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 48px);
+  margin-top: 9vh;
+  padding-top: 22px;
+  border-top: 1px solid rgba(247, 245, 240, 0.25);
+}
+
+.reading__more h5 {
+  margin: 0 0 12px;
+  font-weight: 500;
+  opacity: 0.65;
+}
+
+.reading__more h5:not(:first-child) {
+  margin-top: 28px;
+}
+
+.reading__more p {
+  font-family: var(--f-serif);
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.reading__more p + p {
+  margin-top: 10px;
+}
+
+.reading__more b {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.reading__try {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.reading__bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.reading__bars li {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) 40px;
+  gap: 10px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.reading__bars i {
+  height: 8px;
+  background: rgba(247, 245, 240, 0.12);
+}
+
+.reading__bars b {
+  display: block;
+  height: 100%;
+  background: var(--white);
+}
+
+.reading__bars .mono {
+  text-align: right;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.reading__btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8vh;
+}
+
+.reading__btns button {
+  padding: 12px 16px;
+  background: none;
+  border: 1px solid currentColor;
+  color: inherit;
+  cursor: pointer;
+}
+
+.reading__btns button:hover {
+  background: var(--white);
+  color: var(--ink);
+}
+
+@media (max-width: 1000px) {
+  .reading__three,
+  .reading__more {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* ───────── intro ───────── */
 
 .intro {
@@ -2660,6 +2896,9 @@ dd {
 }
 
 .con__opts button {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
   width: 100%;
   padding: 14px 16px;
   background: none;
@@ -3299,4 +3538,17 @@ dd {
 .fin__verb--engineer,
 .fin__verb--sovereign {
   font-size: 0.8em;
+}
+
+/* the widest-set names must still fit a phone */
+@media (max-width: 760px) {
+  .plate--cinephile .plate__name,
+  .plate--cinephile .plate__mirror {
+    font-size: 7.4vw;
+  }
+
+  .plate--theologian .plate__name,
+  .plate--theologian .plate__mirror {
+    font-size: 9vw;
+  }
 }
