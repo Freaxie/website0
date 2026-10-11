@@ -361,7 +361,8 @@ export interface Settings {
 }
 
 export const DEFAULT_SETTINGS: Settings = {
-  theme: 'dark',
+  // The artifact preview follows the viewer's theme; the site itself opens in the dark atlas.
+  theme: import.meta.env?.VITE_ROUTER === 'hash' ? 'system' : 'dark',
   accent: 'lime',
   activeProjectLimit: 3,
   focusTopicLimit: 4,

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark" data-accent="lime">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -10,9 +10,10 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <script>
       // Apply the saved theme before first paint, so a paper-theme user never sees a dark flash.
+      // If a host page already chose a theme (the artifact viewer does), leave its choice alone.
       try {
         var t = JSON.parse(localStorage.getItem('atlas:theme') || 'null')
-        if (t) {
+        if (t && !document.documentElement.dataset.theme) {
           document.documentElement.dataset.theme = t.theme
           document.documentElement.dataset.accent = t.accent
         }

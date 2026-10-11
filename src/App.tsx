@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react'
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Link, Route, Routes } from 'react-router-dom'
 import { Atlas } from './pages/Atlas'
 import { Home } from './pages/Home'
 import { Identity } from './pages/Identity'
@@ -17,6 +17,15 @@ import { Layout } from './shell/Layout'
 import { useStore } from './store/store'
 import { useUi } from './store/ui'
 
+// The single-file artifact preview runs inside a frame with no server rewrites, so it routes by hash.
+const Router = import.meta.env.VITE_ROUTER === 'hash' ? HashRouter : BrowserRouter
+// A host page (e.g. the artifact viewer) may set data-theme="light"/"dark" before the app starts;
+// "Follow system" then follows that choice.
+const HOST_THEME = (() => {
+  const t = document.documentElement.dataset.theme
+  return t === 'light' ? 'paper' : t === 'dark' ? 'dark' : null
+})()
+
 // The graph library is the heaviest dependency; load it only when the graph is opened.
 const GraphPage = lazy(() => import('./pages/GraphPage').then((m) => ({ default: m.GraphPage })))
 
@@ -26,7 +35,7 @@ function useTheme() {
   useEffect(() => {
     const root = document.documentElement
     const apply = () => {
-      const resolved = theme === 'system' ? (matchMedia('(prefers-color-scheme: light)').matches ? 'paper' : 'dark') : theme
+      const resolved = theme === 'system' ? (HOST_THEME ?? (matchMedia('(prefers-color-scheme: light)').matches ? 'paper' : 'dark')) : theme
       root.dataset.theme = resolved
       root.dataset.accent = accent
       document.querySelector('meta[name="theme-color"]')?.setAttribute('content', resolved === 'paper' ? '#eeede8' : '#0d1015')
@@ -87,7 +96,7 @@ export default function App() {
     )
 
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
@@ -127,6 +136,6 @@ export default function App() {
           />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </Router>
   )
 }
