@@ -1,44 +1,76 @@
-# The Cognitive Functions
+# Atlas
 
-One website for the four exhibitions: Ti/Te, Ni/Ne, Fi/Fe and Si/Se. A lobby at `/` leads into each room.
+A personal wiki, knowledge graph and life OS: one place to see and connect goals, knowledge, identity,
+projects and action. Built for one person (Krish), local-first, and private by construction.
+
+> Explore broadly. Organize rigorously. Execute selectively. Preserve curiosity.
+> Build a coherent life through accumulated action.
+
+The repository also hosts **The Cognitive Functions**, an exhibition in four rooms, now served at
+[`/functions/`](functions/README.md).
+
+## Run it
 
 ```
-npm run build   # writes dist/
-npx serve dist
+npm install
+npm run dev          # http://localhost:5173
+npm run build        # typecheck → Vite build → exhibition → privacy check, into dist/
+npm run preview      # serve dist/ on :4173
+npm test             # unit tests (Vitest)
+npm run test:e2e     # browser tests (Playwright): acceptance, mobile, accessibility
+npm run lint
 ```
 
-| Route          | Source                                          |
-| -------------- | ----------------------------------------------- |
-| `/`            | `src/hub.html`, the lobby                       |
-| `/ti-te.html`  | `exhibitions/ti-te.html`, Internal Coherence × External Effectiveness |
-| `/ni-ne.html`  | `exhibitions/ni-ne.html`, Convergence × Divergence |
-| `/fi-fe.html`  | `exhibitions/fi-fe.html`, Inner Values × Shared Values |
-| `/si-se.html`  | `exhibitions/si-se.html`, Experience × Presence  |
+## What's where
 
-## Deploying to Vercel
+| Route | Section | What it is for |
+| --- | --- | --- |
+| `/` | Observatory | What matters now: focus, next actions, active projects, learning threads, honest signals, the week |
+| `/inbox` | Inbox | Quick captures waiting to be filed |
+| `/identity` | Identity Lab | Possible selves and their parts, the integration board, observations, competing explanations, experiments |
+| `/atlas` | Knowledge Atlas | Every subject as a page, grouped by domain, with interest status and understanding |
+| `/graph` | Graph | Interactive knowledge graph: search, filter, neighbourhoods, path finding, unconnected records, list view |
+| `/learning` | Learning Studio | The output ladder, learning paths with evidence, review queue, knowledge gaps, skills |
+| `/projects` | Project Forge | Active projects with next actions; backlog, paused, finished and deliberately ended work |
+| `/life` | Life Systems | Goals, routines, fitness, health & care, social practice, environment & tools |
+| `/library` | Library | Books and other sources, with arguments, disagreements and whether they changed anything |
+| `/timeline` | Timeline | Dated events (undated ones are kept apart, never guessed) |
+| `/review` | Review Room | Weekly and monthly reviews that end in concrete changes |
+| `/index` | Index | Every record in one dense, filterable table |
+| `/r/:id` | Record | Any record: text, kind-specific fields, typed connections, backlinks |
 
-`vercel.json` in this folder holds the whole setup (no dependencies, no framework):
+**Keyboard:** `Ctrl/⌘ K` search and commands · `c` quick capture (configurable) · `Alt N` new note ·
+`/` search · `g` + letter to jump · `e` edit · `Esc` close or leave the editor · `?` all shortcuts.
 
-1. In Vercel, **Add New → Project** and import this repository.
-2. Leave every setting at its default; `vercel.json` sets the build command and output folder.
-3. Deploy. The lobby is served at `/`, and the rooms at `/ti-te`, `/ni-ne`, `/fi-fe` and `/si-se`.
+## How it works
 
-Or, from a machine with the Vercel CLI: `vercel --prod`.
+- **Stack:** Vite, React 18, TypeScript (strict), React Router, zustand, plain CSS with design tokens.
+  Libraries: `idb` (IndexedDB), `minisearch` (search), `zod` (import validation), `marked` + `DOMPurify`
+  (Markdown), `react-force-graph-2d` (graph, lazy-loaded), `d3-force` (mini-map), `fflate` (Markdown zip).
+  Fonts are self-hosted, so the app makes no third-party requests.
+- **Persistence:** local-first. Every record and link lives in this browser's IndexedDB. The in-memory store
+  writes through on each change (debounced while typing) and shows its state in the top bar. Tabs stay in
+  sync over a `BroadcastChannel`. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+- **Data model:** typed records (`topic`, `note`, `project`, `task`, `resource`, `goal`, `observation`,
+  `hypothesis`, `experiment`, `archetype`, `path`, `event`, `review`, …) plus a separate table of typed links.
+  `[[wikilinks]]` in any text become graph edges and backlinks. Every record says how sure it is
+  (*fact, report, inference, suspicion, hypothesis, aspiration*) and whether it still holds
+  (*current, historical, unverified*).
+- **Portable data:** JSON export/import with validation and migrations ([docs/DATA_FORMAT.md](docs/DATA_FORMAT.md)),
+  plus a Markdown export.
 
-## How the rooms stay intact
+## Privacy
 
-The four exhibitions are compiled single-file React builds, copied here verbatim from their published
-artifacts. They are not modified. `build.mjs` adds exactly one inline `<script>` to each, right after
-`<head>`, from `src/exhibit-nav.js`. That script:
+This repository is **public**, and so is the deployed site. Only the *public seed* (topics, projects,
+learning paths, possible selves) is committed and bundled. Health, medication, family, finances,
+psychological notes and body measurements live in a private import file that is **never committed and never
+bundled**; `npm run build` fails if any of its text shows up in `dist/`. Details: [docs/PRIVACY.md](docs/PRIVACY.md).
 
-- renders the persistent navigation (← All Functions, plus Ti/Te · Ni/Ne · Fi/Fe · Si/Se) inside a
-  **shadow root**, so no CSS passes between it and the exhibition in either direction;
-- plays the arrival transition: the room's two colours part like doors;
-- plays the exit transitions to the lobby or to another room.
+## Deploying
 
-Each room keeps its own document, fonts, stylesheet and React root. So no styles, globals or
-animations can collide between exhibitions.
+`vercel.json` holds the setup: `npm run build`, output `dist/`, SPA rewrites for the app, `/functions/` for the
+exhibition, and permanent redirects from the exhibition's old URLs (`/ti-te` → `/functions/ti-te`, etc.).
 
-`src/pairs.json` is the single source for the pair names, rooms and colours used by the lobby and the nav.
-`dist/hub.html` is the lobby as a page fragment, for hosting as a claude.ai Artifact with the four rooms as
-sibling files.
+The deployed site has no server and no accounts: each visitor's browser starts from the public seed, and
+nothing anyone types leaves their browser. That also means **no sync between devices**. Use export/import to
+move data until a sync backend exists (see the architecture notes for what that would take).

@@ -2,3 +2,8 @@ dist
 node_modules
 .DS_Store
 .vercel
+playwright-report
+test-results
+# Sensitive personal seed data: imported at runtime, never committed, never bundled.
+private/
+*.private.json

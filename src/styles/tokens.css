@@ -1,0 +1,127 @@
+/* Design tokens. One accent, warm off-white on deep charcoal; a paper theme for long reading.
+   Components read only these variables, never raw colours. */
+
+:root {
+  --f-ui: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --f-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+
+  --r-1: 3px;
+  --r-2: 6px;
+  --r-3: 10px;
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 72px;
+
+  --sidebar-w: 236px;
+  --topbar-h: 52px;
+  --read: 720px;
+  --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
+  --t-fast: 120ms;
+  --t-med: 220ms;
+
+}
+
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0d1015;
+  --bg-1: #11151c;
+  --bg-2: #171c25;
+  --bg-3: #1e2430;
+  --line: rgba(231, 225, 211, 0.085);
+  --line-2: rgba(231, 225, 211, 0.15);
+  --line-3: rgba(231, 225, 211, 0.3);
+  --text: #e7e1d3;
+  --text-2: #bdb6a7;
+  --muted: #8f897d;
+  --faint: #5c5851;
+  --grid: rgba(231, 225, 211, 0.03);
+  --overlay: rgba(4, 6, 9, 0.66);
+  --shadow: 0 24px 64px -24px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--line-2);
+  --warn: #e3a64a;
+  --danger: #ee7462;
+  --on-accent: #0d1015;
+  --d-ai: #3987e5;
+  --d-math: #d95926;
+  --d-electronics: #199e70;
+  --d-physics: #c98500;
+  --d-human: #d55181;
+  --d-philosophy: #008300;
+  --d-history: #9085e9;
+  --d-other: #e66767;
+}
+
+:root[data-theme='paper'] {
+  color-scheme: light;
+  --bg: #eeede8;
+  --bg-1: #e7e5de;
+  --bg-2: #dfdcd3;
+  --bg-3: #f7f6f2;
+  --line: rgba(13, 13, 12, 0.1);
+  --line-2: rgba(13, 13, 12, 0.18);
+  --line-3: rgba(13, 13, 12, 0.34);
+  --text: #141412;
+  --text-2: #3b3934;
+  --muted: #66635c;
+  --faint: #a7a399;
+  --grid: rgba(13, 13, 12, 0.04);
+  --overlay: rgba(30, 28, 24, 0.35);
+  --shadow: 0 24px 64px -28px rgba(30, 28, 24, 0.45), 0 0 0 1px var(--line-2);
+  --warn: #9a5d00;
+  --danger: #b3321f;
+  --on-accent: #0d0d0c;
+  --d-ai: #2a78d6;
+  --d-math: #eb6834;
+  --d-electronics: #1baf7a;
+  --d-physics: #eda100;
+  --d-human: #e87ba4;
+  --d-philosophy: #008300;
+  --d-history: #6250d6;
+  --d-other: #e34948;
+}
+
+/* Accent: --accent fills (behind dark text), --accent-text is the accent used as text on the background. */
+:root,
+:root[data-accent='lime'] {
+  --accent: #c6f04a;
+  --accent-text: #c6f04a;
+  --accent-soft: rgba(198, 240, 74, 0.11);
+  --accent-line: rgba(198, 240, 74, 0.42);
+}
+:root[data-accent='blue'] {
+  --accent: #7ea4ff;
+  --accent-text: #8fb0ff;
+  --accent-soft: rgba(126, 164, 255, 0.13);
+  --accent-line: rgba(126, 164, 255, 0.45);
+}
+:root[data-accent='violet'] {
+  --accent: #b9a3ff;
+  --accent-text: #c2afff;
+  --accent-soft: rgba(185, 163, 255, 0.13);
+  --accent-line: rgba(185, 163, 255, 0.45);
+}
+:root[data-theme='paper'][data-accent='lime'] {
+  --accent-text: #496a00;
+  --accent-soft: rgba(120, 160, 0, 0.12);
+  --accent-line: rgba(73, 106, 0, 0.45);
+}
+:root[data-theme='paper'][data-accent='blue'] {
+  --accent: #2f5be0;
+  --accent-text: #2347c9;
+  --on-accent: #f7f6f2;
+  --accent-soft: rgba(35, 71, 201, 0.1);
+  --accent-line: rgba(35, 71, 201, 0.45);
+}
+:root[data-theme='paper'][data-accent='violet'] {
+  --accent: #5b3fc4;
+  --accent-text: #5b3fc4;
+  --on-accent: #f7f6f2;
+  --accent-soft: rgba(91, 63, 196, 0.1);
+  --accent-line: rgba(91, 63, 196, 0.45);
+}
