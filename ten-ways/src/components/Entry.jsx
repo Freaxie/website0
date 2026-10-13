@@ -64,9 +64,23 @@ export default function Entry({ a }) {
               ))}
             </Block>
           ))}
+          {e.scene && (
+            <Block className="entry__sec entry__scene">
+              <h5 className="entry__h mono">
+                <span>§3</span>A scene
+              </h5>
+              <p className="entry__place mono">{e.scene.place}</p>
+              <h6 className="entry__stitle">{e.scene.title}</h6>
+              {e.scene.text.map((p, i) => (
+                <p key={i} className={i === 0 ? 'entry__lead' : undefined}>
+                  {p}
+                </p>
+              ))}
+            </Block>
+          )}
           <Block className="entry__sec">
             <h5 className="entry__h mono">
-              <span>§3</span>Distinctions
+              <span>§4</span>Distinctions
             </h5>
             <dl className="entry__dist">
               {e.distinctions.map(([t, x]) => (
@@ -77,15 +91,51 @@ export default function Entry({ a }) {
               ))}
             </dl>
           </Block>
+          {e.myths && (
+            <Block className="entry__sec">
+              <h5 className="entry__h mono">
+                <span>§5</span>Myths and facts
+              </h5>
+              <ul className="entry__myths">
+                {e.myths.map(([myth, fact]) => (
+                  <li key={myth}>
+                    <p className="entry__myth-q">
+                      <span className="mono">Myth</span>
+                      <s>{myth}</s>
+                    </p>
+                    <p className="entry__myth-a">
+                      <span className="mono">In fact</span>
+                      {fact}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </Block>
+          )}
+          {e.curiosities && (
+            <Block className="entry__sec">
+              <h5 className="entry__h mono">
+                <span>§6</span>Curiosities
+              </h5>
+              <ol className="entry__cur">
+                {e.curiosities.map((c, i) => (
+                  <li key={i}>
+                    <span className="entry__num">{String(i + 1).padStart(2, '0')}</span>
+                    <p>{c}</p>
+                  </li>
+                ))}
+              </ol>
+            </Block>
+          )}
           <Block className="entry__sec">
             <h5 className="entry__h mono">
-              <span>§4</span>Criticism
+              <span>§7</span>Criticism
             </h5>
             <p>{e.critique}</p>
           </Block>
           <Block className="entry__sec">
             <h5 className="entry__h mono">
-              <span>§5</span>Now
+              <span>§8</span>Now
             </h5>
             <p>{e.now}</p>
           </Block>
@@ -96,6 +146,23 @@ export default function Entry({ a }) {
             <h5 className="entry__h mono">In myth</h5>
             <p>{e.figure}</p>
           </Block>
+
+          {e.field && (
+            <Block className="entry__box entry__field" d={0.08}>
+              <h5 className="entry__h mono">Field guide · how to spot one</h5>
+              <p className="entry__latin">
+                {a.name} <i>vulgaris</i>
+              </p>
+              <dl>
+                {e.field.map(([k, v]) => (
+                  <div key={k}>
+                    <dt className="mono">{k}</dt>
+                    <dd>{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Block>
+          )}
 
           <Block className="entry__box" d={0.1}>
             <h5 className="entry__h mono">Lineage · {e.lineage.length} moments</h5>

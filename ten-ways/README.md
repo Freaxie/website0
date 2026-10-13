@@ -38,8 +38,10 @@ who openly refuses.
    question, instrument, gift, shadow, exemplars and a quotation, a live instrument, and a world behind it.
    Below each plate is an **encyclopedia entry** (`src/lib/entries-*.js`):
    - headword, etymology and definition
-   - five numbered sections: Overview, History, Distinctions, Criticism, Now
-   - a margin with its figure in myth, a lineage of eight dated moments, four figures with dates, five
+   - eight numbered sections: Overview, History, A scene (a true story told at length), Distinctions,
+     Myths and facts, Curiosities, Criticism, Now (`src/lib/extras-*.js` holds the scenes, myths,
+     curiosities and field guides)
+   - a margin with its figure in myth, a tongue-in-cheek field guide for spotting one in the wild, a lineage of eight dated moments, four figures with dates, five
      terms, practice and signs, five works of further reading, and cross-references to its kin
 4. **One World, Twenty-Four Encounters.** A mountain, the sea or a stranger, redrawn by each archetype.
 5. **Kinships.** Allies, opposites and unlikely unions (the warrior-monk, the philosopher-king, Ibn Sina

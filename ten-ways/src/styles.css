@@ -805,6 +805,127 @@ dd {
   text-transform: uppercase;
 }
 
+/* the entry's extras: a scene, myths, curiosities, the field guide */
+
+.entry__place {
+  margin: 0 0 6px;
+  opacity: 0.7;
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+.entry__stitle {
+  margin: 0 0 16px;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(30px, 2.8vw, 44px);
+  line-height: 1;
+}
+
+.entry__scene {
+  padding: 26px 0 6px;
+  border-top: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+}
+
+.entry__scene > .entry__h {
+  border-bottom: 0;
+}
+
+.entry__myths li + li {
+  margin-top: 22px;
+}
+
+.entry__myths p {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr);
+  gap: 12px;
+  margin: 0;
+}
+
+.entry__myths p + p {
+  margin-top: 6px;
+  text-indent: 0;
+}
+
+.entry__myths .mono {
+  padding-top: 5px;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.entry__myth-q s {
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
+  font-style: italic;
+}
+
+.entry__cur li {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+}
+
+.entry__cur li:first-child {
+  padding-top: 0;
+}
+
+.entry__cur p {
+  margin: 0;
+}
+
+.entry__num {
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 0.9;
+  font-variation-settings: 'wdth' 62;
+  opacity: 0.55;
+}
+
+.entry__field {
+  padding: 18px 18px 8px;
+  border: 1.5px dashed color-mix(in srgb, currentColor 55%, transparent);
+}
+
+.entry__latin {
+  margin: 0 0 10px;
+  font-family: var(--f-serif);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.entry__field dl div {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px dotted color-mix(in srgb, currentColor 35%, transparent);
+}
+
+.entry__field dt {
+  padding-top: 3px;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.entry__field dd {
+  margin: 0;
+  font-family: var(--f-serif);
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+@media (max-width: 760px) {
+  .entry__myths p,
+  .entry__field dl div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+}
+
 /* the index of the twenty-four, by order */
 
 .ten__orders {
