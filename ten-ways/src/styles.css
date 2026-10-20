@@ -629,6 +629,60 @@ dd {
   line-height: 1.15;
 }
 
+/* the painting of the myth: drawn in code, then made pixels, tesserae, glass, ink, clay, wood or print */
+.painting {
+  margin: 0 0 20px;
+}
+
+.painting__frame {
+  aspect-ratio: 4 / 5;
+  background: color-mix(in srgb, currentColor 7%, transparent);
+  box-shadow: 0 1px 0 color-mix(in srgb, currentColor 30%, transparent);
+}
+
+.painting--glass .painting__frame {
+  background: none;
+  box-shadow: none;
+}
+
+.painting canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.painting canvas.is-done {
+  opacity: 1;
+}
+
+.painting--pixel canvas {
+  image-rendering: pixelated;
+}
+
+.painting figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  margin-top: 10px;
+}
+
+.painting__title {
+  font-family: var(--f-serif);
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+.painting__medium {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  padding-top: 3px;
+}
+
 .entry__line li {
   position: relative;
   display: grid;
@@ -3633,6 +3687,10 @@ dd {
   .cursor .pulse,
   .cursor .star {
     animation: none;
+  }
+
+  .painting canvas {
+    transition: none;
   }
 }
 

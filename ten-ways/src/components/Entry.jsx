@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { ENTRIES } from '../lib/encyclopedia.js'
 import { LINKS, ORDERS, byId } from '../lib/archetypes.js'
+import Painting from './Painting.jsx'
 
 const rise = (d = 0) => ({ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.9, delay: d, ease: [0.2, 0.8, 0.2, 1] } } })
 const KIND = { allies: 'Ally', opposites: 'Opposite', unions: 'Union' }
@@ -16,7 +17,8 @@ function Block({ className, children, d = 0, as = 'section' }) {
 }
 
 // The encyclopedia entry under each plate: headword, etymology and definition; a reading column of
-// numbered sections; and a margin of lineage, figures, terms, reading and cross-references.
+// numbered sections; and a margin with a painting of its myth, then lineage, figures, terms, reading
+// and cross-references.
 export default function Entry({ a }) {
   const e = ENTRIES[a.id]
   if (!e) return null
@@ -144,6 +146,7 @@ export default function Entry({ a }) {
         <aside className="entry__side">
           <Block className="entry__box entry__myth" d={0.05}>
             <h5 className="entry__h mono">In myth</h5>
+            <Painting a={a} />
             <p>{e.figure}</p>
           </Block>
 

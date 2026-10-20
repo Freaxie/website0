@@ -41,8 +41,9 @@ who openly refuses.
    - eight numbered sections: Overview, History, A scene (a true story told at length), Distinctions,
      Myths and facts, Curiosities, Criticism, Now (`src/lib/extras-*.js` holds the scenes, myths,
      curiosities and field guides)
-   - a margin with its figure in myth, a tongue-in-cheek field guide for spotting one in the wild, a lineage of eight dated moments, four figures with dates, five
-     terms, practice and signs, five works of further reading, and cross-references to its kin
+   - a margin with a painting of its myth (see below), a tongue-in-cheek field guide for spotting one
+     in the wild, a lineage of eight dated moments, four figures with dates, five terms, practice and
+     signs, five works of further reading, and cross-references to its kin
 4. **One World, Twenty-Four Encounters.** A mountain, the sea or a stranger, redrawn by each archetype.
 5. **Kinships.** Allies, opposites and unlikely unions (the warrior-monk, the philosopher-king, Ibn Sina
    the physician-philosopher, the mystics who spoke of God as a lover).
@@ -55,6 +56,26 @@ who openly refuses.
    party behaviour and something to try for each, your balance across the six orders, good company, your
    opposite, the way you hardly use, and your shadow. Or spend thirty points by hand.
 8. **Coda.** Twenty-four imperatives, and one sentence.
+
+## Paintings
+
+Beside each entry's myth hangs a painting of it. None is an image file. Each scene is drawn from code
+in a 100 × 125 frame (`src/lib/paintings-1.js` to `-3.js`, with the drawing kit in `src/lib/paint-kit.js`)
+and then remade in a medium chosen for its subject (`src/lib/paintings.js`):
+
+| Medium | How it is made | Paintings |
+| --- | --- | --- |
+| Pixel painting | averaged down to 128 × 160, reduced to its own palette of about twenty colours, ordered-dithered | Prometheus, Icarus, Pygmalion, Scheherazade, Narcissus, Mercury, Coyote, Odysseus, Mnemosyne, Asclepius, Psyche |
+| Attic vase | black-figure or red-figure on clay, Old Attic inscriptions, tongues and a meander, a fired sheen | Socrates, Achilles and Hector, Dionysus at sea (a cup, after Exekias), Chiron and Achilles |
+| Mosaic | staggered tesserae, split finer where the picture is busy; gold stones that catch the light unevenly | Orpheus among the animals, Solomon on his throne, Demeter |
+| Stained glass | colour fields cut again by a Voronoi grid, every cut leaded, painted lines, a lancet arch | Jacob and the angel |
+| Woodcut | tone cut as hatching that bends with the forms, outlines, a second block in one colour | Oedipus and the Sphinx, the alchemist |
+| Ink | brushwork on warm paper, wet bleed and granulation, a seal | the Buddha beneath the fig tree |
+| Screenprint | separated into two inks, each screened at its own angle, a little out of register | Antigone, Plato's cave |
+
+A painting is made once, a few milliseconds at a time, when its entry comes near, and then stays
+still. The inscriptions use Old Attic spellings (ΣΟΚΡΑΤΕΣ, ΗΕΚΤΟΡ, ΧΙΡΟΝ); the characters on the
+ink painting's seal are abstract strokes, not real writing.
 
 ## Worlds
 
