@@ -1,8 +1,9 @@
 # The Cognitive Functions
 
 One website for the four exhibitions: Ti/Te, Ni/Ne, Fi/Fe and Si/Se. A lobby at `/` leads into each room.
-Alongside them are two interactive laboratories built from `labs/`: **The Observer** at `/observer`, on
-metacognition and sentience, and **The Leap** at `/intuition`, on extraverted (Ne) and introverted (Ni) intuition.
+Alongside them are three interactive laboratories built from `labs/`: **The Observer** at `/observer`, on
+metacognition and sentience, **The Leap** at `/intuition`, on extraverted (Ne) and introverted (Ni) intuition, and
+**Proof & Lever** at `/thinking`, on introverted (Ti) and extraverted (Te) thinking.
 
 ```
 npm --prefix labs ci   # once, for the laboratories
@@ -19,6 +20,7 @@ npx serve dist
 | `/si-se.html`  | `exhibitions/si-se.html`, Experience × Presence  |
 | `/observer/`   | `labs/`, The Observer (React + Vite)            |
 | `/intuition/`  | `labs/`, The Leap (React + Vite)                |
+| `/thinking/`   | `labs/`, Proof & Lever (React + Vite)           |
 
 ## Deploying to Vercel
 
@@ -27,7 +29,7 @@ npx serve dist
 1. In Vercel, **Add New → Project** and import this repository.
 2. Leave every setting at its default; `vercel.json` sets the install command, build command and output folder.
 3. Deploy. The lobby is served at `/`, the rooms at `/ti-te`, `/ni-ne`, `/fi-fe` and `/si-se`, The Observer
-   at `/observer` and The Leap at `/intuition`.
+   at `/observer`, The Leap at `/intuition` and Proof & Lever at `/thinking`.
 
 Or, from a machine with the Vercel CLI: `vercel --prod`.
 
@@ -51,7 +53,7 @@ sibling files.
 
 ## The laboratories
 
-Two single-page React + Vite experiences in `labs/`, built as one multi-page project that shares its engine: the
+Three single-page React + Vite experiences in `labs/`, built as one multi-page project that shares its engine: the
 HUD, the canvas loop, the synthesised sound, the text effects and the claim tags. Every visual is procedural (Canvas
 2D, one WebGL shader, SVG) and every sound is made with Web Audio once the visitor enters. Nothing leaves the browser:
 the pointer is read only to animate the page, and the only thing stored is the sound on/off setting. Statements are
@@ -65,19 +67,26 @@ tagged as **empirical claim**, **theoretical model**, **philosophical argument**
   set aside to incubate until the end), shadows (pattern in noise, the door that never closes), which way (not a
   type test) and the return. It uses the Ni violet and Ne lime from `src/pairs.json`, and sits alongside the
   existing `/ni-ne` room rather than replacing it.
+- **Proof & Lever** (`/thinking`): introverted thinking (Ti) asks whether it holds together, extraverted thinking
+  (Te) asks whether it works. The judge (validity against belief), two orders (the same pieces sorted into a
+  taxonomy, then run down a production line), inward (the illusion of explanatory depth, with a zipper), outward (a
+  production line to unblock), the same logic (the Wason selection task, abstract and social), shadows (the 2 · 4 · 6
+  task and a target that stops meaning anything), which way (not a type test) and the balance. It uses the Ti blue
+  and Te orange from `src/pairs.json`, and sits alongside the existing `/ti-te` room rather than replacing it.
 
 ```
 cd labs
 npm ci
-npm run dev                         # http://localhost:5173/observer/ and /intuition/
-npm run build                       # writes ../dist/observer, ../dist/intuition and ../dist/labs-assets
+npm run dev                         # http://localhost:5173/observer/, /intuition/ and /thinking/
+npm run build                       # writes ../dist/observer, ../dist/intuition, ../dist/thinking and ../dist/labs-assets
 PAGE=intuition npm run build:single  # writes dist-single/intuition.html, one self-contained file
 ```
 
 | Path                     | What it holds                                               |
 | ------------------------ | ----------------------------------------------------------- |
-| `observer/index.html`    | The Observer's page; `intuition/index.html` is The Leap's   |
+| `observer/index.html`    | The Observer's page; `intuition/` and `thinking/` hold the others' |
 | `src/observer/`          | The Observer: app shell, one file per section, its styles   |
 | `src/intuition/`         | The Leap: app shell, one file per section, its styles       |
+| `src/thinking/`          | Proof & Lever: app shell, one file per section, its styles  |
 | `src/shared/components/` | HUD, eyelid shell, statements and text effects, claim tags  |
 | `src/shared/lib/`        | canvas loop, pointer, synthesised sound, noise, small store |

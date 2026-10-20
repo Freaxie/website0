@@ -1,0 +1,148 @@
+/* ───────── §07 which way ───────── */
+
+.axis__statement {
+  grid-column: 1 / span 9;
+}
+
+.axis__aside {
+  grid-column: 8 / span 5;
+  margin-top: clamp(28px, 5vh, 56px);
+}
+
+.axis__pairs {
+  margin-top: clamp(56px, 9vh, 110px);
+  border-top: 1px solid var(--hair);
+}
+
+.axis__row {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: 12px 24px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--hair);
+}
+
+.axis__q {
+  margin: 0;
+}
+
+.axis__opts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.axis__opt {
+  padding: 12px 14px;
+  border: 1px solid var(--hair);
+  font-family: var(--f-serif);
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--ink-2);
+  text-align: left;
+  transition:
+    border-color 0.3s,
+    color 0.3s,
+    background 0.3s;
+}
+
+.axis__opt--te:hover {
+  border-color: rgba(240, 106, 46, 0.6);
+}
+
+.axis__opt--ti:hover {
+  border-color: rgba(104, 128, 255, 0.7);
+}
+
+.axis__opt--te.is-on {
+  border-color: var(--te);
+  color: var(--ink);
+  background: rgba(240, 106, 46, 0.08);
+}
+
+.axis__opt--ti.is-on {
+  border-color: var(--ti);
+  color: var(--ink);
+  background: rgba(104, 128, 255, 0.1);
+}
+
+.axis__result {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(20px, 3vw, 48px);
+  align-items: center;
+  margin-top: clamp(40px, 7vh, 80px);
+}
+
+.axis__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.axis__tick {
+  stroke: var(--dim);
+}
+
+.axis__end,
+.axis__lab {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.axis__end--te {
+  fill: var(--te);
+}
+
+.axis__end--ti {
+  fill: var(--ti);
+}
+
+.axis__lab {
+  fill: var(--ink);
+}
+
+.axis__said {
+  fill: var(--ink);
+}
+
+.axis__did {
+  fill: #040404;
+  stroke: var(--ink);
+  stroke-width: 1.4;
+}
+
+.axis__read {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.axis__basis {
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .axis__statement,
+  .axis__aside {
+    grid-column: 1 / -1;
+  }
+  .axis__result,
+  .axis__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .axis__opts {
+    grid-template-columns: 1fr;
+  }
+  /* the svg is scaled down to the phone's width; its type is scaled back up */
+  .axis__end,
+  .axis__lab {
+    font-size: 16px;
+    letter-spacing: 0.1em;
+  }
+}

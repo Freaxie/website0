@@ -8,6 +8,7 @@ import react from '@vitejs/plugin-react'
 const PAGES = {
   observer: 'observer/index.html',
   intuition: 'intuition/index.html',
+  thinking: 'thinking/index.html',
 }
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
 
