@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import SectionHead from '../components/SectionHead.jsx'
 import { ARCHETYPES, DIMS } from '../lib/archetypes.js'
@@ -6,6 +6,47 @@ import { ARCHETYPES, DIMS } from '../lib/archetypes.js'
 const W = 900
 const H = 620
 const PAD = 70
+// a little inset, so nothing sits on the frame
+const px = (v) => PAD + ((v * 0.88 + 1) / 2) * (W - 2 * PAD)
+const py = (v) => H - PAD - ((v * 0.84 + 1) / 2) * (H - 2 * PAD)
+
+// Where each sign is drawn: its true place, nudged until no sign or name sits on another. Each sign
+// is a box as wide as its name and as tall as the disc and the name together.
+function settle(xd, yd) {
+  const pts = ARCHETYPES.map((a) => ({ x: px(a.at[xd]), y: py(a.at[yd]), w: Math.max(48, a.name.length * 7.9 + 10) }))
+  for (let it = 0; it < 160; it++) {
+    let moved = false
+    for (let i = 0; i < pts.length; i++)
+      for (let j = i + 1; j < pts.length; j++) {
+        const A = pts[i]
+        const B = pts[j]
+        const dx = B.x - A.x
+        const dy = B.y - A.y
+        const needX = (A.w + B.w) / 2 + 6
+        const needY = 68
+        const ox = needX - Math.abs(dx)
+        const oy = needY - Math.abs(dy)
+        if (ox <= 0 || oy <= 0) continue
+        moved = true
+        // part along whichever way frees them sooner
+        if (ox / needX < oy / needY) {
+          const s = ((dx >= 0 ? 1 : -1) * Math.min(ox, 12)) / 2
+          A.x -= s
+          B.x += s
+        } else {
+          const s = ((dy >= 0 ? 1 : -1) * Math.min(oy, 12)) / 2
+          A.y -= s
+          B.y += s
+        }
+      }
+    for (const q of pts) {
+      q.x = Math.min(W - PAD - q.w / 2 + 20, Math.max(PAD + q.w / 2 - 20, q.x))
+      q.y = Math.min(H - PAD - 20, Math.max(PAD + 26, q.y))
+    }
+    if (!moved) break
+  }
+  return Object.fromEntries(ARCHETYPES.map((a, i) => [a.id, pts[i]]))
+}
 
 export default function Atlas() {
   const [xd, setXd] = useState('act')
@@ -35,12 +76,10 @@ export default function Atlas() {
       setYd(id)
     }
   }
-  // a little inset, so nothing sits on the frame
-  const px = (v) => PAD + ((v * 0.88 + 1) / 2) * (W - 2 * PAD)
-  const py = (v) => H - PAD - ((v * 0.84 + 1) / 2) * (H - 2 * PAD)
+  const at = useMemo(() => settle(xd, yd), [xd, yd])
   const h = hover && ARCHETYPES.find((a) => a.id === hover)
   const near = ARCHETYPES.reduce((best, a) => {
-    const d = Math.hypot(px(a.at[xd]) - you.x, py(a.at[yd]) - you.y)
+    const d = Math.hypot(at[a.id].x - you.x, at[a.id].y - you.y)
     return d < best.d ? { a, d } : best
   }, { a: null, d: Infinity }).a
 
@@ -98,13 +137,13 @@ export default function Atlas() {
           <text x={W / 2 + 12} y={H - PAD + 30} className="atl__end">
             ↓ {Y.lo}
           </text>
-          <motion.line x1={you.x} y1={you.y} initial={false} animate={{ x2: px(near.at[xd]), y2: py(near.at[yd]) }} transition={{ duration: 0.4 }} stroke={near.color} className="atl__tie" />
-          <motion.circle r="30" fill="none" stroke={near.color} strokeWidth="3" initial={false} animate={{ cx: px(near.at[xd]), cy: py(near.at[yd]) }} transition={{ type: 'spring', stiffness: 70, damping: 14 }} />
+          <motion.line x1={you.x} y1={you.y} initial={false} animate={{ x2: at[near.id].x, y2: at[near.id].y }} transition={{ duration: 0.4 }} stroke={near.color} className="atl__tie" />
+          <motion.circle r="30" fill="none" stroke={near.color} strokeWidth="3" initial={false} animate={{ cx: at[near.id].x, cy: at[near.id].y }} transition={{ type: 'spring', stiffness: 70, damping: 14 }} />
           {ARCHETYPES.map((a, i) => (
             <motion.g
               key={a.id}
               initial={false}
-              animate={{ x: px(a.at[xd]), y: py(a.at[yd]) }}
+              animate={{ x: at[a.id].x, y: at[a.id].y }}
               transition={{ type: 'spring', stiffness: 70, damping: 14, delay: i * 0.03 }}
               className={`atl__pt ${hover && hover !== a.id ? 'is-dim' : ''}`}
               onPointerEnter={() => setHover(a.id)}
@@ -127,7 +166,7 @@ export default function Atlas() {
           </g>
         </svg>
         {h && (
-          <div className="atl__card" style={{ left: `${(px(h.at[xd]) / W) * 100}%`, top: `${(py(h.at[yd]) / H) * 100}%`, borderColor: h.color }}>
+          <div className="atl__card" style={{ left: `${(at[h.id].x / W) * 100}%`, top: `${(at[h.id].y / H) * 100}%`, borderColor: h.color }}>
             <span className="mono" style={{ color: h.color }}>
               {h.no} · {h.name}
             </span>

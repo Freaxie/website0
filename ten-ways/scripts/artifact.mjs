@@ -16,7 +16,7 @@ const page = `<title>Twenty-Four Ways of Encountering Reality</title>
 <meta name="description" content="An interactive atlas of twenty-four archetypal ways of encountering reality, in six orders of four, each with an interactive world and an encyclopedia entry.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap">
 <style>${css}</style>
 <div id="root"></div>
 <script type="module">${js}</script>

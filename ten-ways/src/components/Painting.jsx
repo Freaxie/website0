@@ -9,7 +9,7 @@ const SCENES = { ...one, ...two, ...three }
 
 // The painting beside each entry's myth. Nothing is stored: the scene is drawn from code and remade
 // in its medium once, a little at a time, when the entry comes near, and then it stays still.
-export default function Painting({ a }) {
+export default function Painting({ a, compact = false }) {
   const sc = SCENES[a.id]
   const box = useRef(null)
   const ref = useRef(null)
@@ -28,14 +28,25 @@ export default function Painting({ a }) {
   }, [near, sc])
   if (!sc) return null
   return (
-    <figure className={`painting painting--${sc.style}`} ref={box}>
-      <div className="painting__frame">
-        <canvas ref={ref} className={done ? 'is-done' : undefined} role="img" aria-label={`${sc.title}. ${mediumOf(sc)}.`} />
+    <figure className={`painting painting--${sc.style}${compact ? ' painting--compact' : ''}`} ref={box}>
+      <div className="painting__mat">
+        <div className="painting__frame">
+          <canvas ref={ref} className={done ? 'is-done' : undefined} role="img" aria-label={`${sc.title}. ${mediumOf(sc)}.`} />
+        </div>
       </div>
-      <figcaption>
-        <span className="painting__title">{sc.title}</span>
-        <span className="painting__medium mono">{mediumOf(sc)}</span>
-      </figcaption>
+      {compact ? (
+        <figcaption className="painting__label">
+          <span className="painting__title">
+            <span className="mono">Enclosed</span> {sc.title}
+          </span>
+        </figcaption>
+      ) : (
+        <figcaption className="painting__label">
+          <span className="painting__no mono">{a.no}</span>
+          <span className="painting__title">{sc.title}</span>
+          <span className="painting__medium mono">{mediumOf(sc)}</span>
+        </figcaption>
+      )}
     </figure>
   )
 }

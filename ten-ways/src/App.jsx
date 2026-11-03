@@ -7,12 +7,14 @@ import Whisper from './components/Whisper.jsx'
 import Passage from './components/Passage.jsx'
 import Secrets from './components/Secrets.jsx'
 import Hero from './sections/Hero.jsx'
+import Foreword from './sections/Foreword.jsx'
 import Atlas from './sections/Atlas.jsx'
 import Plates from './sections/Plates.jsx'
 import Encounters from './sections/Encounters.jsx'
 import Kinships from './sections/Kinships.jsx'
 import Lineages from './sections/Lineages.jsx'
 import Constellation from './sections/Constellation.jsx'
+import Letters from './sections/Letters.jsx'
 import Finale from './sections/Finale.jsx'
 
 export const ROOMS = [
@@ -23,7 +25,8 @@ export const ROOMS = [
   { id: 'kinships', no: '05', name: 'Kinships' },
   { id: 'lineages', no: '06', name: 'Lineages' },
   { id: 'yours', no: '07', name: 'Your Constellation' },
-  { id: 'coda', no: '08', name: 'Coda' },
+  { id: 'letters', no: '08', name: 'Letters' },
+  { id: 'coda', no: '09', name: 'Coda' },
 ]
 
 export default function App() {
@@ -33,12 +36,14 @@ export default function App() {
       <Nav rooms={ROOMS} />
       <main>
         <Hero />
+        <Foreword />
         <Atlas />
         <Plates />
         <Encounters />
         <Kinships />
         <Lineages />
         <Constellation />
+        <Letters />
         <Finale />
       </main>
       <Grain />

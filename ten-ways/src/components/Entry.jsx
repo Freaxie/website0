@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion'
 import { ENTRIES } from '../lib/encyclopedia.js'
-import { LINKS, ORDERS, byId } from '../lib/archetypes.js'
+import { ARCHETYPES, LINKS, ORDERS, byId } from '../lib/archetypes.js'
+import { toneVars } from '../lib/tones.js'
 import Painting from './Painting.jsx'
+import Glyph from './Glyph.jsx'
 
 const rise = (d = 0) => ({ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.9, delay: d, ease: [0.2, 0.8, 0.2, 1] } } })
 const KIND = { allies: 'Ally', opposites: 'Opposite', unions: 'Union' }
@@ -16,22 +18,46 @@ function Block({ className, children, d = 0, as = 'section' }) {
   )
 }
 
-// The encyclopedia entry under each plate: headword, etymology and definition; a reading column of
-// numbered sections; and a margin with a painting of its myth, then lineage, figures, terms, reading
-// and cross-references.
+function Head({ n, children }) {
+  return (
+    <h5 className="entry__h">
+      <span className="entry__hn mono">§{n}</span>
+      <span className="entry__ht">{children}</span>
+    </h5>
+  )
+}
+
+// A rule with the archetype's sign at its centre.
+function Ornament({ a }) {
+  return (
+    <div className="entry__orn" aria-hidden="true">
+      <i />
+      <Glyph d={a.glyph} width={4} />
+      <i />
+    </div>
+  )
+}
+
+// The encyclopedia entry under each plate, set as a page of its own: a paper faintly of the
+// archetype's hue, a headword, a reading column of numbered sections, and a margin that opens with a
+// painting of its myth.
 export default function Entry({ a }) {
   const e = ENTRIES[a.id]
   if (!e) return null
   const order = ORDERS.find((o) => o.id === a.order)
+  const next = ARCHETYPES[ARCHETYPES.indexOf(a) + 1]
   const related = Object.entries(LINKS).flatMap(([kind, list]) =>
     list.filter(([p, q]) => p === a.id || q === a.id).map(([p, q, why]) => ({ kind, other: byId[p === a.id ? q : p], why })),
   )
-  const sections = [
-    ['Overview', e.overview],
-    ['History', e.history],
-  ]
+  const prose = (paras, lead) =>
+    paras.map((p, i) => (
+      <p key={i} className={lead && i === 0 ? 'entry__lead' : undefined}>
+        {p}
+      </p>
+    ))
+  let n = 0
   return (
-    <section className="entry" aria-label={`Encyclopedia entry: ${a.name}`}>
+    <section className="entry" style={toneVars(a)} aria-label={`Encyclopedia entry: ${a.name}`}>
       <Block className="entry__head" as="header">
         <p className="entry__crumb mono">
           <span>Entry {a.no} of XXIV</span>
@@ -44,46 +70,39 @@ export default function Entry({ a }) {
           {a.name.toLowerCase()}
           <span className="entry__pos">noun</span>
         </h4>
-        <p className="entry__etym">
-          <span className="mono">Etymology</span>
-          {e.etym}
-        </p>
-        <p className="entry__def">{e.def}</p>
+        <dl className="entry__defs">
+          <div className="entry__etym">
+            <dt className="mono">Etymology</dt>
+            <dd>{e.etym}</dd>
+          </div>
+          <div className="entry__def">
+            <dt className="mono">Definition</dt>
+            <dd>{e.def}</dd>
+          </div>
+        </dl>
+        <Ornament a={a} />
       </Block>
 
       <div className="entry__body">
         <div className="entry__main">
-          {sections.map(([title, paras], k) => (
-            <Block key={title} className="entry__sec">
-              <h5 className="entry__h mono">
-                <span>§{k + 1}</span>
-                {title}
-              </h5>
-              {paras.map((p, i) => (
-                <p key={i} className={k === 0 && i === 0 ? 'entry__lead' : undefined}>
-                  {p}
-                </p>
-              ))}
-            </Block>
-          ))}
+          <Block className="entry__sec">
+            <Head n={++n}>Overview</Head>
+            {prose(e.overview, true)}
+          </Block>
+          <Block className="entry__sec">
+            <Head n={++n}>History</Head>
+            {prose(e.history)}
+          </Block>
           {e.scene && (
             <Block className="entry__sec entry__scene">
-              <h5 className="entry__h mono">
-                <span>§3</span>A scene
-              </h5>
+              <Head n={++n}>A scene</Head>
               <p className="entry__place mono">{e.scene.place}</p>
               <h6 className="entry__stitle">{e.scene.title}</h6>
-              {e.scene.text.map((p, i) => (
-                <p key={i} className={i === 0 ? 'entry__lead' : undefined}>
-                  {p}
-                </p>
-              ))}
+              {prose(e.scene.text, true)}
             </Block>
           )}
           <Block className="entry__sec">
-            <h5 className="entry__h mono">
-              <span>§4</span>Distinctions
-            </h5>
+            <Head n={++n}>Distinctions</Head>
             <dl className="entry__dist">
               {e.distinctions.map(([t, x]) => (
                 <div key={t}>
@@ -95,9 +114,7 @@ export default function Entry({ a }) {
           </Block>
           {e.myths && (
             <Block className="entry__sec">
-              <h5 className="entry__h mono">
-                <span>§5</span>Myths and facts
-              </h5>
+              <Head n={++n}>Myths and facts</Head>
               <ul className="entry__myths">
                 {e.myths.map(([myth, fact]) => (
                   <li key={myth}>
@@ -116,9 +133,7 @@ export default function Entry({ a }) {
           )}
           {e.curiosities && (
             <Block className="entry__sec">
-              <h5 className="entry__h mono">
-                <span>§6</span>Curiosities
-              </h5>
+              <Head n={++n}>Curiosities</Head>
               <ol className="entry__cur">
                 {e.curiosities.map((c, i) => (
                   <li key={i}>
@@ -129,30 +144,39 @@ export default function Entry({ a }) {
               </ol>
             </Block>
           )}
+          {e.day && (
+            <Block className="entry__sec entry__day">
+              <Head n={++n}>A day in the life</Head>
+              <ol className="entry__hours">
+                {e.day.map(([time, text]) => (
+                  <li key={time}>
+                    <time className="mono">{time}</time>
+                    <p>{text}</p>
+                  </li>
+                ))}
+              </ol>
+            </Block>
+          )}
           <Block className="entry__sec">
-            <h5 className="entry__h mono">
-              <span>§7</span>Criticism
-            </h5>
+            <Head n={++n}>Criticism</Head>
             <p>{e.critique}</p>
           </Block>
           <Block className="entry__sec">
-            <h5 className="entry__h mono">
-              <span>§8</span>Now
-            </h5>
+            <Head n={++n}>Now</Head>
             <p>{e.now}</p>
           </Block>
         </div>
 
         <aside className="entry__side">
           <Block className="entry__box entry__myth" d={0.05}>
-            <h5 className="entry__h mono">In myth</h5>
+            <h5 className="entry__label mono">In myth</h5>
             <Painting a={a} />
-            <p>{e.figure}</p>
+            <p className="entry__myth-line">{e.figure}</p>
           </Block>
 
           {e.field && (
             <Block className="entry__box entry__field" d={0.08}>
-              <h5 className="entry__h mono">Field guide · how to spot one</h5>
+              <h5 className="entry__label mono">Field guide · how to spot one</h5>
               <p className="entry__latin">
                 {a.name} <i>vulgaris</i>
               </p>
@@ -168,7 +192,7 @@ export default function Entry({ a }) {
           )}
 
           <Block className="entry__box" d={0.1}>
-            <h5 className="entry__h mono">Lineage · {e.lineage.length} moments</h5>
+            <h5 className="entry__label mono">Lineage · {e.lineage.length} moments</h5>
             <ol className="entry__line">
               {e.lineage.map(([y, label, text]) => (
                 <li key={y}>
@@ -180,11 +204,11 @@ export default function Entry({ a }) {
           </Block>
 
           <Block className="entry__box" d={0.1}>
-            <h5 className="entry__h mono">Figures</h5>
+            <h5 className="entry__label mono">Figures</h5>
             <ul className="entry__figs">
-              {e.figures.map(([n, dates, line]) => (
-                <li key={n}>
-                  <b>{n}</b>
+              {e.figures.map(([nm, dates, line]) => (
+                <li key={nm}>
+                  <b>{nm}</b>
                   <span className="mono">{dates}</span>
                   <span>{line}</span>
                 </li>
@@ -193,7 +217,7 @@ export default function Entry({ a }) {
           </Block>
 
           <Block className="entry__box" d={0.1}>
-            <h5 className="entry__h mono">Terms</h5>
+            <h5 className="entry__label mono">Terms</h5>
             <dl className="entry__lex">
               {e.lexicon.map(([w, d]) => (
                 <div key={w}>
@@ -206,7 +230,7 @@ export default function Entry({ a }) {
 
           <Block className="entry__box entry__pair" d={0.1}>
             <div>
-              <h5 className="entry__h mono">Practice</h5>
+              <h5 className="entry__label mono">Practice</h5>
               <ul className="entry__dash">
                 {e.practice.map((p) => (
                   <li key={p}>{p}</li>
@@ -214,7 +238,7 @@ export default function Entry({ a }) {
               </ul>
             </div>
             <div>
-              <h5 className="entry__h mono">Signs you are one</h5>
+              <h5 className="entry__label mono">Signs you are one</h5>
               <ul className="entry__dash entry__signs">
                 {e.signs.map((p) => (
                   <li key={p}>{p}</li>
@@ -224,7 +248,7 @@ export default function Entry({ a }) {
           </Block>
 
           <Block className="entry__box" d={0.1}>
-            <h5 className="entry__h mono">Further reading</h5>
+            <h5 className="entry__label mono">Further reading</h5>
             <ul className="entry__read">
               {e.reading.map(([t, by]) => (
                 <li key={t}>
@@ -237,7 +261,7 @@ export default function Entry({ a }) {
 
           {related.length > 0 && (
             <Block className="entry__box" d={0.1}>
-              <h5 className="entry__h mono">See also</h5>
+              <h5 className="entry__label mono">See also</h5>
               <ul className="entry__see">
                 {related.map(({ kind, other, why }) => (
                   <li key={kind + other.id}>
@@ -254,6 +278,27 @@ export default function Entry({ a }) {
           )}
         </aside>
       </div>
+
+      <Block className="entry__end" as="footer">
+        <Ornament a={a} />
+        <nav className="entry__onward" aria-label="Onward">
+          <a href={`#letter-${a.id}`}>
+            <span className="mono">In the Letters room</span>
+            <em>A letter to a young {a.name.toLowerCase()}</em>
+          </a>
+          {next ? (
+            <a href={`#plate-${next.id}`}>
+              <span className="mono">Plate {next.no}</span>
+              <em>{next.name} →</em>
+            </a>
+          ) : (
+            <a href="#encounters">
+              <span className="mono">Room 04</span>
+              <em>One world, twenty-four encounters →</em>
+            </a>
+          )}
+        </nav>
+      </Block>
     </section>
   )
 }

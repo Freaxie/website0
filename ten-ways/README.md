@@ -31,16 +31,19 @@ who openly refuses.
 
 ## Rooms
 
-1. **Entrance.** Twenty-four rays converge on REALITY. Point at a sign, or let them turn.
+1. **Entrance.** Twenty-four rays converge on REALITY. Point at a sign, or let them turn. Below it, a
+   foreword from the curator and the plan of the nine rooms (`src/sections/Foreword.jsx`).
 2. **The Atlas.** The twenty-four on two chosen axes out of five (Inward–Outward, Change–Order,
    Body–Mind, Alone–Together, Present–Future). Drag the YOU marker to find the archetype nearest you.
 3. **The Twenty-Four.** An index by order, then twenty-four full-colour plates. Each plate has its
    question, instrument, gift, shadow, exemplars and a quotation, a live instrument, and a world behind it.
-   Below each plate is an **encyclopedia entry** (`src/lib/entries-*.js`):
+   Below each plate is an **encyclopedia entry** (`src/lib/entries-*.js`), set as a page of its own on
+   a paper faintly of the archetype's hue:
    - headword, etymology and definition
-   - eight numbered sections: Overview, History, A scene (a true story told at length), Distinctions,
-     Myths and facts, Curiosities, Criticism, Now (`src/lib/extras-*.js` holds the scenes, myths,
-     curiosities and field guides)
+   - nine numbered sections: Overview, History, A scene (a true story told at length), Distinctions,
+     Myths and facts, Curiosities, A day in the life (hour by hour, `src/lib/days.js`), Criticism and
+     Now (`src/lib/extras-*.js` holds the scenes, myths, curiosities and field guides)
+   - a closing ornament with the way on: the next plate, and the letter to a young one of its kind
    - a margin with a painting of its myth (see below), a tongue-in-cheek field guide for spotting one
      in the wild, a lineage of eight dated moments, four figures with dates, five terms, practice and
      signs, five works of further reading, and cross-references to its kin
@@ -54,8 +57,20 @@ who openly refuses.
    answer draws a reply from the archetype you chose, and the shape draws itself on a radar as you go. At
    the end comes a reading: an epithet, your three strongest ways with a portrait, superpower, blind spot,
    party behaviour and something to try for each, your balance across the six orders, good company, your
-   opposite, the way you hardly use, and your shadow. Or spend thirty points by hand.
-8. **Coda.** Twenty-four imperatives, and one sentence.
+   opposite, the way you hardly use, and your shadow, with a link to each one's entry and its letter. Or
+   spend thirty points by hand.
+8. **Letters.** Twenty-four letters to someone just starting out in each of the ways, from an imagined
+   elder of it (`src/lib/letters-*.js`), in the tradition of Rilke's letters to a young poet. Choose a
+   wax seal from the tray and the letter opens on the desk, with the archetype's painting enclosed.
+9. **Coda.** Twenty-four imperatives, set by order, and one sentence.
+
+## Type and colour
+
+Headlines are set in Archivo, display lines in Instrument Serif, labels in JetBrains Mono, and all
+reading text in Newsreader, a face drawn for long reading on screens. Each entry takes its colours from
+its archetype (`src/lib/tones.js`): a warm paper washed with the archetype's hue, an ink of the same
+hue gone nearly black, and an accent dark enough to set text in, all worked out in OKLCH so that
+lightness can change without the hue drifting.
 
 ## Paintings
 

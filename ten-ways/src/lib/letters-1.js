@@ -1,0 +1,143 @@
+// Letters I–VIII: to the young of Knowing and Making. Each is written by an imagined elder of the
+// way, in the tradition of Rilke's letters to a young poet; the advice is the curator's.
+export default {
+  scientist: {
+    place: 'The laboratory, late, with the centrifuge running',
+    dear: 'Dear friend,',
+    body: [
+      'You write that your first real experiment has failed and that you are wondering whether you are made for this. I have good news. Your experiment has not failed. It has told you something you did not want to hear, which is the only kind of news that was ever worth the trouble of collecting. The ones that come out exactly as you hoped are the ones to worry about; check those twice, and then ask someone who dislikes you to check them a third time.',
+      'Buy a notebook with numbered pages and write in it in ink. Date every entry. Before you look at a result, write down what you expect it to be, and why. You will be astonished, over the years, at how often your memory quietly rewrites the prediction to match the outcome. The notebook will not. It is the most honest colleague you will ever have, and the cheapest.',
+      'Most of the work is not discovery. It is washing glassware, recalibrating, rerunning, reading the manual for the instrument nobody has read the manual for, and finding the bug that turns out to be a cable. Do not resent this. It is how you come to know your apparatus well enough to trust it, and a measurement is only as good as your trust in the thing that made it. Be kind to the technicians. They know where everything is, and they have seen every mistake you are about to make.',
+      'Fall in love with questions, not with answers. An answer you love is a hostage; you will defend it long after it should have been released. A question you love will take you wherever it goes, including to the conclusion that you were wrong, and that conclusion, said aloud in a seminar room full of people, is one of the finest things a person can say. Practise it. “I don’t know” and “I was mistaken” are the two most useful sentences in the profession, and the hardest to say into a microphone.',
+      'Treasure the anomaly. The point that sits off the line is either noise or the beginning of something, and you will not know which until you have looked at it with more attention than it seems to deserve. Most of the time it is noise. Look anyway. The history of the field is full of people who saw the strange point first and tidied it away.',
+      'There will be a night, perhaps not soon, when the data come in and you understand something that nobody alive has understood before you. It will be small, probably. It will be yours for an hour or two before you tell anyone. I have had perhaps four such nights in forty years and I would not trade them for anything. Then you will write it up, and reviewers will be unkind, and a younger person will find the flaw in it, and that will be right too. Your result was never meant to be a monument. It was meant to be a step that someone else can stand on.',
+      'One warning, because you are clever and the clever are prone to it. Do not mistake the method for the world. What you can measure is real; it is not all that is real. The people who tell you that only the measurable matters are usually describing the limits of their instruments and calling them the limits of reality. Love your instruments, and keep going to concerts.',
+      'Sleep. Exercise. Have friends outside the department. Nobody does good work on a brain that has been run like a cheap engine.',
+    ],
+    close: 'Yours in good doubt,',
+    sign: 'an old experimentalist',
+    ps: 'Label your samples. I once lost three months to a tube marked, in my own handwriting, “X”.',
+  },
+
+  philosopher: {
+    place: 'Under the plane tree, a Thursday',
+    dear: 'Dear questioner,',
+    body: [
+      'So it has happened. You asked what a word meant, a plain word, justice or knowledge or self, and it came apart in your hands, and now every word you pick up comes apart too, and you are not sure there is anything left to stand on. Welcome. The dizziness you feel is not a sign that you are doing it wrong. It is the floor of the subject. Plato has Socrates say that philosophy begins in wonder; he might have added that it continues in vertigo, and that the trick is to learn to walk on it.',
+      'Learn to draw distinctions. Most quarrels that look like disagreements about the world are disagreements about a word that two people are using in two ways. When an argument becomes hot, stop and ask each side what they mean, and write the two meanings down side by side. Half the time the argument dissolves. The other half, you have found the real one, and the real one is always more interesting.',
+      'Read slowly, and read your opponents at their best. Before you reject a view, state it so well that the people who hold it would thank you for the summary. It is harder than refuting it and far more useful, because it is the only way to find out whether you were right. The cheap victory, over a version of the argument nobody believes, teaches you nothing except how to enjoy yourself.',
+      'Write short. Clarity is a courtesy to the reader and a test for the writer: if you cannot say it plainly, you may not yet know what you think. Obscurity has a long and decorated history in this subject, and you may admire some of it, but do not imitate it. The most profound thing is not the thing nobody can follow.',
+      'Here is the warning. You are going to become very good at finding the flaw in things, and the world will reward you for it at dinner parties. Cleverness is easy to mistake for wisdom, and doubt is easy to mistake for depth. A person can doubt everything and decide nothing, and call it rigour, and grow old in it. Do not. Philosophy that never arrives at a judgment is a very elegant way of avoiding a life. At some point the examined life has to be lived.',
+      'And it is lived in small places. How you treat a waiter is a philosophical position. So is what you do with a lie you were told in confidence, and what you say when a friend asks whether their work is good. You will be tested far more often in kitchens than in seminars. Socrates wrote nothing down. He talked, in the market, with whoever would stop; the conversation was the work.',
+      'So find people to argue with: friends, not enemies, who will tell you when you are wrong and stay for supper anyway. Philosophy done alone tends to curl up on itself. Done with others, it stays honest.',
+    ],
+    close: 'With affection, and a question,',
+    sign: 'an old gadfly',
+    ps: 'If you ever find that you have proved nothing exists, check your premises, then go for a walk. The walk will exist.',
+  },
+
+  theologian: {
+    place: 'The cloister, after the last office of the day',
+    dear: 'Dear friend in the question,',
+    body: [
+      'You write that you are afraid study will cool your faith, that every commentary you read takes something away, and that your questions feel like disloyalty. Let me reassure you with the oldest reassurance there is. The tradition you are joining is not a set of answers that questions threaten. It is a conversation, kept going for centuries, made almost entirely of questions. Anselm called the whole enterprise faith seeking understanding. Seeking is the verb. The one who stops asking has not kept the faith; he has put it in a drawer.',
+      'Jacob wrestled until daybreak and would not let go without a blessing, and he limped for the rest of his life. That is a fair description of serious theology. You will be marked by it. You may not be comforted by it, at least not at first. But you will have held on to something real, which is more than comfort.',
+      'Learn the languages, as many as you can bear. Read the commentaries, and then the commentaries on the commentaries, and notice how often the old writers disagreed, and how courteously, and for how long. You are not inventing anything. You are taking a seat at a table that was laid before your grandparents were born, and the best thing a newcomer can do at such a table is listen for a long time before speaking.',
+      'Be humble about the word “God”. It is not a label on a filing drawer. The mystics, in more than one tradition, insisted that whatever we say about the ultimate is less true than what we cannot say, and that every image of the divine is also a kind of idol. Keep that in your pocket. It will stop you from mistaking your diagram for the thing itself.',
+      'Here is the only warning I have, and I give it with all the force I have left. Never let a doctrine make you unkind. If your theology makes it easier to hurt someone, to exclude them, to stop seeing them as a person, then it is bad theology, however ancient its citations. The map of heaven has been used to rule the earth more times than I can bear to count, and the people who did it were always certain. Certainty is not a virtue. Love is. When the two disagree, go with love, and then go back to the books to find out why.',
+      'Do not only study about prayer. Pray, or practise whatever your tradition practises, even on days when it feels like talking to the ceiling. A theologian who never prays is like a musicologist who never listens to music: learned, and missing the point. And read the psalms, which are full of complaint. “My God, my God, why have you forsaken me?” is in the book. Your doubts are in good company.',
+      'Finally, love the people in the pews more than the ideas. The ideas will keep. The people are here only once.',
+    ],
+    close: 'Yours in the long conversation,',
+    sign: 'an old reader of old books',
+    ps: 'Keep a pencil in your prayer book. The margins are where theology has always been done.',
+  },
+
+  detective: {
+    place: 'The night desk, third coffee',
+    dear: 'Dear investigator,',
+    body: [
+      'They tell me you have your first case of your own, and that you have not slept properly since. Good. That restlessness is the engine. Learn to drive it rather than letting it drive you, and you will be at this a long time.',
+      'The whole job is attention. Not brilliance; attention. Look at what is actually there before you decide what it means. Write it down plainly, in the order you found it, before you have a theory, because once you have a theory you will start seeing only the things that agree with it. The first walk through a scene is the only one you get with innocent eyes. Use it slowly.',
+      'Most cases are not clever. People are, sometimes, but most of what happens has a dull explanation: money, jealousy, drink, a door left open. The boring answer is usually the right one. Check it anyway. The time it is not the boring answer is the time that matters, and you will only catch it if checking is a habit and not a mood.',
+      'Hold your theories loosely. This is the warning, and I wish someone had given it to me harder. The worst thing a detective can do is become certain early. Certainty bends evidence. It makes the inconvenient fact look like an error and the convenient witness look reliable, and it has put innocent people in prison, more of them than anyone likes to say. Suspicion of everyone is a disease of this work too; it will follow you home and sit at your table. Be suspicious of your own conclusions first. That is the only suspicion that never does harm.',
+      'Learn to be quiet. People will tell you almost anything if you let a silence go on long enough; most of us cannot bear one, and we fill it with the truth. Do not rush to the next question. Wait. The answer is often in the second sentence, the one they did not plan.',
+      'Do the paperwork. I know. Nobody joined for the paperwork. But the chain of custody, the dated note, the exhibit labelled properly, these are the spine of justice, and a case that was solved and then lost in court on a technicality has helped nobody, least of all the dead.',
+      'Remember who it is for. The victim, first. Their family. But also the suspect, who is owed the truth as much as anyone, and the stranger on the jury who will have to decide. Justice begins with attention, and attention is a form of respect.',
+      'Keep one friend who is not in the job, and one evening a week that it is not allowed into. It will try to get in. Do not let it.',
+    ],
+    close: 'Yours, still looking,',
+    sign: 'an old hand at the night desk',
+    ps: 'Never assume. Write that inside your hat. Then check that it is your hat.',
+  },
+
+  engineer: {
+    place: 'The site office, in the rain, waiting on a concrete pour',
+    dear: 'Dear colleague,',
+    body: [
+      'You have your first proper job, and I gather it is less glamorous than you hoped: spreadsheets, specifications, a great deal of checking other people’s numbers. Good. Checking other people’s numbers is how you learn which numbers matter, and the person who checks carefully at twenty-three is the person who is trusted with the bridge at forty.',
+      'Study failures. Collapses, recalls, the boring reports into why a thing cracked. Success teaches you very little, because a working machine keeps its secrets; a broken one tells you everything it was hiding. Most of what the profession knows, it learned from wreckage, and the people who wrote those reports did you an enormous favour. Read them the way a doctor reads post-mortems.',
+      'Respect the safety factor. It is not timidity. It is the number we put in because we are ignorant: of the steel, of the soil, of the load that someone will one day put on the thing that nobody imagined. The margin is humility written in arithmetic. You will be pressed, often, to shave it. Be the person in the room who knows exactly how much it can be shaved and refuses to go a millimetre further.',
+      'Talk to the people who will build it and the people who will use it. The welder knows things your model does not. The maintenance crew will tell you, if you ask, exactly which of your clever ideas will be cursed at three in the morning in thirty years. Design for that person. Label things. Leave access panels. Write the drawing so that a stranger can understand it after you have retired.',
+      'Simplicity is the hardest thing to make. Every part you add is a part that can fail; the best part is often the one you found a way to leave out. Elegance in this trade is not ornament. It is the shortest honest path from the problem to the thing that solves it.',
+      'And here is the warning, the one that matters most as you get good. The question is never only whether it can be built. It is what it is for, and who it serves, and what it will do when it is used in ways you did not intend, as it will be. We have built a great many things simply because we could, and some of them have outgrown their purpose and turned on the people they were meant to help. You will be asked to build things you should not build. Say no, in writing, and keep a copy.',
+      'One more thing. Someday, if you are lucky, you will stand by something you designed while it takes its first real load: water through the pipe, traffic over the span, people through the door. Nobody crossing it will know your name. That is not a sadness. That is the whole point, and it is one of the best feelings in the world.',
+    ],
+    close: 'Yours, with the margins intact,',
+    sign: 'an old engineer',
+    ps: 'Measure twice. Then ask someone else to measure, because there is a fair chance you measured the wrong thing both times.',
+  },
+
+  artist: {
+    place: 'The studio, the window open, turpentine in the air',
+    dear: 'Dear maker,',
+    body: [
+      'You sent me photographs of your work and asked, very politely, whether it is any good. I am going to answer a different question, because the honest answer to yours is that it does not matter yet. What matters is whether you will make the next one, and the hundred after that. A painter I admired used to say that inspiration was for amateurs, and that the rest of us just turned up. Turn up. Every day if you can, at the same hour, whether or not you feel anything. The feeling arrives more often when it knows where to find you.',
+      'Make a great deal of bad work. Quantity is not the enemy of quality; it is the road to it. The person who makes fifty pots learns more than the person who spends a year on one perfect pot and has, at the end of it, one pot and a theory. Most of what you make will be practice. Let it be practice. Throw it away without ceremony and keep the hand it gave you.',
+      'Copy the masters, by hand, slowly. Not to imitate them but to find out what they were doing, which you cannot see by looking and can only learn by doing it badly yourself. Your own voice will not come from avoiding influence. It will come from your limits: from the things you cannot do the way they did, and the strange solutions you find instead.',
+      'Look harder than other people. Draw what is in front of you rather than what you know is there; the eye is lazy and will hand you the idea of a face instead of the face. The whole discipline is a long training in seeing, and it will spoil you for ordinary looking, in the best way.',
+      'Learn when to stop. More good work is ruined by the last hour than by the first. A thing can be finished without being perfect, and nothing alive is perfect. Leave a little roughness in. It is how the viewer knows a person was here.',
+      'Now the warning, which I give because I have watched it happen to people with more talent than either of us. Do not let the work become your excuse. Art is not a licence to be cruel to the people who love you, or to treat their lives as material, or to believe that being difficult is the same as being serious. Beauty is not an alibi. The best artists I have known were generous, punctual, and kind to their assistants, and their work was no worse for it.',
+      'Finally, earn your living however you need to. A day job is not a betrayal of your art; it is what has paid for most of the art in history. The studio will wait for you in the evening. It always has.',
+    ],
+    close: 'Yours, with paint under the nails,',
+    sign: 'an old painter',
+    ps: 'Clean your brushes tonight. Tomorrow’s picture starts with them.',
+  },
+
+  musician: {
+    place: 'Backstage, between the matinee and the evening show',
+    dear: 'Dear young player,',
+    body: [
+      'Your teacher tells me you practise five hours a day and that you are unhappy, and I am writing to say that the two facts may be related. Let me tell you what forty years of playing for a living has taught me, in no particular order, which is how music teaches everything.',
+      'Practise slowly. Slower than you think. Slow is the fastest way there is to learn a passage, because the hands learn exactly what you give them, and if you give them a blur they learn a blur. The metronome is not your enemy; it is a friend who does not flatter. And stop when you are tired. Practising a mistake for an hour is practising the mistake.',
+      'Listen more than you play. To recordings, to other instruments, to the people next to you in the section. Music is not something you do at an audience; it is something you do with the people beside you, and the best players I have known were, above all, the best listeners. Play with people better than you, whenever you can bear it. It is humbling. It is also the quickest teacher there is.',
+      'Record yourself. The tape does not lie, and it does not care how it felt. You will hate the first few recordings. Then you will start to hear what everyone else hears, which is the beginning of being able to change it.',
+      'Love the rests. Silence is part of the music, not a gap in it; a phrase is shaped as much by where it breathes as by its notes. Young players fill every space. Older ones leave room, and the room is where the listener comes in.',
+      'You will make mistakes on stage. Keep going. The beat does not stop for your wrong note, and the audience mostly will not notice it unless you show them. A wrong note played with conviction is very often taken for an interpretation. The one thing you must never do is stop.',
+      'And the warning, because I see it in your teacher’s letter. Perfectionism is not a standard; it is a fear wearing a standard’s clothes. A life can be practised instead of lived, with every evening spent in a small room preparing for a performance that never feels ready. Go out. Fall in love. Hear other music. Your playing needs a life to be about.',
+      'Protect your ears. Wear earplugs in loud rehearsals and loud bars. Your hands can be rested and retrained; your hearing, once it is gone, does not come back, and it is the instrument underneath every other instrument you will ever play.',
+    ],
+    close: 'Yours, in tune most of the time,',
+    sign: 'an old second violin',
+    ps: 'One day the whole band will lock in at once, and for eight bars you will feel the floor disappear. That is what all the scales were for.',
+  },
+
+  storyteller: {
+    place: 'By the fire, the last log on',
+    dear: 'Dear teller,',
+    body: [
+      'You have finished your first story, and you want to know whether it is good, and you are afraid that it is not. Let me give you some of what I have learned from a long life of telling stories to anyone who would sit still, and some who would not.',
+      'Every story is a promise. The first line tells the listener what kind of journey this is going to be, and the rest of the story is you keeping your word. You can surprise them; in fact you must. But you cannot cheat them. An ending should feel, at the moment it arrives, both unexpected and as though it could not have been otherwise. That is the whole art, and almost nobody gets it right on the first try.',
+      'Start late and leave early. Begin as close to the trouble as you can bear, and end as soon as the meaning has landed. Most first drafts have two pages of throat-clearing at the beginning and a page of explaining at the end. Cut both. The listener is cleverer than you fear.',
+      'Use the one true detail. A single precise thing, the chipped cup, the coat buttoned wrong, the dog that would not come in from the rain, will do more than ten adjectives. Specifics are how a listener comes to believe you. Generalities are how they fall asleep.',
+      'Read everything aloud. The ear knows things the eye forgives. If you run out of breath, the sentence is too long; if you stumble, the rhythm is wrong; if you are bored, so are they. Stories were spoken long before they were written, and they still remember it.',
+      'Listen to how people actually talk: on buses, in queues, at funerals. Steal their rhythms, their odd turns of phrase, the way nobody ever says exactly what they mean. Do not steal their secrets. That is the line.',
+      'And now the warning, the one I wish someone had given me. Stories make sense of things, and that is their gift and their danger. The tidy story is often not the true one. You will be tempted to bend real events, and real people, to fit a shape that satisfies; you will be tempted to tell your own life as a story and then to live as though the story were true. Be careful. The people in your stories, even the invented ones, are made out of people you have known. Treat them with the respect you would want if it were you.',
+      'Tell stories for one listener at a time, even when the room is full. It is the only way anyone has ever been held.',
+    ],
+    close: 'Yours, until the fire goes out,',
+    sign: 'an old teller of tales',
+    ps: 'Carry a notebook. The best line you hear this year will be spoken by a stranger on a bus, and you will not remember it by the time you get off.',
+  },
+}

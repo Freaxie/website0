@@ -133,9 +133,14 @@ function Reading({ raw, ranked, fusion, onHand, onAgain, quiz }) {
                   <dd>{x.try}</dd>
                 </div>
               </dl>
-              <a className="reading__go mono" href={`#plate-${a.id}`}>
-                Read the {a.name.toLowerCase()}’s entry →
-              </a>
+              <p className="reading__go">
+                <a className="mono" href={`#plate-${a.id}`}>
+                  Read the {a.name.toLowerCase()}’s entry →
+                </a>
+                <a className="mono" href={`#letter-${a.id}`}>
+                  Open the letter →
+                </a>
+              </p>
             </motion.li>
           )
         })}
