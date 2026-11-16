@@ -64,6 +64,20 @@ who openly refuses.
    wax seal from the tray and the letter opens on the desk, with the archetype's painting enclosed.
 9. **Coda.** Twenty-four imperatives, set by order, and one sentence.
 
+## Finding your way
+
+- **Search** (the button at top right, `/` or Ctrl-K) covers every entry, day and letter and jumps to the passage.
+- **A marker** remembers the plate or room where reading stopped and offers to return to the line.
+- **Each entry has a contents bar** that rides along the top while it is read.
+- **Paintings open full-screen**, with the myth they show and how the medium is made (`src/lib/painting-notes.js`).
+- **The test's reading can be saved as a card**, a 1080 × 1350 image (`src/lib/card.js`). Inside a claude.ai
+  artifact the save goes through the viewer's downloads prompt.
+- **Sound** is off until asked for: a quiet chord for the plate on screen, silent over the text
+  (`src/components/Sound.jsx`).
+
+The entries are mounted a few at a time after the first paint, so the entrance opens at once; any jump
+to an anchor mounts the rest first.
+
 ## Type and colour
 
 Headlines are set in Archivo, display lines in Instrument Serif, labels in JetBrains Mono, and all

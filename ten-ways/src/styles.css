@@ -2383,6 +2383,8 @@ dd {
   min-height: 100svh;
   padding: 64px calc(var(--gutter) + var(--navspace)) 7vh var(--gutter);
   overflow: hidden;
+  /* clip, where it is understood, so the entry's contents bar can stick to the window */
+  overflow: clip;
   isolation: isolate;
   background: var(--c);
   color: var(--fg);
@@ -5020,8 +5022,11 @@ button.painting__mat:focus-visible .painting__zoom {
 
 @media (max-width: 760px) {
   .entry__toc {
-    top: 8px;
+    top: 44px;
     gap: 14px;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    background: var(--t-page);
   }
 
   .entry__toc b {

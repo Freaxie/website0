@@ -101,7 +101,7 @@ export default {
       text: [
         'Two fifteen-year-old girls had been murdered three years apart in neighbouring villages. A local seventeen-year-old confessed to the second killing, and the police thought the case was closed. Then they asked Alec Jeffreys, a geneticist at the University of Leicester who had just invented DNA profiling, to confirm it.',
         'His results were astonishing: the same man had committed both murders, and it was not the young man who had confessed. For the first time in history, DNA had cleared a suspect. The police then asked every adult man in the area, some five thousand of them, to give a blood sample. None matched.',
-        'Then a woman in a pub overheard a man boasting that he had given a sample in someone else’s name, as a favour to a colleague, a baker called Colin Pitchfork. Pitchfork was arrested in 1987 and became the first person convicted with DNA evidence. The detective’s oldest tools, gossip and an attentive listener, had worked alongside its newest.',
+        'Then a woman in a pub overheard a man boasting that he had given a sample in someone else’s name, as a favour to a colleague, a baker called Colin Pitchfork. Pitchfork was arrested in 1987 and became the first person convicted of murder with DNA evidence. The detective’s oldest tools, gossip and an attentive listener, had worked alongside its newest.',
       ],
     },
     curiosities: [

@@ -74,7 +74,7 @@ export default {
     },
     curiosities: [
       'Nintendo was founded in Kyoto in 1889 to make hanafuda playing cards.',
-      'In 1774 Josiah Wedgwood delivered a 944-piece dinner service to Catherine the Great, each piece painted with a different British view and a small green frog.',
+      'In 1774 Josiah Wedgwood delivered a dinner and dessert service of some 950 pieces to Catherine the Great, painted with more than twelve hundred different British views, each piece with a small green frog.',
       'The Post-it note began with a failed glue. 3M’s Spencer Silver made a weak adhesive in 1968; years later his colleague Art Fry used it to stop bookmarks falling out of his hymn book.',
       'Coca-Cola is said to have sold an average of about nine glasses a day in its first year, 1886.',
       'In the United States, roughly half of new businesses close within five years.',
@@ -197,8 +197,8 @@ export default {
       ],
     },
     curiosities: [
-      'A Library of Congress study in 2013 estimated that about seventy-five per cent of American silent feature films are lost.',
-      'Russian Ark (2002) is a single unbroken ninety-six-minute shot through the Hermitage Museum, filmed on the third attempt.',
+      'A Library of Congress study in 2013 found that about seventy per cent of American silent feature films are lost, and that only fourteen per cent survive complete in their original form.',
+      'Russian Ark (2002) is a single unbroken shot of about an hour and a half through the Hermitage Museum, filmed on the fourth attempt, with the daylight and the camera’s battery nearly gone.',
       'For Barry Lyndon (1975) Stanley Kubrick lit scenes with candles alone, using lenses made by Zeiss originally for NASA.',
       'Hitchcock called the object everyone in a thriller is chasing the “MacGuffin”: it hardly matters what it is, only that the characters care.',
       'Yasujirō Ozu famously placed his camera low, around the eye level of someone kneeling on a tatami mat.',
@@ -315,7 +315,7 @@ export default {
       title: 'The philosopher and his student',
       place: 'Paris, c. 1115–1140',
       text: [
-        'Peter Abelard was the most famous teacher in Paris: brilliant, arrogant, adored by his students. Héloïse was perhaps in her late teens, the niece of a canon of Notre-Dame named Fulbert, and already known for her learning in Latin, Greek and Hebrew. Abelard arranged to lodge in Fulbert’s house as her tutor. “Our books lay open,” he wrote later, “but there were more words of love than of reading.”',
+        'Peter Abelard was the most famous teacher in Paris: brilliant, arrogant, adored by his students. Héloïse was young, though her age is uncertain and she may have been in her twenties, the niece of a canon of Notre-Dame named Fulbert, and already known for her learning in Latin, Greek and Hebrew. Abelard arranged to lodge in Fulbert’s house as her tutor. “Our books lay open,” he wrote later, “but there were more words of love than of reading.”',
         'Héloïse became pregnant, gave birth to a son they named Astrolabe, and, reluctantly, agreed to a secret marriage. Fulbert, believing Abelard meant to abandon her, sent men who attacked him in the night and castrated him. Abelard became a monk; Héloïse, at his insistence, a nun.',
         'Years later, after Abelard wrote an account of his misfortunes, they exchanged letters. Héloïse, now an abbess, wrote that if the name of wife seemed holier, the name of lover had always been sweeter to her. They are buried together in Père Lachaise cemetery in Paris, where people still leave letters on their tomb.',
       ],

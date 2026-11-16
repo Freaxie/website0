@@ -182,7 +182,7 @@ export default {
       [-2350, 'c. 2350 BC', 'The palace archive of Ebla, in Syria, holds thousands of clay tablets.'],
       [-650, 'c. 650 BC', 'Ashurbanipal gathers a library of clay tablets at Nineveh.'],
       [-285, 'c. 285 BC', 'The Library of Alexandria is founded.'],
-      [1790, '1790', 'Revolutionary France creates the Archives nationales and opens records to citizens.'],
+      [1790, '1790', 'Revolutionary France creates the Archives nationales; a law of 1794 opens its records to citizens.'],
       [1876, '1876', 'Melvil Dewey publishes his decimal classification.'],
       [1898, '1898', 'Three Dutch archivists publish the manual that makes provenance the profession’s rule.'],
       [1992, '1992', 'The Stasi files are opened to the people they watched.'],
