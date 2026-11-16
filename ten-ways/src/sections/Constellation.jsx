@@ -4,6 +4,7 @@ import SectionHead from '../components/SectionHead.jsx'
 import Glyph from '../components/Glyph.jsx'
 import { ARCHETYPES, LINKS, ORDERS, byId, mark, onDark } from '../lib/archetypes.js'
 import { ORDER_READING, QUESTIONS, REACT, RESULTS } from '../lib/quiz.js'
+import { drawCard, saveCard } from '../lib/card.js'
 import { bus } from '../lib/bus.js'
 import { TAU } from '../lib/geom.js'
 
@@ -69,6 +70,38 @@ const rawFrom = (answers) => {
   return p
 }
 const cap = (raw) => Object.fromEntries(Object.entries(raw).map(([id, v]) => [id, Math.min(MAX, v)]))
+
+// The reading as a picture to keep or send.
+function Card({ title, sub, raw, top }) {
+  const ref = useRef(null)
+  const [open, setOpen] = useState(false)
+  useEffect(() => {
+    if (!open) return
+    const draw = () => ref.current && drawCard(ref.current, { title, sub, raw, top })
+    draw()
+    // draw again once the faces are certainly in, so the card is never set in a fallback
+    document.fonts?.ready.then(draw)
+  }, [open, title, sub, raw, top])
+  return (
+    <div className="reading__card">
+      {open ? (
+        <>
+          <canvas ref={ref} role="img" aria-label={`A card of your constellation: ${title}`} />
+          <div>
+            <button type="button" className="mono" onClick={() => saveCard(ref.current)}>
+              Save the image
+            </button>
+            <p>If nothing downloads, press and hold the picture, or right-click it, and choose to save it.</p>
+          </div>
+        </>
+      ) : (
+        <button type="button" className="mono" onClick={() => setOpen(true)}>
+          Make a card of your constellation
+        </button>
+      )}
+    </div>
+  )
+}
 
 // The reading: what the shape says, at length.
 function Reading({ raw, ranked, fusion, onHand, onAgain, quiz }) {
@@ -194,6 +227,13 @@ function Reading({ raw, ranked, fusion, onHand, onAgain, quiz }) {
           </p>
         </div>
       </div>
+
+      <Card
+        title={fusion ? fusion.name : r.epithet}
+        sub={fusion ? fusion.line : `Mostly the ${lead.name.toLowerCase()}${others.length ? `, with ${others.join(' and ')} close behind` : ''}.`}
+        raw={raw}
+        top={top}
+      />
 
       <div className="reading__btns">
         <button type="button" className="mono" onClick={onHand}>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
 import { motion } from 'framer-motion'
 import { ENTRIES } from '../lib/encyclopedia.js'
@@ -20,12 +20,44 @@ function Block({ className, children, d = 0, as = 'section' }) {
   )
 }
 
-function Head({ n, children }) {
+export const slug = (t) => t.toLowerCase().replace(/[^a-z]+/g, '-')
+
+function Head({ n, id, children }) {
   return (
-    <h5 className="entry__h">
+    <h5 className="entry__h" id={`s-${id}-${slug(children)}`} data-sec={children}>
       <span className="entry__hn mono">§{n}</span>
       <span className="entry__ht">{children}</span>
     </h5>
+  )
+}
+
+// The entry's own contents: it rides along the top of the page while the entry is being read, and
+// marks the section under the eye.
+function Contents({ a }) {
+  const ref = useRef(null)
+  const [secs, setSecs] = useState([])
+  const [on, setOn] = useState(null)
+  useEffect(() => {
+    const heads = [...ref.current.closest('.entry').querySelectorAll('.entry__h')]
+    setSecs(heads.map((h) => ({ id: h.id, name: h.dataset.sec })))
+    const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && setOn(e.target.id)), { rootMargin: '-15% 0px -70% 0px' })
+    heads.forEach((h) => io.observe(h))
+    return () => io.disconnect()
+  }, [])
+  return (
+    <nav className="entry__toc" ref={ref} aria-label={`Sections of the ${a.name.toLowerCase()}’s entry`}>
+      <b>{a.name}</b>
+      <ol>
+        {secs.map((x, i) => (
+          <li key={x.id}>
+            <a href={`#${x.id}`} className={x.id === on ? 'is-on' : ''} aria-current={x.id === on ? 'true' : undefined}>
+              <span className="mono">§{i + 1}</span>
+              {x.name}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
   )
 }
 
@@ -47,7 +79,7 @@ function Ornament({ a }) {
 // paint, so the entrance opens at once; any jump to an anchor mounts the rest first, so it lands true.
 const waiting = new Set()
 let started = false
-function flushAll() {
+export function flushAll() {
   if (!waiting.size) return
   const all = [...waiting]
   waiting.clear()
@@ -136,26 +168,27 @@ function EntryPage({ a }) {
         <Ornament a={a} />
       </Block>
 
+      <Contents a={a} />
       <div className="entry__body">
         <div className="entry__main">
           <Block className="entry__sec">
-            <Head n={++n}>Overview</Head>
+            <Head n={++n} id={a.id}>Overview</Head>
             {prose(e.overview, true)}
           </Block>
           <Block className="entry__sec">
-            <Head n={++n}>History</Head>
+            <Head n={++n} id={a.id}>History</Head>
             {prose(e.history)}
           </Block>
           {e.scene && (
             <Block className="entry__sec entry__scene">
-              <Head n={++n}>A scene</Head>
+              <Head n={++n} id={a.id}>A scene</Head>
               <p className="entry__place mono">{e.scene.place}</p>
               <h6 className="entry__stitle">{e.scene.title}</h6>
               {prose(e.scene.text, true)}
             </Block>
           )}
           <Block className="entry__sec">
-            <Head n={++n}>Distinctions</Head>
+            <Head n={++n} id={a.id}>Distinctions</Head>
             <dl className="entry__dist">
               {e.distinctions.map(([t, x]) => (
                 <div key={t}>
@@ -167,7 +200,7 @@ function EntryPage({ a }) {
           </Block>
           {e.myths && (
             <Block className="entry__sec">
-              <Head n={++n}>Myths and facts</Head>
+              <Head n={++n} id={a.id}>Myths and facts</Head>
               <ul className="entry__myths">
                 {e.myths.map(([myth, fact]) => (
                   <li key={myth}>
@@ -186,7 +219,7 @@ function EntryPage({ a }) {
           )}
           {e.curiosities && (
             <Block className="entry__sec">
-              <Head n={++n}>Curiosities</Head>
+              <Head n={++n} id={a.id}>Curiosities</Head>
               <ol className="entry__cur">
                 {e.curiosities.map((c, i) => (
                   <li key={i}>
@@ -199,7 +232,7 @@ function EntryPage({ a }) {
           )}
           {e.day && (
             <Block className="entry__sec entry__day">
-              <Head n={++n}>A day in the life</Head>
+              <Head n={++n} id={a.id}>A day in the life</Head>
               <ol className="entry__hours">
                 {e.day.map(([time, text]) => (
                   <li key={time}>
@@ -211,11 +244,11 @@ function EntryPage({ a }) {
             </Block>
           )}
           <Block className="entry__sec">
-            <Head n={++n}>Criticism</Head>
+            <Head n={++n} id={a.id}>Criticism</Head>
             <p>{e.critique}</p>
           </Block>
           <Block className="entry__sec">
-            <Head n={++n}>Now</Head>
+            <Head n={++n} id={a.id}>Now</Head>
             <p>{e.now}</p>
           </Block>
         </div>

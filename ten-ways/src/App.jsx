@@ -6,6 +6,7 @@ import Cursor from './components/Cursor.jsx'
 import Whisper from './components/Whisper.jsx'
 import Passage from './components/Passage.jsx'
 import Secrets from './components/Secrets.jsx'
+import Wayfinder from './components/Wayfinder.jsx'
 import Hero from './sections/Hero.jsx'
 import Foreword from './sections/Foreword.jsx'
 import Atlas from './sections/Atlas.jsx'
@@ -34,6 +35,7 @@ export default function App() {
     <MotionConfig reducedMotion="user">
       <Intro />
       <Nav rooms={ROOMS} />
+      <Wayfinder />
       <main>
         <Hero />
         <Foreword />
