@@ -653,6 +653,14 @@ export function makeKit(ctx, seed = 1, extra = {}) {
         ],
         p.beardCol ?? p.headCol ?? col,
       )
+    // a face that is lit gets an eye, however small, unless the scene has drawn its own
+    if (p.eye === undefined && p.face !== false) {
+      const hc = String(p.headCol ?? col)
+      if (/^#[0-9a-f]{6}$/i.test(hc)) {
+        const [r, g, b] = hex(hc)
+        if (0.3 * r + 0.59 * g + 0.11 * b > 150) p = { ...p, eye: tint(hc, 0.72, '#1a0f0a') }
+      }
+    }
     if (p.eye) {
       const ex = hd[0] + dir * hr2 * 0.45
       const ey = hd[1] - 0.35 * s

@@ -2,6 +2,10 @@
 // 100 × 125 frame and handed to a medium chosen for it.
 import { lerp } from './geom.js'
 
+// The angel and Jacob, shared by the glass and the enamel painted over it.
+const ANGEL = { x: 61, y: 66, s: 1.45, dir: -1, torso: -16, head: -22, col: '#f2c8a0', legL: [-8, 0], legR: [14, 6], armL: [-54, -76], armR: [-128, -150], hair: '#c8742a', hairLen: 1.2, w: 1.7, headR: 1.35, face: false }
+const JACOB = { x: 36, y: 74, s: 1.36, dir: 1, torso: 30, head: 32, w: 1.7, headR: 1.3, col: '#e0a47a', legL: [-40, -10], legR: [10, 0], armL: [70, 40], armR: [96, 60], face: false }
+
 // Oedipus, shared by the key block and the colour block of his woodcut.
 const OEDIPUS = { x: 26, y: 98, s: 1.15, dir: 1, torso: 30, head: 50, legL: [64, -6], legR: [84, 8], armL: [20, 60], armR: [12, 186], back: ['armL'] }
 
@@ -335,6 +339,39 @@ export default {
     cells: 12,
     smooth: 1,
     title: 'Jacob wrestles the angel until daybreak',
+    // painted on the glass after leading: the faces, the hands, the folds, the quills
+    over(ctx, K) {
+      const E = '#2a1a12'
+      const face = (J, r, d) => {
+        const [x, y] = J.hd
+        K.curve([[x + d * r * 0.2, y - r * 0.22], [x + d * r * 0.5, y - r * 0.34], [x + d * r * 0.78, y - r * 0.18]], E, 0.42)
+        K.curve([[x + d * r * 0.28, y - r * 0.02], [x + d * r * 0.5, y - r * 0.12], [x + d * r * 0.72, y - r * 0.02]], E, 0.34)
+        K.disc(x + d * r * 0.52, y - r * 0.02, r * 0.09, E)
+        K.curve([[x + d * r * 0.98, y - r * 0.05], [x + d * r * 1.12, y + r * 0.3], [x + d * r * 0.88, y + r * 0.34]], E, 0.36)
+        K.curve([[x + d * r * 0.5, y + r * 0.58], [x + d * r * 0.72, y + r * 0.62], [x + d * r * 0.86, y + r * 0.54]], E, 0.36)
+        K.ring(x - d * r * 0.25, y + r * 0.08, r * 0.2, E, 0.3, d > 0 ? 60 : -120, d > 0 ? 300 : 120)
+      }
+      const an = K.joints(ANGEL)
+      const ja = K.joints(JACOB)
+      face(an, 2.5 * ANGEL.s * ANGEL.headR, -1)
+      face(ja, 2.5 * JACOB.s * JACOB.headR, 1)
+      // hair in locks
+      for (let i = 0; i < 4; i++) K.curve([[an.hd[0] + 1 + i * 1.1, an.hd[1] - 4 + i * 0.3], [an.hd[0] + 2.4 + i * 0.9, an.hd[1] - 1 + i], [an.hd[0] + 2 + i * 0.7, an.hd[1] + 3 + i * 0.6]], E, 0.3)
+      for (let i = 0; i < 3; i++) K.curve([[ja.hd[0] - 1 - i * 1.1, ja.hd[1] - 3.6 + i * 0.3], [ja.hd[0] - 2.6 - i * 0.7, ja.hd[1] - 1 + i], [ja.hd[0] - 2.4 - i * 0.5, ja.hd[1] + 2 + i * 0.6]], E, 0.3)
+      // the fall of the angel's robe, and Jacob's tunic
+      for (let i = 0; i < 5; i++) K.curve([[an.P[0] - 7 + i * 2.6, an.P[1] + 2], [an.P[0] - 9 + i * 3, an.P[1] + 16], [an.P[0] - 10 + i * 3.4, an.P[1] + 30]], E, 0.34)
+      for (let i = 0; i < 3; i++) K.curve([[ja.P[0] - 3 + i * 2.4, ja.P[1] - 6], [ja.P[0] - 4 + i * 2.6, ja.P[1] + 4], [ja.P[0] - 5 + i * 3, ja.P[1] + 12]], E, 0.34)
+      // a quill down each feather
+      for (const [x0, a0, sp, len] of [[an.sc[0] + 4, -14, -52, 30], [an.sc[0] + 6, 22, 50, 32]])
+        for (let k = 0; k < 8; k++) {
+          const t = k / 7
+          const a = ((a0 + sp * t) * Math.PI) / 180
+          const l = len * 1.5 * (1 - 0.5 * Math.pow(t, 1.2))
+          K.line([[x0 + Math.sin(a) * l * 0.2, an.sc[1] + 3 - Math.cos(a) * l * 0.2], [x0 + Math.sin(a) * l * 0.74, an.sc[1] + 3 - Math.cos(a) * l * 0.74]], E, 0.26)
+        }
+      // fingers on the hand that touches his hip
+      for (let i = -1; i <= 1; i++) K.line([[an.hl[0], an.hl[1] + i * 0.8], [an.hl[0] - 2.2, an.hl[1] + i * 1.1 + 0.6]], E, 0.26)
+    },
     draw(ctx, K) {
       K.sky(['#13205e', '#22388a', '#3a58ad', '#8a6aa8', '#e8906a', '#ffd26a'], 0, 86)
       K.glow(84, 86, 30, '#ffe7a0', 0.7)
@@ -361,7 +398,7 @@ export default {
           1.3,
         )
       // the angel: wings raised, a halo, robes of light
-      const ang = { x: 61, y: 66, s: 1.45, dir: -1, torso: -16, head: -22, col: '#f2c8a0', legL: [-8, 0], legR: [14, 6], armL: [-54, -76], armR: [-128, -150], hair: '#c8742a', hairLen: 1.2, w: 1.7, headR: 1.35 }
+      const ang = ANGEL
       const a = K.joints(ang)
       const feathers = ['#d88a28', '#c8302c', '#2f8a5a', '#d88a28', '#c8302c', '#2f8a5a', '#d88a28', '#c8302c']
       K.wing(a.sc[0] + 4, a.sc[1] + 3, 1.5, -14, '#e0a838', { n: 8, len: 30, spread: -52, w: 3, cols: feathers })
@@ -380,26 +417,7 @@ export default {
         '#2f4ab8',
       )
       // Jacob: earth-coloured, holding on
-      const ja = K.body({
-        x: 36,
-        y: 74,
-        s: 1.36,
-        dir: 1,
-        torso: 30,
-        head: 32,
-        w: 1.7,
-        headR: 1.3,
-        col: '#e0a47a',
-        legL: [-40, -10],
-        legR: [10, 0],
-        armL: [70, 40],
-        armR: [96, 60],
-        back: ['armL'],
-        robe: { col: '#a8301e', hem: 5.6, y: 88 },
-        beard: true,
-        beardCol: '#4a2a18',
-        hair: '#4a2a18',
-      })
+      const ja = K.body({ ...JACOB, back: ['armL'], robe: { col: '#a8301e', hem: 5.6, y: 88 }, beard: true, beardCol: '#4a2a18', hair: '#4a2a18' })
       K.blob(
         [
           [ja.sl[0] - 1, ja.sl[1] - 0.5],
@@ -844,7 +862,8 @@ export default {
   musician: {
     style: 'mosaic',
     seed: 71,
-    tiles: 62,
+    tiles: 78,
+    split: 420,
     colors: 16,
     grout: '#50473c',
     title: 'Orpheus plays, and the animals come to listen',

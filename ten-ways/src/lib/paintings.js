@@ -456,6 +456,13 @@ async function glass(sc, out) {
       d[o + 3] = 255 * clamp(win + 0.5)
     }
   ctx.putImageData(img, 0, 0)
+  // the glass painter's last pass: faces, hands and folds drawn on the glass in dark enamel
+  if (sc.over) {
+    ctx.save()
+    ctx.scale(W / FW, H / FH)
+    sc.over(ctx, makeKit(ctx, (sc.seed ?? 1) + 5))
+    ctx.restore()
+  }
 }
 
 // Ink: the drawing laid on warm paper, sharp where the brush pressed and bled where it was wet, with

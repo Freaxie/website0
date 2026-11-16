@@ -767,7 +767,7 @@ export default {
       K.beast({ kind: 'dog', x: 86, y: 112, s: 0.9, dir: -1, col: '#a88a6a' })
       // Asclepius, who comes in the dream, with his serpent staff
       K.glow(70, 74, 24, '#d8e8ff', 0.25)
-      const A = K.body({ x: 70, y: 82, s: 1.12, dir: -1, torso: -4, head: -16, col: '#e0b898', armL: [-40, -60], armR: [30, 4], robe: { col: '#e8e4dc', hem: 6, y: 106 }, beard: true, beardCol: '#c8c0b8', hair: '#c8c0b8' })
+      const A = K.body({ x: 70, y: 82, s: 1.12, dir: -1, torso: -4, head: -16, col: '#c98f66', armL: [-40, -60], armR: [30, 4], robe: { col: '#efe6d2', hem: 6, y: 106 }, beard: true, beardCol: '#5a4636', hair: '#5a4636' })
       K.blob(
         [
           [A.sl[0] - 1, A.sl[1] - 0.6],
@@ -776,7 +776,7 @@ export default {
           [A.P[0] - 2, A.P[1] + 23],
           [A.P[0] - 4, A.P[1] + 4],
         ],
-        '#b8b0c8',
+        '#b8863a',
       )
       K.limb([A.hr[0], A.hr[1] - 14], [A.hr[0] + 2, 108], 1.3, 1.2, '#3a2412')
       K.serpent(
@@ -991,7 +991,7 @@ export default {
         '#e6d8f0',
       )
       // Psyche, the lamp held out, a knife held low
-      const P = K.body({ x: 66, y: 76, s: 1.08, dir: -1, torso: -22, head: -32, col: '#f0c8a8', armL: [-110, -140], armR: [10, 0], legL: [-6, 0], legR: [8, 2], robe: { col: '#f2ece0', hem: 6, y: 98 }, hair: '#4a2414', hairLen: 1.4 })
+      const P = K.body({ x: 66, y: 76, s: 1.08, dir: -1, torso: -22, head: -32, col: '#f0c8a8', armL: [-110, -140], armR: [10, 0], legL: [-6, 0], legR: [8, 2], robe: { col: '#c9566a', hem: 6, y: 98 }, hair: '#4a2414', hairLen: 1.8 })
       K.line(
         [
           [P.hr[0], P.hr[1]],
@@ -1020,7 +1020,8 @@ export default {
   gardener: {
     style: 'mosaic',
     seed: 241,
-    tiles: 60,
+    tiles: 78,
+    split: 420,
     colors: 16,
     grout: '#4a4236',
     title: 'Demeter with wheat and a torch',
