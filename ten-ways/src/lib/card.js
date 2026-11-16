@@ -128,19 +128,27 @@ export function drawCard(canvas, { title, sub, raw, top }) {
   })
 }
 
-export function saveCard(canvas, name = 'my-constellation.png') {
-  return new Promise((done) =>
-    canvas.toBlob((blob) => {
-      if (!blob) return done(false)
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = name
-      document.body.append(a)
-      a.click()
-      a.remove()
-      setTimeout(() => URL.revokeObjectURL(url), 2000)
-      done(true)
-    }, 'image/png'),
-  )
+// Save the card. Inside a claude.ai artifact the page may not download by itself: the viewer is asked
+// through the downloads capability. Anywhere else, an ordinary download link does it.
+export async function saveCard(canvas, filename = 'my-constellation.png') {
+  const blob = await new Promise((r) => canvas.toBlob(r, 'image/png'))
+  if (!blob) return false
+  const downloads = await window.claude?.use?.('downloads').catch(() => null)
+  if (downloads) {
+    try {
+      await downloads.save({ filename, data: blob })
+      return true
+    } catch {
+      return false
+    }
+  }
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  document.body.append(a)
+  a.click()
+  a.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 2000)
+  return true
 }
