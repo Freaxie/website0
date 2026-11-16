@@ -2644,17 +2644,11 @@ dd {
   stroke-width: 2.5;
 }
 
-.kin__link--allies {
-  stroke: var(--ink);
-}
-
 .kin__link--opposites {
-  stroke: #a8161f;
   stroke-dasharray: 7 6;
 }
 
 .kin__link--unions {
-  stroke: #5a2a8a;
   stroke-width: 4;
 }
 
@@ -4482,4 +4476,304 @@ dd {
   .plate--theologian .plate__mirror {
     font-size: 9vw;
   }
+}
+
+/* ───────── the older rooms, brought up to the entries ───────── */
+
+/* each room's figure is mounted like the paintings: a pale card, a hairline, a soft shadow */
+.atl__map,
+.lin__chart,
+.kin__ring {
+  padding: clamp(14px, 2.2vw, 34px);
+  background: #fbf8f1;
+  border: 1px solid rgba(40, 30, 20, 0.1);
+  box-shadow:
+    0 1px 1px rgba(40, 30, 20, 0.05),
+    0 34px 60px -40px rgba(40, 26, 12, 0.5);
+}
+
+.enc__stage {
+  border: clamp(8px, 1vw, 14px) solid #fbf8f1;
+  box-shadow:
+    0 0 0 1px rgba(40, 30, 20, 0.1),
+    0 34px 60px -40px rgba(40, 26, 12, 0.5);
+}
+
+/* the paper rooms share one warm paper, lit a little from above */
+.atl,
+.enc,
+.kin,
+.lin,
+.fore,
+.fin {
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(255, 252, 244, 0.75), transparent 70%),
+    var(--paper);
+}
+
+/* kinships: finer threads in the two archetypes' colours */
+.kin__link {
+  stroke-width: 1.7;
+  opacity: 0.85;
+}
+
+.kin__link--opposites {
+  stroke-dasharray: 5 5;
+}
+
+.kin__link--unions {
+  stroke-width: 3;
+}
+
+.kin__circle {
+  opacity: 0.1;
+}
+
+.kin__list li {
+  padding: 16px 0;
+  border-top-color: rgba(12, 12, 12, 0.14);
+}
+
+.kin__list p,
+.atl__legend p {
+  line-height: 1.4;
+}
+
+.kin__pair {
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+
+.kin__modes button,
+.atl__pick button,
+.lin__eras button,
+.lin__step button {
+  transition:
+    background 0.3s,
+    color 0.3s,
+    border-color 0.3s;
+}
+
+.kin__modes button {
+  border-color: rgba(12, 12, 12, 0.16);
+  background: rgba(255, 253, 248, 0.6);
+}
+
+/* lineages */
+.lin__list button {
+  padding: 13px 0;
+  border-top-color: rgba(12, 12, 12, 0.12);
+}
+
+.lin__lt {
+  line-height: 1.4;
+}
+
+/* the atlas card and the nearest-way line */
+.atl__card {
+  border-width: 1px;
+  background: #fffdf8;
+  box-shadow: 0 16px 30px -18px rgba(40, 26, 12, 0.5);
+}
+
+.atl__legend p {
+  border-top-color: rgba(12, 12, 12, 0.25);
+}
+
+/* the test, on the dark: quieter option cards that lift under the pointer */
+.con {
+  background:
+    radial-gradient(90% 55% at 70% 30%, rgba(255, 244, 220, 0.05), transparent 70%),
+    var(--ink);
+}
+
+.con__opts button {
+  background: rgba(255, 255, 255, 0.025);
+  transition:
+    background 0.25s,
+    transform 0.25s var(--ease),
+    border-color 0.25s;
+}
+
+.con__opts button:hover,
+.con__opts button:focus-visible {
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateX(4px);
+}
+
+@media (max-width: 760px) {
+  .atl__map,
+  .lin__chart,
+  .kin__ring {
+    margin-left: calc(-0.5 * var(--gutter));
+    margin-right: calc(-0.5 * var(--gutter));
+    padding: 10px;
+  }
+}
+
+/* ───────── the painting, opened ───────── */
+
+button.painting__mat {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: left;
+  cursor: zoom-in;
+  transition:
+    transform 0.4s var(--ease),
+    box-shadow 0.4s;
+}
+
+.painting__frame {
+  display: block;
+}
+
+button.painting__mat:hover,
+button.painting__mat:focus-visible {
+  transform: translateY(-3px);
+}
+
+.painting__zoom {
+  position: absolute;
+  right: clamp(12px, 1.5vw, 20px);
+  bottom: clamp(12px, 1.5vw, 20px);
+  padding: 6px 9px 5px;
+  font-size: 9.5px;
+  background: rgba(20, 16, 12, 0.78);
+  color: #f6f1e6;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+button.painting__mat:hover .painting__zoom,
+button.painting__mat:focus-visible .painting__zoom {
+  opacity: 1;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 420px);
+  justify-content: center;
+  align-items: center;
+  gap: clamp(24px, 4vw, 72px);
+  padding: clamp(20px, 4vw, 64px);
+  background: rgba(16, 12, 9, 0.94);
+  color: #efe6d6;
+  overflow-y: auto;
+  cursor: zoom-out;
+  animation: lightbox 0.35s ease;
+}
+
+@keyframes lightbox {
+  from {
+    opacity: 0;
+  }
+}
+
+.lightbox__pic {
+  padding: clamp(10px, 1.4vw, 20px);
+  background: #fbf8f1;
+  box-shadow: 0 40px 90px -30px #000;
+  cursor: default;
+}
+
+.lightbox__pic.painting--glass {
+  background: none;
+  box-shadow: none;
+}
+
+.lightbox__pic canvas {
+  display: block;
+  height: min(84vh, 1000px);
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 4 / 5;
+}
+
+.lightbox__pic.painting--pixel canvas {
+  image-rendering: pixelated;
+}
+
+.lightbox__text {
+  cursor: default;
+}
+
+.lightbox__text h3 {
+  margin: 10px 0 8px;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(32px, 3vw, 46px);
+  line-height: 1.02;
+}
+
+.lightbox__text .mono {
+  opacity: 0.6;
+}
+
+.lightbox__text h4 {
+  margin: 28px 0 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(239, 230, 214, 0.2);
+  font-weight: 500;
+}
+
+.lightbox__text p:not(.mono) {
+  font-family: var(--f-text);
+  font-size: 17.5px;
+  line-height: 1.6;
+}
+
+.lightbox__text .lightbox__note {
+  margin-top: 24px;
+  font-style: italic;
+  font-size: 15px;
+  opacity: 0.6;
+}
+
+.lightbox__shut {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  z-index: 2;
+  padding: 9px 12px;
+  background: none;
+  border: 1px solid rgba(239, 230, 214, 0.4);
+  color: inherit;
+}
+
+.lightbox__shut:hover {
+  background: #efe6d6;
+  color: #1a1410;
+}
+
+@media (max-width: 900px) {
+  .lightbox {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    padding-top: 64px;
+  }
+
+  .lightbox__pic canvas {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox {
+    animation: none;
+  }
+
+  button.painting__mat {
+    transition: none;
+  }
+}
+
+/* an entry not yet mounted keeps a screen of its paper */
+.entry--wait {
+  min-height: 100svh;
 }

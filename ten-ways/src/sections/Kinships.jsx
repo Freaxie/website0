@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import SectionHead from '../components/SectionHead.jsx'
-import { ARCHETYPES, LINKS, byId } from '../lib/archetypes.js'
+import { ARCHETYPES, LINKS, byId, ink } from '../lib/archetypes.js'
 import { TAU } from '../lib/geom.js'
 
 const MODES = [
@@ -40,6 +40,19 @@ export default function Kinships() {
         <div className="kin__ring">
           <svg viewBox="-370 -290 740 580" role="img" aria-label={`${MODES.find((m) => m.id === mode).name} among the twenty-four archetypes`}>
             <circle r={R} className="kin__circle" />
+            {/* each thread runs from one archetype's colour to the other's */}
+            <defs>
+              {shown.map(([a, b]) => {
+                const [x1, y1] = pos(a)
+                const [x2, y2] = pos(b)
+                return (
+                  <linearGradient key={`${a}-${b}`} id={`kin-${a}-${b}`} gradientUnits="userSpaceOnUse" x1={x1} y1={y1} x2={x2} y2={y2}>
+                    <stop offset="0" stopColor={ink(byId[a])} />
+                    <stop offset="1" stopColor={ink(byId[b])} />
+                  </linearGradient>
+                )
+              })}
+            </defs>
             <AnimatePresence>
               {shown.map(([a, b]) => {
                 const [x1, y1] = pos(a)
@@ -48,6 +61,7 @@ export default function Kinships() {
                   <motion.path
                     key={`${mode}-${a}-${b}`}
                     d={`M${x1} ${y1}Q0 0 ${x2} ${y2}`}
+                    stroke={`url(#kin-${a}-${b})`}
                     className={`kin__link kin__link--${mode}`}
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={{ pathLength: 1, opacity: 1 }}

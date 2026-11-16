@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import { flushSync } from 'react-dom'
 import { motion } from 'framer-motion'
 import { ENTRIES } from '../lib/encyclopedia.js'
 import { ARCHETYPES, LINKS, ORDERS, byId } from '../lib/archetypes.js'
@@ -41,7 +43,58 @@ function Ornament({ a }) {
 // The encyclopedia entry under each plate, set as a page of its own: a paper faintly of the
 // archetype's hue, a headword, a reading column of numbered sections, and a margin that opens with a
 // painting of its myth.
+// The twenty-four entries are most of the page. They are mounted a few at a time after the first
+// paint, so the entrance opens at once; any jump to an anchor mounts the rest first, so it lands true.
+const waiting = new Set()
+let started = false
+function flushAll() {
+  if (!waiting.size) return
+  const all = [...waiting]
+  waiting.clear()
+  flushSync(() => all.forEach((go) => go()))
+}
+function pump() {
+  const idle = window.requestIdleCallback ?? ((f) => setTimeout(f, 60))
+  idle(
+    () => {
+      const next = [...waiting].slice(0, 2)
+      next.forEach((go) => {
+        waiting.delete(go)
+        go()
+      })
+      if (waiting.size) pump()
+    },
+    { timeout: 400 },
+  )
+}
+function start() {
+  if (started) return
+  started = true
+  addEventListener('click', (e) => e.target.closest?.('a[href^="#"]') && flushAll(), true)
+  addEventListener('hashchange', flushAll)
+  addEventListener('keydown', (e) => (e.key === 'End' || ((e.metaKey || e.ctrlKey) && e.key === 'f')) && flushAll(), true)
+  // arriving with an anchor: mount everything, then go to it
+  if (location.hash.length > 1)
+    setTimeout(() => {
+      flushAll()
+      requestAnimationFrame(() => document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: 'instant' }))
+    }, 0)
+  setTimeout(pump, 900)
+}
+
 export default function Entry({ a }) {
+  const [ready, setReady] = useState(false)
+  useEffect(() => {
+    const go = () => setReady(true)
+    waiting.add(go)
+    start()
+    return () => waiting.delete(go)
+  }, [])
+  if (!ready) return <section className="entry entry--wait" style={toneVars(a)} aria-hidden="true" />
+  return <EntryPage a={a} />
+}
+
+function EntryPage({ a }) {
   const e = ENTRIES[a.id]
   if (!e) return null
   const order = ORDERS.find((o) => o.id === a.order)
