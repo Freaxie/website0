@@ -5078,3 +5078,57 @@ button.painting__mat:focus-visible .painting__zoom {
   line-height: 1.45;
   opacity: 0.65;
 }
+
+/* sound: off until asked for */
+.sound-btn {
+  position: fixed;
+  z-index: 80;
+  right: 18px;
+  bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 5px;
+  background: none;
+  border: 1px solid currentColor;
+  color: #fff;
+  mix-blend-mode: difference;
+  opacity: 0.75;
+}
+
+.sound-btn:hover,
+.sound-btn.is-on {
+  opacity: 1;
+}
+
+.sound-btn i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+}
+
+.sound-btn.is-on i {
+  background: currentColor;
+  animation: sound 2.4s ease-in-out infinite;
+}
+
+@keyframes sound {
+  50% {
+    transform: scale(1.7);
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sound-btn.is-on i {
+    animation: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .sound-btn {
+    right: 12px;
+    bottom: 12px;
+  }
+}
